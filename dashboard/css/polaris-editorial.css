@@ -1,0 +1,66 @@
+/* dashboard/css/polaris-editorial.css
+   Editorial luxury layer — typography, card refinement, and the entry loader.
+   Additive only: no selectors here touch layout/logic, only presentation. */
+
+/* ---------- Editorial type: serif for section headers & big numbers ---------- */
+h2, h3 {
+  font-family: var(--font-serif);
+  letter-spacing: 0.1px;
+}
+
+.stat-value {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.3px;
+}
+
+/* ---------- Card refinement: quieter glass, thinner hairline ---------- */
+.card-luxury {
+  border-color: rgba(237, 233, 222, 0.06);
+}
+
+.card-luxury::before {
+  background: linear-gradient(90deg, transparent, rgba(227, 193, 122, 0.22), transparent);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent-champagne), #b98a3e) !important;
+  color: #1a1408 !important;
+  box-shadow: 0 4px 20px rgba(227, 193, 122, 0.3) !important;
+}
+
+/* ---------- Reduced motion respect ---------- */
+@media (prefers-reduced-motion: reduce) {
+  #polaris-loader, #polaris-loader * {
+    animation: none !important;
+    transition: opacity 0.3s linear !important;
+  }
+}
+
+/* =====================================================================
+   ENTRY LOADER — cinematic black hole (particle swirl + lensing)
+   Pure visual gate shown on first paint; removes itself independently
+   of app/auth/websocket initialization underneath.
+   ===================================================================== */
+#polaris-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 100000;
+  background: #050607;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 900ms var(--ease-cinematic, cubic-bezier(0.65, 0, 0.35, 1));
+}
+
+#polaris-loader.loader-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+#polaris-loader canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}

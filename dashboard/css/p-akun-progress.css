@@ -1,0 +1,4 @@
+/* Gaya progresi (pencapaian, dompet, marketplace, penghitung topbar). Dimiliki pengembang progress.
+   Hanya di dalam @layer pillar; kelas berawalan ax-prg-; warna dan jarak hanya dari token (css/tokens.css). */
+@layer pillar {
+}

@@ -1,0 +1,3379 @@
+/* dashboard/css/kinetix-themes.css — 7 Kinetix Design Archetypes & Motion Engine for Polaris */
+
+/* ==========================================================================
+   1. NEOBRUTALISM THEME (High Contrast, Bold 2.5px Black Borders, Vibrant Yellow)
+   ========================================================================== */
+html[data-theme="neobrutalism"],
+body[data-theme="neobrutalism"] {
+  --bg-space: #FFFDF0;
+  --bg-surface: #FFFFFF;
+  --bg-surface-elevated: #FFF7B2;
+  --bg-glass: #FFFFFF;
+  --bg-glass-hover: #FFFDF0;
+
+  --border-subtle: #000000;
+  --border-active: #000000;
+  --border-glow: #000000;
+
+  --text-primary: #000000;
+  --text-secondary: #111111;
+  --text-muted: #2d3748;
+
+  --accent-cyan: #FFE600;
+  --accent-indigo: #00E5FF;
+  --accent-purple: #FF52D9;
+  --accent-emerald: #00E676;
+  --accent-amber: #FF9100;
+  --accent-rose: #FF1744;
+  --accent-champagne: #FFE600;
+
+  --font-sans: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 10px;
+  --radius-full: 6px;
+
+  --shadow-luxury: 4px 4px 0px #000000;
+  --shadow-glow-cyan: 4px 4px 0px #000000;
+  --shadow-glow-emerald: 4px 4px 0px #000000;
+}
+
+/* Neobrutalism Global Structural Overrides */
+html[data-theme="neobrutalism"] body,
+body[data-theme="neobrutalism"] {
+  background-color: #FFFDF0 !important;
+  background-image: 
+    radial-gradient(#111111 1.2px, transparent 1.2px),
+    linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px) !important;
+  background-size: 24px 24px, 48px 48px, 48px 48px !important;
+  color: #000000 !important;
+  font-family: 'Outfit', -apple-system, sans-serif !important;
+}
+
+html[data-theme="neobrutalism"] #starfield-canvas {
+  display: block !important;
+  opacity: 0.8 !important;
+}
+html[data-theme="neobrutalism"] .ambient-nebula,
+html[data-theme="neobrutalism"] .crt-scanlines-container {
+  display: none !important;
+}
+
+/* Force dark, crisp black on light background for all typography */
+html[data-theme="neobrutalism"] h1,
+html[data-theme="neobrutalism"] h2,
+html[data-theme="neobrutalism"] h3,
+html[data-theme="neobrutalism"] h4,
+html[data-theme="neobrutalism"] h5,
+html[data-theme="neobrutalism"] h6,
+html[data-theme="neobrutalism"] strong,
+html[data-theme="neobrutalism"] b,
+html[data-theme="neobrutalism"] .card-title,
+html[data-theme="neobrutalism"] .modal-title,
+html[data-theme="neobrutalism"] .vercel-brand-text {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+  background: none !important;
+  font-family: 'Outfit', sans-serif !important;
+}
+
+html[data-theme="neobrutalism"] p,
+html[data-theme="neobrutalism"] label,
+html[data-theme="neobrutalism"] td,
+html[data-theme="neobrutalism"] th,
+html[data-theme="neobrutalism"] li,
+html[data-theme="neobrutalism"] .gauge-label,
+html[data-theme="neobrutalism"] .config-desc,
+html[data-theme="neobrutalism"] .command-desc,
+html[data-theme="neobrutalism"] .stat-label {
+  color: #111111 !important;
+}
+
+/* Override hardcoded light colors on Neobrutalism */
+html[data-theme="neobrutalism"] [style*="color: #fff"],
+html[data-theme="neobrutalism"] [style*="color: #ffffff"],
+html[data-theme="neobrutalism"] [style*="color: #f8fafc"],
+html[data-theme="neobrutalism"] [style*="color: #cbd5e1"],
+html[data-theme="neobrutalism"] [style*="color: #94a3b8"],
+html[data-theme="neobrutalism"] [style*="color: #64748b"],
+html[data-theme="neobrutalism"] [style*="color: #f1f5f9"] {
+  color: #111111 !important;
+}
+
+/* Neobrutalist Cards, Panels & Modals */
+html[data-theme="neobrutalism"] .polaris-card,
+html[data-theme="neobrutalism"] .vercel-card,
+html[data-theme="neobrutalism"] .stat-card,
+html[data-theme="neobrutalism"] .config-card,
+html[data-theme="neobrutalism"] .modal-card,
+html[data-theme="neobrutalism"] .modal-content,
+html[data-theme="neobrutalism"] .overview-hero-card,
+html[data-theme="neobrutalism"] .instance-card,
+html[data-theme="neobrutalism"] .cluster-gauge-card,
+html[data-theme="neobrutalism"] .card-luxury,
+html[data-theme="neobrutalism"] .kinetix-modal-card,
+html[data-theme="neobrutalism"] .settings-group,
+html[data-theme="neobrutalism"] .feature-group-card,
+html[data-theme="neobrutalism"] .log-entry-card {
+  background-color: #FFFFFF !important;
+  border: 1.5px solid #000000 !important;
+  box-shadow: 3px 3px 0px #000000 !important;
+  border-radius: 8px !important;
+  color: #000000 !important;
+  box-sizing: border-box !important;
+}
+
+/* Neobrutalist Buttons */
+html[data-theme="neobrutalism"] .btn-polaris,
+html[data-theme="neobrutalism"] .btn-primary,
+html[data-theme="neobrutalism"] .btn-action,
+html[data-theme="neobrutalism"] .btn-rainbow {
+  border: 1.5px solid #000000 !important;
+  box-shadow: 2.5px 2.5px 0px #000000 !important;
+  border-radius: 6px !important;
+  font-weight: 800 !important;
+  color: #000000 !important;
+  background-color: #FFE600 !important;
+  background-image: none !important;
+  box-sizing: border-box !important;
+  transition: transform 0.1s ease, box-shadow 0.1s ease !important;
+}
+html[data-theme="neobrutalism"] .btn-polaris span,
+html[data-theme="neobrutalism"] .btn-primary span,
+html[data-theme="neobrutalism"] .btn-action span,
+html[data-theme="neobrutalism"] .btn-rainbow span {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+}
+
+html[data-theme="neobrutalism"] .btn-secondary {
+  background-color: #FFFFFF !important;
+  border: 1.5px solid #000000 !important;
+  box-shadow: 2.5px 2.5px 0px #000000 !important;
+  color: #000000 !important;
+  box-sizing: border-box !important;
+}
+
+html[data-theme="neobrutalism"] .btn-danger {
+  background-color: #FF5252 !important;
+  border: 1.5px solid #000000 !important;
+  box-shadow: 2.5px 2.5px 0px #000000 !important;
+  color: #FFFFFF !important;
+  box-sizing: border-box !important;
+}
+html[data-theme="neobrutalism"] .btn-danger span {
+  color: #FFFFFF !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+}
+
+html[data-theme="neobrutalism"] .btn-polaris:hover,
+html[data-theme="neobrutalism"] .btn-primary:hover,
+html[data-theme="neobrutalism"] .btn-action:hover,
+html[data-theme="neobrutalism"] .btn-rainbow:hover,
+html[data-theme="neobrutalism"] .btn-secondary:hover {
+  transform: translate(-1px, -1px) !important;
+  box-shadow: 4px 4px 0px #000000 !important;
+}
+
+html[data-theme="neobrutalism"] .btn-polaris:active,
+html[data-theme="neobrutalism"] .btn-primary:active,
+html[data-theme="neobrutalism"] .btn-action:active {
+  transform: translate(1.5px, 1.5px) !important;
+  box-shadow: 1px 1px 0px #000000 !important;
+}
+
+/* Neobrutalist Navigation & Header */
+html[data-theme="neobrutalism"] .vercel-header-wrapper {
+  background-color: #FFFDF0 !important;
+  border-bottom: 1.5px solid #000000 !important;
+}
+
+html[data-theme="neobrutalism"] .vercel-center-search {
+  background-color: #FFFFFF !important;
+  border: 1.5px solid #000000 !important;
+  box-shadow: 2px 2px 0px #000000 !important;
+  border-radius: 6px !important;
+  height: 36px !important;
+  box-sizing: border-box !important;
+}
+html[data-theme="neobrutalism"] .vercel-kbd-shortcut {
+  background-color: #FFE600 !important;
+  border: 1.5px solid #000000 !important;
+  color: #000000 !important;
+}
+
+html[data-theme="neobrutalism"] .nav-tab {
+  color: #000000 !important;
+  font-weight: 800 !important;
+  border: 1.5px solid transparent !important;
+  height: 38px !important;
+  box-sizing: border-box !important;
+  padding: 0 14px !important;
+}
+
+html[data-theme="neobrutalism"] .nav-tab.active {
+  background-color: #FFE600 !important;
+  border: 1.5px solid #000000 !important;
+  box-shadow: 2px 2px 0px #000000 !important;
+  border-radius: 6px !important;
+  color: #000000 !important;
+  height: 38px !important;
+  box-sizing: border-box !important;
+  padding: 0 14px !important;
+}
+
+/* Neobrutalist Form Inputs */
+html[data-theme="neobrutalism"] input,
+html[data-theme="neobrutalism"] select,
+html[data-theme="neobrutalism"] textarea {
+  border: 1.5px solid #000000 !important;
+  background-color: #FFFFFF !important;
+  color: #000000 !important;
+  border-radius: 6px !important;
+  box-shadow: 2px 2px 0px #000000 !important;
+  box-sizing: border-box !important;
+}
+html[data-theme="neobrutalism"] input::placeholder,
+html[data-theme="neobrutalism"] textarea::placeholder {
+  color: #718096 !important;
+}
+
+/* Neobrutalist Terminal */
+html[data-theme="neobrutalism"] .macos-terminal-wrapper,
+html[data-theme="neobrutalism"] #terminal-body {
+  border: 1.5px solid #000000 !important;
+  box-shadow: 4px 4px 0px #000000 !important;
+  background-color: #FFFDF0 !important;
+  color: #000000 !important;
+  box-sizing: border-box !important;
+}
+html[data-theme="neobrutalism"] .terminal-line {
+  color: #000000 !important;
+}
+
+/* Neobrutalist Tables */
+html[data-theme="neobrutalism"] table {
+  border: 1.5px solid #000000 !important;
+  box-sizing: border-box !important;
+}
+html[data-theme="neobrutalism"] thead th {
+  background-color: #FFF7B2 !important;
+  color: #000000 !important;
+  border-bottom: 1.5px solid #000000 !important;
+}
+html[data-theme="neobrutalism"] tbody tr {
+  border-bottom: 1.5px solid #000000 !important;
+}
+html[data-theme="neobrutalism"] tbody td {
+  color: #000000 !important;
+}
+
+/* ==========================================================================
+   2. CYBERPUNK HUD THEME (Neon Cyan, Glowing Magenta, Deep Obsidian)
+   ========================================================================== */
+html[data-theme="cyberpunk"],
+body[data-theme="cyberpunk"] {
+  --bg-space: #070314;
+  --bg-surface: #0E0724;
+  --bg-surface-elevated: #180D38;
+  --bg-glass: rgba(14, 7, 36, 0.88);
+  --bg-glass-hover: rgba(24, 13, 56, 0.95);
+
+  --border-subtle: rgba(0, 240, 255, 0.3);
+  --border-active: #00F0FF;
+  --border-glow: rgba(255, 0, 127, 0.5);
+
+  --text-primary: #FFFFFF;
+  --text-secondary: #00F0FF;
+  --text-muted: #9D8BBF;
+
+  --accent-cyan: #00F0FF;
+  --accent-indigo: #7928CA;
+  --accent-purple: #FF007F;
+  --accent-emerald: #00FF66;
+  --accent-amber: #FFE600;
+  --accent-rose: #FF0055;
+  --accent-champagne: #00F0FF;
+
+  --font-sans: 'JetBrains Mono', 'Fira Code', monospace;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-full: 4px;
+
+  --shadow-luxury: 0 0 25px rgba(0, 240, 255, 0.25), 0 0 5px rgba(255, 0, 127, 0.2);
+  --shadow-glow-cyan: 0 0 20px rgba(0, 240, 255, 0.5);
+  --shadow-glow-emerald: 0 0 20px rgba(0, 255, 102, 0.5);
+}
+
+html[data-theme="cyberpunk"] body,
+body[data-theme="cyberpunk"] {
+  background-color: #070314 !important;
+  background-image: 
+    linear-gradient(180deg, rgba(255, 0, 85, 0.08) 0%, rgba(0, 240, 255, 0.06) 100%),
+    linear-gradient(rgba(0, 240, 255, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 0, 85, 0.07) 1px, transparent 1px) !important;
+  background-size: 100% 100%, 36px 36px, 36px 36px !important;
+  color: #FFFFFF !important;
+  font-family: 'JetBrains Mono', monospace !important;
+}
+
+html[data-theme="cyberpunk"] #starfield-canvas {
+  display: block !important;
+  opacity: 0.9 !important;
+}
+html[data-theme="cyberpunk"] .crt-scanlines-container {
+  display: block !important;
+  opacity: 0.22 !important;
+}
+
+html[data-theme="cyberpunk"] h1,
+html[data-theme="cyberpunk"] h2,
+html[data-theme="cyberpunk"] h3,
+html[data-theme="cyberpunk"] .card-title,
+html[data-theme="cyberpunk"] .vercel-brand-text {
+  font-family: 'JetBrains Mono', monospace !important;
+  color: #00F0FF !important;
+  -webkit-text-fill-color: initial !important;
+  text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+}
+
+html[data-theme="cyberpunk"] .polaris-card,
+html[data-theme="cyberpunk"] .vercel-card,
+html[data-theme="cyberpunk"] .stat-card,
+html[data-theme="cyberpunk"] .config-card,
+html[data-theme="cyberpunk"] .card-luxury,
+html[data-theme="cyberpunk"] .tilt-card,
+html[data-theme="cyberpunk"] .modal-card,
+html[data-theme="cyberpunk"] .modal-content,
+html[data-theme="cyberpunk"] .kinetix-modal-card,
+html[data-theme="cyberpunk"] .settings-group,
+html[data-theme="cyberpunk"] .feature-group-card,
+html[data-theme="cyberpunk"] .log-entry-card,
+html[data-theme="cyberpunk"] .cluster-gauge-card,
+html[data-theme="cyberpunk"] .platform-chip-card,
+html[data-theme="cyberpunk"] .control-slider-card,
+html[data-theme="cyberpunk"] .overview-hero-card {
+  background-color: #0E0724 !important;
+  border: 1px solid rgba(0, 240, 255, 0.45) !important;
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.18), inset 0 0 10px rgba(0, 240, 255, 0.05) !important;
+  color: #FFFFFF !important;
+}
+
+/* Cyberpunk Card Glow Pseudo-element */
+html[data-theme="cyberpunk"] .card-luxury::before {
+  background: radial-gradient(600px circle at var(--mouse-x, 0) var(--mouse-y, 0), rgba(0, 240, 255, 0.12), transparent 40%) !important;
+}
+
+html[data-theme="cyberpunk"] .btn-primary,
+html[data-theme="cyberpunk"] .btn-rainbow,
+html[data-theme="cyberpunk"] .btn-action,
+html[data-theme="cyberpunk"] .btn-shine-effect {
+  background: linear-gradient(135deg, #00F0FF 0%, #FF007F 100%) !important;
+  color: #000000 !important;
+  font-weight: 800 !important;
+  border: none !important;
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.4) !important;
+}
+html[data-theme="cyberpunk"] .btn-primary span,
+html[data-theme="cyberpunk"] .btn-rainbow span,
+html[data-theme="cyberpunk"] .btn-action span,
+html[data-theme="cyberpunk"] .btn-shine-effect span {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+}
+
+html[data-theme="cyberpunk"] .btn-secondary,
+html[data-theme="cyberpunk"] .sfx-test-btn {
+  background-color: rgba(14, 7, 36, 0.85) !important;
+  border: 1px solid rgba(0, 240, 255, 0.4) !important;
+  color: #00F0FF !important;
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.15) !important;
+}
+html[data-theme="cyberpunk"] .btn-secondary span,
+html[data-theme="cyberpunk"] .sfx-test-btn span,
+html[data-theme="cyberpunk"] .sfx-test-btn div {
+  color: #00F0FF !important;
+}
+
+html[data-theme="cyberpunk"] .btn-danger {
+  background: linear-gradient(135deg, #FF0055 0%, #7928CA 100%) !important;
+  border: 1px solid #FF0055 !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 0 15px rgba(255, 0, 85, 0.45) !important;
+}
+
+html[data-theme="cyberpunk"] .nav-tab.active {
+  color: #00F0FF !important;
+  border-bottom: 2px solid #00F0FF !important;
+  text-shadow: 0 0 8px rgba(0, 240, 255, 0.6);
+  background: rgba(0, 240, 255, 0.08) !important;
+}
+
+html[data-theme="cyberpunk"] input,
+html[data-theme="cyberpunk"] select,
+html[data-theme="cyberpunk"] textarea,
+html[data-theme="cyberpunk"] .form-input,
+html[data-theme="cyberpunk"] .form-select,
+html[data-theme="cyberpunk"] .form-textarea,
+html[data-theme="cyberpunk"] .form-input-luxury {
+  background-color: #070314 !important;
+  border: 1px solid #00F0FF !important;
+  color: #00F0FF !important;
+  box-shadow: 0 0 8px rgba(0, 240, 255, 0.2) !important;
+  font-family: 'JetBrains Mono', monospace !important;
+}
+
+html[data-theme="cyberpunk"] table,
+html[data-theme="cyberpunk"] .polaris-table {
+  border: 1px solid rgba(0, 240, 255, 0.3) !important;
+}
+html[data-theme="cyberpunk"] thead th,
+html[data-theme="cyberpunk"] .polaris-table th {
+  background-color: rgba(0, 240, 255, 0.12) !important;
+  color: #00F0FF !important;
+  border-bottom: 1px solid #00F0FF !important;
+}
+html[data-theme="cyberpunk"] tbody td,
+html[data-theme="cyberpunk"] .polaris-table td {
+  border-bottom: 1px solid rgba(0, 240, 255, 0.15) !important;
+  color: #e2e8f0 !important;
+}
+
+/* Cyberpunk iPhone & Story Mockup Frame */
+html[data-theme="cyberpunk"] .dl-iphone-bezel,
+html[data-theme="cyberpunk"] .wa-phone-mockup {
+  background: #070314 !important;
+  border: 2px solid #00F0FF !important;
+  box-shadow: 0 0 30px rgba(0, 240, 255, 0.35), inset 0 0 15px rgba(255, 0, 127, 0.25) !important;
+}
+html[data-theme="cyberpunk"] .dl-iphone-dynamic-island {
+  border: 1px solid #00F0FF !important;
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.4) !important;
+}
+html[data-theme="cyberpunk"] .dl-iphone-screen,
+html[data-theme="cyberpunk"] .wa-story-screen {
+  background: #04010a !important;
+}
+
+/* ==========================================================================
+   3. AMBER TERMINAL THEME (Authentic 1980s Phosphor CRT Amber)
+   ========================================================================== */
+html[data-theme="amber_terminal"],
+body[data-theme="amber_terminal"] {
+  --bg-space: #100800;
+  --bg-surface: #1A0E00;
+  --bg-surface-elevated: #261600;
+  --bg-glass: rgba(26, 14, 0, 0.94);
+  --bg-glass-hover: rgba(38, 22, 0, 0.96);
+
+  --border-subtle: rgba(255, 176, 0, 0.3);
+  --border-active: #FFB000;
+  --border-glow: rgba(255, 176, 0, 0.5);
+
+  --text-primary: #FFB000;
+  --text-secondary: #D49200;
+  --text-muted: #8A5F00;
+
+  --accent-cyan: #FFB000;
+  --accent-indigo: #FFCC00;
+  --accent-purple: #FF9900;
+  --accent-emerald: #FFB000;
+  --accent-amber: #FFB000;
+  --accent-rose: #FF7700;
+  --accent-champagne: #FFB000;
+
+  --font-sans: 'JetBrains Mono', monospace;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 6px;
+  --radius-xl: 8px;
+  --radius-full: 4px;
+
+  --shadow-luxury: 0 0 20px rgba(255, 176, 0, 0.25);
+  --shadow-glow-cyan: 0 0 20px rgba(255, 176, 0, 0.4);
+  --shadow-glow-emerald: 0 0 20px rgba(255, 176, 0, 0.4);
+}
+
+html[data-theme="amber_terminal"] body,
+body[data-theme="amber_terminal"] {
+  background-color: #100800 !important;
+  background-image: 
+    radial-gradient(circle at 50% 50%, rgba(255, 176, 0, 0.08) 0%, transparent 75%),
+    linear-gradient(rgba(255, 176, 0, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 176, 0, 0.05) 1px, transparent 1px) !important;
+  background-size: 100% 100%, 32px 32px, 32px 32px !important;
+  color: #FFB000 !important;
+  font-family: 'JetBrains Mono', monospace !important;
+}
+
+html[data-theme="amber_terminal"] #starfield-canvas {
+  display: block !important;
+  opacity: 0.85 !important;
+}
+html[data-theme="amber_terminal"] .ambient-nebula {
+  display: none !important;
+}
+
+html[data-theme="amber_terminal"] .crt-scanlines-container {
+  display: block !important;
+  opacity: 0.35 !important;
+}
+
+html[data-theme="amber_terminal"] h1,
+html[data-theme="amber_terminal"] h2,
+html[data-theme="amber_terminal"] h3,
+html[data-theme="amber_terminal"] h4,
+html[data-theme="amber_terminal"] h5,
+html[data-theme="amber_terminal"] h6,
+html[data-theme="amber_terminal"] p,
+html[data-theme="amber_terminal"] label,
+html[data-theme="amber_terminal"] td,
+html[data-theme="amber_terminal"] th,
+html[data-theme="amber_terminal"] .card-title,
+html[data-theme="amber_terminal"] .vercel-brand-text {
+  color: #FFB000 !important;
+  -webkit-text-fill-color: #FFB000 !important;
+  text-shadow: 0 0 4px rgba(255, 176, 0, 0.35);
+  font-family: 'JetBrains Mono', monospace !important;
+}
+
+/* Span text color fallback — exclude buttons so button text remains black */
+html[data-theme="amber_terminal"] span:not(.btn-polaris span):not(.btn-primary span):not(.btn-rainbow span):not(.btn-action span) {
+  color: #FFB000 !important;
+}
+
+html[data-theme="amber_terminal"] .polaris-card,
+html[data-theme="amber_terminal"] .vercel-card,
+html[data-theme="amber_terminal"] .stat-card,
+html[data-theme="amber_terminal"] .config-card,
+html[data-theme="amber_terminal"] .card-luxury,
+html[data-theme="amber_terminal"] .tilt-card,
+html[data-theme="amber_terminal"] .modal-card,
+html[data-theme="amber_terminal"] .modal-content,
+html[data-theme="amber_terminal"] .kinetix-modal-card,
+html[data-theme="amber_terminal"] .settings-group,
+html[data-theme="amber_terminal"] .feature-group-card,
+html[data-theme="amber_terminal"] .log-entry-card,
+html[data-theme="amber_terminal"] .cluster-gauge-card,
+html[data-theme="amber_terminal"] .platform-chip-card,
+html[data-theme="amber_terminal"] .control-slider-card,
+html[data-theme="amber_terminal"] .overview-hero-card {
+  background-color: #1A0E00 !important;
+  border: 1px solid rgba(255, 176, 0, 0.45) !important;
+  box-shadow: 0 0 15px rgba(255, 176, 0, 0.18) !important;
+  color: #FFB000 !important;
+}
+
+/* Amber Terminal Card Glow */
+html[data-theme="amber_terminal"] .card-luxury::before {
+  background: radial-gradient(600px circle at var(--mouse-x, 0) var(--mouse-y, 0), rgba(255, 176, 0, 0.12), transparent 40%) !important;
+}
+
+/* Buttons in Amber Terminal: Solid amber background with solid black text */
+html[data-theme="amber_terminal"] .btn-polaris.btn-primary,
+html[data-theme="amber_terminal"] .btn-primary,
+html[data-theme="amber_terminal"] .btn-rainbow,
+html[data-theme="amber_terminal"] .btn-action,
+html[data-theme="amber_terminal"] .btn-shine-effect {
+  background-color: #FFB000 !important;
+  background-image: none !important;
+  color: #100800 !important;
+  border: 1px solid #FFB000 !important;
+  font-weight: 800 !important;
+  -webkit-text-fill-color: #100800 !important;
+  box-shadow: 0 0 10px rgba(255, 176, 0, 0.3) !important;
+}
+html[data-theme="amber_terminal"] .btn-polaris.btn-primary *,
+html[data-theme="amber_terminal"] .btn-primary *,
+html[data-theme="amber_terminal"] .btn-rainbow *,
+html[data-theme="amber_terminal"] .btn-action *,
+html[data-theme="amber_terminal"] .btn-shine-effect * {
+  color: #100800 !important;
+  -webkit-text-fill-color: #100800 !important;
+  text-shadow: none !important;
+}
+
+html[data-theme="amber_terminal"] .btn-secondary,
+html[data-theme="amber_terminal"] .sfx-test-btn {
+  background-color: #1A0E00 !important;
+  border: 1px solid #FFB000 !important;
+  color: #FFB000 !important;
+  -webkit-text-fill-color: #FFB000 !important;
+}
+html[data-theme="amber_terminal"] .btn-secondary *,
+html[data-theme="amber_terminal"] .sfx-test-btn * {
+  color: #FFB000 !important;
+  -webkit-text-fill-color: #FFB000 !important;
+}
+
+html[data-theme="amber_terminal"] .btn-danger {
+  background-color: #8A1A00 !important;
+  border: 1px solid #FF3B00 !important;
+  color: #FFAA88 !important;
+  -webkit-text-fill-color: #FFAA88 !important;
+}
+
+html[data-theme="amber_terminal"] input,
+html[data-theme="amber_terminal"] select,
+html[data-theme="amber_terminal"] textarea,
+html[data-theme="amber_terminal"] .form-input,
+html[data-theme="amber_terminal"] .form-select,
+html[data-theme="amber_terminal"] .form-textarea,
+html[data-theme="amber_terminal"] .form-input-luxury {
+  background-color: #100800 !important;
+  color: #FFB000 !important;
+  border: 1px solid #FFB000 !important;
+  font-family: 'JetBrains Mono', monospace !important;
+  box-shadow: 0 0 6px rgba(255, 176, 0, 0.2) !important;
+}
+
+html[data-theme="amber_terminal"] .nav-tab.active {
+  background-color: rgba(255, 176, 0, 0.15) !important;
+  border: 1px solid #FFB000 !important;
+  color: #FFB000 !important;
+}
+
+html[data-theme="amber_terminal"] table,
+html[data-theme="amber_terminal"] .polaris-table {
+  border: 1px solid rgba(255, 176, 0, 0.4) !important;
+}
+html[data-theme="amber_terminal"] thead th,
+html[data-theme="amber_terminal"] .polaris-table th {
+  background-color: rgba(255, 176, 0, 0.15) !important;
+  color: #FFB000 !important;
+  border-bottom: 1px solid #FFB000 !important;
+}
+html[data-theme="amber_terminal"] tbody td,
+html[data-theme="amber_terminal"] .polaris-table td {
+  border-bottom: 1px solid rgba(255, 176, 0, 0.2) !important;
+  color: #FFB000 !important;
+}
+
+/* Amber Terminal iPhone & Story Mockup Frame */
+html[data-theme="amber_terminal"] .dl-iphone-bezel,
+html[data-theme="amber_terminal"] .wa-phone-mockup {
+  background: #100800 !important;
+  border: 2px solid #FFB000 !important;
+  box-shadow: 0 0 25px rgba(255, 176, 0, 0.35) !important;
+}
+html[data-theme="amber_terminal"] .dl-iphone-dynamic-island {
+  border: 1px solid #FFB000 !important;
+}
+html[data-theme="amber_terminal"] .dl-iphone-screen,
+html[data-theme="amber_terminal"] .wa-story-screen {
+  background: #0d0600 !important;
+}
+
+/* ==========================================================================
+   4. EDITORIAL LUXURY THEME (Cormorant Garamond, Warm Paper & Gold)
+   ========================================================================== */
+html[data-theme="editorial"],
+body[data-theme="editorial"] {
+  --bg-space: #141210;
+  --bg-surface: #1E1B18;
+  --bg-surface-elevated: #282420;
+  --bg-glass: rgba(30, 27, 24, 0.88);
+  --bg-glass-hover: rgba(40, 36, 32, 0.95);
+
+  --border-subtle: rgba(235, 225, 215, 0.12);
+  --border-active: #D4AF37;
+  --border-glow: rgba(212, 175, 55, 0.3);
+
+  --text-primary: #F7F4EE;
+  --text-secondary: #C8C0B2;
+  --text-muted: #827B70;
+
+  --accent-cyan: #D4AF37;
+  --accent-indigo: #B89758;
+  --accent-purple: #9E7D46;
+  --accent-emerald: #528066;
+  --accent-amber: #D4AF37;
+  --accent-rose: #A34E4C;
+  --accent-champagne: #F1D2A9;
+
+  --font-sans: 'Cormorant Garamond', 'Inter', serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-full: 9999px;
+
+  --shadow-luxury: 0 20px 40px -15px rgba(0, 0, 0, 0.8), 0 0 1px 1px rgba(212, 175, 55, 0.15);
+}
+
+html[data-theme="editorial"] body,
+html[data-theme="editorial_luxury"] body,
+body[data-theme="editorial"],
+body[data-theme="editorial_luxury"] {
+  background-color: #141210 !important;
+  background-image: 
+    radial-gradient(ellipse at 50% 0%, rgba(212, 175, 55, 0.12) 0%, transparent 60%),
+    radial-gradient(ellipse at 50% 100%, rgba(140, 95, 30, 0.08) 0%, transparent 60%) !important;
+  color: #F7F4EE !important;
+}
+
+html[data-theme="editorial"] #starfield-canvas,
+html[data-theme="editorial_luxury"] #starfield-canvas {
+  display: block !important;
+  opacity: 0.8 !important;
+}
+
+html[data-theme="editorial"] h1,
+html[data-theme="editorial"] h2,
+html[data-theme="editorial"] h3,
+html[data-theme="editorial"] .card-title,
+html[data-theme="editorial"] .vercel-brand-text {
+  font-family: 'Cormorant Garamond', serif !important;
+  color: #D4AF37 !important;
+  letter-spacing: 0.02em !important;
+}
+
+html[data-theme="editorial"] .polaris-card,
+html[data-theme="editorial"] .vercel-card,
+html[data-theme="editorial"] .stat-card,
+html[data-theme="editorial"] .config-card,
+html[data-theme="editorial"] .card-luxury,
+html[data-theme="editorial"] .tilt-card,
+html[data-theme="editorial"] .modal-card,
+html[data-theme="editorial"] .modal-content,
+html[data-theme="editorial"] .kinetix-modal-card,
+html[data-theme="editorial"] .settings-group,
+html[data-theme="editorial"] .feature-group-card,
+html[data-theme="editorial"] .log-entry-card,
+html[data-theme="editorial"] .cluster-gauge-card,
+html[data-theme="editorial"] .platform-chip-card,
+html[data-theme="editorial"] .control-slider-card,
+html[data-theme="editorial"] .overview-hero-card {
+  background-color: #1E1B18 !important;
+  border: 1px solid rgba(212, 175, 55, 0.25) !important;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.6) !important;
+  color: #F7F4EE !important;
+}
+
+/* Editorial Card Glow */
+html[data-theme="editorial"] .card-luxury::before {
+  background: radial-gradient(600px circle at var(--mouse-x, 0) var(--mouse-y, 0), rgba(212, 175, 55, 0.1), transparent 40%) !important;
+}
+
+html[data-theme="editorial"] .btn-primary,
+html[data-theme="editorial"] .btn-rainbow,
+html[data-theme="editorial"] .btn-action,
+html[data-theme="editorial"] .btn-shine-effect {
+  background: linear-gradient(135deg, #D4AF37 0%, #B89758 100%) !important;
+  color: #141210 !important;
+  font-weight: 750 !important;
+  border: none !important;
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.25) !important;
+}
+html[data-theme="editorial"] .btn-primary span,
+html[data-theme="editorial"] .btn-rainbow span,
+html[data-theme="editorial"] .btn-action span,
+html[data-theme="editorial"] .btn-shine-effect span {
+  color: #141210 !important;
+}
+
+html[data-theme="editorial"] .btn-secondary,
+html[data-theme="editorial"] .sfx-test-btn {
+  background-color: rgba(30, 27, 24, 0.9) !important;
+  border: 1px solid rgba(212, 175, 55, 0.3) !important;
+  color: #D4AF37 !important;
+}
+html[data-theme="editorial"] .btn-secondary span,
+html[data-theme="editorial"] .sfx-test-btn span,
+html[data-theme="editorial"] .sfx-test-btn div {
+  color: #D4AF37 !important;
+}
+
+html[data-theme="editorial"] .btn-danger {
+  background-color: #5C2220 !important;
+  border: 1px solid #A34E4C !important;
+  color: #F7F4EE !important;
+}
+
+html[data-theme="editorial"] .nav-tab.active {
+  color: #D4AF37 !important;
+  border-bottom: 2px solid #D4AF37 !important;
+  background: rgba(212, 175, 55, 0.08) !important;
+}
+
+html[data-theme="editorial"] input,
+html[data-theme="editorial"] select,
+html[data-theme="editorial"] textarea,
+html[data-theme="editorial"] .form-input,
+html[data-theme="editorial"] .form-select,
+html[data-theme="editorial"] .form-textarea,
+html[data-theme="editorial"] .form-input-luxury {
+  background-color: #141210 !important;
+  border: 1px solid rgba(212, 175, 55, 0.3) !important;
+  color: #F7F4EE !important;
+  font-family: inherit !important;
+}
+
+html[data-theme="editorial"] table,
+html[data-theme="editorial"] .polaris-table {
+  border: 1px solid rgba(212, 175, 55, 0.25) !important;
+}
+html[data-theme="editorial"] thead th,
+html[data-theme="editorial"] .polaris-table th {
+  background-color: rgba(212, 175, 55, 0.1) !important;
+  color: #D4AF37 !important;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.3) !important;
+}
+html[data-theme="editorial"] tbody td,
+html[data-theme="editorial"] .polaris-table td {
+  border-bottom: 1px solid rgba(212, 175, 55, 0.12) !important;
+  color: #e4decb !important;
+}
+
+/* Editorial iPhone & Story Mockup Frame */
+html[data-theme="editorial"] .dl-iphone-bezel,
+html[data-theme="editorial"] .wa-phone-mockup {
+  background: #141210 !important;
+  border: 2px solid rgba(212, 175, 55, 0.4) !important;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.85), 0 0 20px rgba(212, 175, 55, 0.18) !important;
+}
+html[data-theme="editorial"] .dl-iphone-dynamic-island {
+  border: 1px solid rgba(212, 175, 55, 0.35) !important;
+}
+html[data-theme="editorial"] .dl-iphone-screen,
+html[data-theme="editorial"] .wa-story-screen {
+  background: #0d0c0a !important;
+}
+
+/* ==========================================================================
+   5. MIDNIGHT AURORA THEME (Cosmic Obsidian, Emerald & Cyan Gradients)
+   ========================================================================== */
+html[data-theme="midnight_aurora"],
+body[data-theme="midnight_aurora"] {
+  --bg-space: #030712;
+  --bg-surface: #0A1128;
+  --bg-surface-elevated: #111D42;
+  --bg-glass: rgba(10, 17, 40, 0.75);
+  --bg-glass-hover: rgba(17, 29, 66, 0.88);
+
+  --border-subtle: rgba(56, 189, 248, 0.18);
+  --border-active: #38BDF8;
+  --border-glow: rgba(16, 185, 129, 0.35);
+
+  --text-primary: #F0FDFA;
+  --text-secondary: #99F6E4;
+  --text-muted: #5EEAD4;
+
+  --accent-cyan: #38BDF8;
+  --accent-indigo: #818CF8;
+  --accent-purple: #C084FC;
+  --accent-emerald: #34D399;
+  --accent-amber: #FBBF24;
+  --accent-rose: #FB7185;
+  --accent-champagne: #FDE68A;
+
+  --font-sans: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-full: 9999px;
+
+  --shadow-luxury: 0 20px 40px -15px rgba(3, 7, 18, 0.9), 0 0 25px rgba(56, 189, 248, 0.2);
+}
+
+html[data-theme="midnight_aurora"] body,
+body[data-theme="midnight_aurora"] {
+  background-color: #030712 !important;
+  background-image: 
+    radial-gradient(ellipse at 20% 0%, rgba(56, 189, 248, 0.22) 0%, transparent 55%),
+    radial-gradient(ellipse at 80% 10%, rgba(16, 185, 129, 0.18) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 100%, rgba(99, 102, 241, 0.15) 0%, transparent 60%) !important;
+  color: #F0FDFA !important;
+}
+
+html[data-theme="midnight_aurora"] #starfield-canvas,
+html[data-theme="midnight_aurora"] .ambient-nebula {
+  display: block !important;
+}
+
+html[data-theme="midnight_aurora"] .polaris-card,
+html[data-theme="midnight_aurora"] .vercel-card,
+html[data-theme="midnight_aurora"] .stat-card,
+html[data-theme="midnight_aurora"] .config-card,
+html[data-theme="midnight_aurora"] .card-luxury,
+html[data-theme="midnight_aurora"] .tilt-card,
+html[data-theme="midnight_aurora"] .modal-card,
+html[data-theme="midnight_aurora"] .modal-content,
+html[data-theme="midnight_aurora"] .kinetix-modal-card,
+html[data-theme="midnight_aurora"] .settings-group,
+html[data-theme="midnight_aurora"] .feature-group-card,
+html[data-theme="midnight_aurora"] .log-entry-card,
+html[data-theme="midnight_aurora"] .cluster-gauge-card,
+html[data-theme="midnight_aurora"] .platform-chip-card,
+html[data-theme="midnight_aurora"] .control-slider-card,
+html[data-theme="midnight_aurora"] .overview-hero-card {
+  background-color: #0A1128 !important;
+  border: 1px solid rgba(56, 189, 248, 0.25) !important;
+  box-shadow: 0 20px 40px -15px rgba(3, 7, 18, 0.9), 0 0 25px rgba(56, 189, 248, 0.12) !important;
+  color: #F0FDFA !important;
+}
+
+/* Midnight Aurora Card Glow */
+html[data-theme="midnight_aurora"] .card-luxury::before {
+  background: radial-gradient(600px circle at var(--mouse-x, 0) var(--mouse-y, 0), rgba(56, 189, 248, 0.12), transparent 40%) !important;
+}
+
+html[data-theme="midnight_aurora"] .btn-primary,
+html[data-theme="midnight_aurora"] .btn-rainbow,
+html[data-theme="midnight_aurora"] .btn-action,
+html[data-theme="midnight_aurora"] .btn-shine-effect {
+  background: linear-gradient(135deg, #38BDF8 0%, #34D399 100%) !important;
+  color: #030712 !important;
+  font-weight: 800 !important;
+  border: none !important;
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.35) !important;
+}
+html[data-theme="midnight_aurora"] .btn-primary span,
+html[data-theme="midnight_aurora"] .btn-rainbow span,
+html[data-theme="midnight_aurora"] .btn-action span,
+html[data-theme="midnight_aurora"] .btn-shine-effect span {
+  color: #030712 !important;
+}
+
+html[data-theme="midnight_aurora"] .btn-secondary,
+html[data-theme="midnight_aurora"] .sfx-test-btn {
+  background-color: rgba(10, 17, 40, 0.85) !important;
+  border: 1px solid rgba(56, 189, 248, 0.28) !important;
+  color: #38BDF8 !important;
+}
+html[data-theme="midnight_aurora"] .btn-secondary span,
+html[data-theme="midnight_aurora"] .sfx-test-btn span,
+html[data-theme="midnight_aurora"] .sfx-test-btn div {
+  color: #38BDF8 !important;
+}
+
+html[data-theme="midnight_aurora"] .nav-tab.active {
+  color: #38BDF8 !important;
+  border-bottom: 2px solid #38BDF8 !important;
+  background: rgba(56, 189, 248, 0.08) !important;
+}
+
+html[data-theme="midnight_aurora"] input,
+html[data-theme="midnight_aurora"] select,
+html[data-theme="midnight_aurora"] textarea,
+html[data-theme="midnight_aurora"] .form-input,
+html[data-theme="midnight_aurora"] .form-select,
+html[data-theme="midnight_aurora"] .form-textarea,
+html[data-theme="midnight_aurora"] .form-input-luxury {
+  background-color: #050b1a !important;
+  border: 1px solid rgba(56, 189, 248, 0.3) !important;
+  color: #F0FDFA !important;
+}
+
+html[data-theme="midnight_aurora"] table,
+html[data-theme="midnight_aurora"] .polaris-table {
+  border: 1px solid rgba(56, 189, 248, 0.2) !important;
+}
+html[data-theme="midnight_aurora"] thead th,
+html[data-theme="midnight_aurora"] .polaris-table th {
+  background-color: rgba(56, 189, 248, 0.12) !important;
+  color: #38BDF8 !important;
+  border-bottom: 1px solid rgba(56, 189, 248, 0.3) !important;
+}
+html[data-theme="midnight_aurora"] tbody td,
+html[data-theme="midnight_aurora"] .polaris-table td {
+  border-bottom: 1px solid rgba(56, 189, 248, 0.1) !important;
+  color: #F0FDFA !important;
+}
+
+/* Midnight Aurora iPhone & Story Mockup Frame */
+html[data-theme="midnight_aurora"] .dl-iphone-bezel,
+html[data-theme="midnight_aurora"] .wa-phone-mockup {
+  background: #050b1a !important;
+  border: 2px solid rgba(56, 189, 248, 0.4) !important;
+  box-shadow: 0 0 35px rgba(56, 189, 248, 0.25), 0 0 15px rgba(52, 211, 153, 0.15) !important;
+}
+html[data-theme="midnight_aurora"] .dl-iphone-dynamic-island {
+  border: 1px solid rgba(56, 189, 248, 0.3) !important;
+}
+html[data-theme="midnight_aurora"] .dl-iphone-screen,
+html[data-theme="midnight_aurora"] .wa-story-screen {
+  background: #030712 !important;
+}
+
+/* ==========================================================================
+   6. VAPORWAVE 80s THEME (Synthwave Purple, Magenta Sunset)
+   ========================================================================== */
+html[data-theme="vaporwave_retro"],
+body[data-theme="vaporwave_retro"] {
+  --bg-space: #18092E;
+  --bg-surface: #250F46;
+  --bg-surface-elevated: #361664;
+  --bg-glass: rgba(37, 15, 70, 0.82);
+  --bg-glass-hover: rgba(54, 22, 100, 0.92);
+
+  --border-subtle: rgba(255, 113, 206, 0.25);
+  --border-active: #FF71CE;
+  --border-glow: rgba(1, 205, 254, 0.4);
+
+  --text-primary: #FFFBFE;
+  --text-secondary: #01CDFE;
+  --text-muted: #B967FF;
+
+  --accent-cyan: #01CDFE;
+  --accent-indigo: #05FFA1;
+  --accent-purple: #FF71CE;
+  --accent-emerald: #05FFA1;
+  --accent-amber: #FFFB96;
+  --accent-rose: #FF71CE;
+  --accent-champagne: #FFFB96;
+
+  --font-sans: 'Syne', 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  --shadow-luxury: 0 15px 35px rgba(255, 113, 206, 0.25), 0 0 20px rgba(1, 205, 254, 0.2);
+}
+
+html[data-theme="vaporwave_retro"] body,
+body[data-theme="vaporwave_retro"] {
+  background-color: #18092E !important;
+  background-image: 
+    radial-gradient(ellipse at 50% 100%, rgba(255, 113, 206, 0.22) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, rgba(1, 205, 254, 0.18) 0%, transparent 50%),
+    radial-gradient(ellipse at 20% 30%, rgba(5, 255, 161, 0.12) 0%, transparent 50%) !important;
+  color: #FFFBFE !important;
+}
+
+html[data-theme="vaporwave_retro"] #starfield-canvas {
+  display: block !important;
+  opacity: 0.85 !important;
+}
+
+html[data-theme="vaporwave_retro"] h1,
+html[data-theme="vaporwave_retro"] h2,
+html[data-theme="vaporwave_retro"] h3,
+html[data-theme="vaporwave_retro"] .vercel-brand-text {
+  font-family: 'Syne', sans-serif !important;
+  color: #FF71CE !important;
+}
+
+html[data-theme="vaporwave_retro"] .polaris-card,
+html[data-theme="vaporwave_retro"] .vercel-card,
+html[data-theme="vaporwave_retro"] .stat-card,
+html[data-theme="vaporwave_retro"] .config-card,
+html[data-theme="vaporwave_retro"] .card-luxury,
+html[data-theme="vaporwave_retro"] .tilt-card,
+html[data-theme="vaporwave_retro"] .modal-card,
+html[data-theme="vaporwave_retro"] .modal-content,
+html[data-theme="vaporwave_retro"] .kinetix-modal-card,
+html[data-theme="vaporwave_retro"] .settings-group,
+html[data-theme="vaporwave_retro"] .feature-group-card,
+html[data-theme="vaporwave_retro"] .log-entry-card,
+html[data-theme="vaporwave_retro"] .cluster-gauge-card,
+html[data-theme="vaporwave_retro"] .platform-chip-card,
+html[data-theme="vaporwave_retro"] .control-slider-card,
+html[data-theme="vaporwave_retro"] .overview-hero-card {
+  background-color: #250F46 !important;
+  border: 1px solid rgba(255, 113, 206, 0.35) !important;
+  box-shadow: 0 0 20px rgba(255, 113, 206, 0.18) !important;
+  color: #FFFBFE !important;
+}
+
+/* Vaporwave Card Glow */
+html[data-theme="vaporwave_retro"] .card-luxury::before {
+  background: radial-gradient(600px circle at var(--mouse-x, 0) var(--mouse-y, 0), rgba(255, 113, 206, 0.12), transparent 40%) !important;
+}
+
+html[data-theme="vaporwave_retro"] .btn-primary,
+html[data-theme="vaporwave_retro"] .btn-rainbow,
+html[data-theme="vaporwave_retro"] .btn-action,
+html[data-theme="vaporwave_retro"] .btn-shine-effect {
+  background: linear-gradient(135deg, #FF71CE 0%, #01CDFE 100%) !important;
+  color: #FFFFFF !important;
+  font-weight: 800 !important;
+  border: none !important;
+  box-shadow: 0 0 15px rgba(255, 113, 206, 0.4) !important;
+}
+html[data-theme="vaporwave_retro"] .btn-primary span,
+html[data-theme="vaporwave_retro"] .btn-rainbow span,
+html[data-theme="vaporwave_retro"] .btn-action span,
+html[data-theme="vaporwave_retro"] .btn-shine-effect span {
+  color: #FFFFFF !important;
+}
+
+html[data-theme="vaporwave_retro"] .btn-secondary,
+html[data-theme="vaporwave_retro"] .sfx-test-btn {
+  background-color: rgba(37, 15, 70, 0.85) !important;
+  border: 1px solid rgba(1, 205, 254, 0.35) !important;
+  color: #01CDFE !important;
+}
+html[data-theme="vaporwave_retro"] .btn-secondary span,
+html[data-theme="vaporwave_retro"] .sfx-test-btn span,
+html[data-theme="vaporwave_retro"] .sfx-test-btn div {
+  color: #01CDFE !important;
+}
+
+html[data-theme="vaporwave_retro"] .nav-tab.active {
+  color: #FF71CE !important;
+  border-bottom: 2px solid #FF71CE !important;
+  background: rgba(255, 113, 206, 0.08) !important;
+}
+
+html[data-theme="vaporwave_retro"] input,
+html[data-theme="vaporwave_retro"] select,
+html[data-theme="vaporwave_retro"] textarea,
+html[data-theme="vaporwave_retro"] .form-input,
+html[data-theme="vaporwave_retro"] .form-select,
+html[data-theme="vaporwave_retro"] .form-textarea,
+html[data-theme="vaporwave_retro"] .form-input-luxury {
+  background-color: #18092E !important;
+  border: 1px solid #FF71CE !important;
+  color: #01CDFE !important;
+}
+
+html[data-theme="vaporwave_retro"] table,
+html[data-theme="vaporwave_retro"] .polaris-table {
+  border: 1px solid rgba(255, 113, 206, 0.3) !important;
+}
+html[data-theme="vaporwave_retro"] thead th,
+html[data-theme="vaporwave_retro"] .polaris-table th {
+  background-color: rgba(255, 113, 206, 0.12) !important;
+  color: #FF71CE !important;
+  border-bottom: 1px solid #FF71CE !important;
+}
+html[data-theme="vaporwave_retro"] tbody td,
+html[data-theme="vaporwave_retro"] .polaris-table td {
+  border-bottom: 1px solid rgba(255, 113, 206, 0.12) !important;
+  color: #f1e9f7 !important;
+}
+
+/* Vaporwave iPhone & Story Mockup Frame */
+html[data-theme="vaporwave_retro"] .dl-iphone-bezel,
+html[data-theme="vaporwave_retro"] .wa-phone-mockup {
+  background: #18092E !important;
+  border: 2px solid #FF71CE !important;
+  box-shadow: 0 0 30px rgba(255, 113, 206, 0.35), 0 0 15px rgba(1, 205, 254, 0.25) !important;
+}
+html[data-theme="vaporwave_retro"] .dl-iphone-dynamic-island {
+  border: 1px solid #FF71CE !important;
+}
+html[data-theme="vaporwave_retro"] .dl-iphone-screen,
+html[data-theme="vaporwave_retro"] .wa-story-screen {
+  background: #110522 !important;
+}
+
+/* ==========================================================================
+   7. MINIMALIST SWISS THEME (Monochrome Slate, Precision, Zero Clutter)
+   ========================================================================== */
+html[data-theme="minimalist"],
+body[data-theme="minimalist"] {
+  --bg-space: #09090B;
+  --bg-surface: #121215;
+  --bg-surface-elevated: #18181B;
+  --bg-glass: rgba(18, 18, 21, 0.85);
+  --bg-glass-hover: rgba(24, 24, 27, 0.95);
+
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-active: #E4E4E7;
+  --border-glow: rgba(255, 255, 255, 0.15);
+
+  --text-primary: #FAFAFA;
+  --text-secondary: #A1A1AA;
+  --text-muted: #71717A;
+
+  --accent-cyan: #E4E4E7;
+  --accent-indigo: #D4D4D8;
+  --accent-purple: #A1A1AA;
+  --accent-emerald: #10B981;
+  --accent-amber: #F59E0B;
+  --accent-rose: #EF4444;
+  --accent-champagne: #E4E4E7;
+
+  --font-sans: 'Plus Jakarta Sans', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 22px;
+  --radius-full: 9999px;
+
+  --shadow-luxury: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+html[data-theme="minimalist"] body,
+body[data-theme="minimalist"] {
+  background-color: #09090B !important;
+  background-image: 
+    radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px) !important;
+  background-size: 32px 32px, 64px 64px, 64px 64px !important;
+  color: #FAFAFA !important;
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+}
+
+html[data-theme="minimalist"] #starfield-canvas {
+  display: block !important;
+  opacity: 0.65 !important;
+}
+
+html[data-theme="minimalist"] .polaris-card,
+html[data-theme="minimalist"] .vercel-card,
+html[data-theme="minimalist"] .stat-card,
+html[data-theme="minimalist"] .config-card,
+html[data-theme="minimalist"] .card-luxury,
+html[data-theme="minimalist"] .tilt-card,
+html[data-theme="minimalist"] .modal-card,
+html[data-theme="minimalist"] .modal-content,
+html[data-theme="minimalist"] .kinetix-modal-card,
+html[data-theme="minimalist"] .settings-group,
+html[data-theme="minimalist"] .feature-group-card,
+html[data-theme="minimalist"] .log-entry-card,
+html[data-theme="minimalist"] .cluster-gauge-card,
+html[data-theme="minimalist"] .platform-chip-card,
+html[data-theme="minimalist"] .control-slider-card,
+html[data-theme="minimalist"] .overview-hero-card {
+  background-color: #121215 !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4) !important;
+  color: #FAFAFA !important;
+}
+
+/* Minimalist Card Glow */
+html[data-theme="minimalist"] .card-luxury::before {
+  background: radial-gradient(600px circle at var(--mouse-x, 0) var(--mouse-y, 0), rgba(255, 255, 255, 0.05), transparent 40%) !important;
+}
+
+html[data-theme="minimalist"] .btn-primary,
+html[data-theme="minimalist"] .btn-rainbow,
+html[data-theme="minimalist"] .btn-action,
+html[data-theme="minimalist"] .btn-shine-effect {
+  background: #FAFAFA !important;
+  color: #09090B !important;
+  font-weight: 750 !important;
+  border: none !important;
+  box-shadow: 0 2px 10px rgba(255, 255, 255, 0.15) !important;
+}
+html[data-theme="minimalist"] .btn-primary span,
+html[data-theme="minimalist"] .btn-rainbow span,
+html[data-theme="minimalist"] .btn-action span,
+html[data-theme="minimalist"] .btn-shine-effect span {
+  color: #09090B !important;
+}
+
+html[data-theme="minimalist"] .btn-secondary,
+html[data-theme="minimalist"] .sfx-test-btn {
+  background-color: #18181B !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  color: #FAFAFA !important;
+}
+html[data-theme="minimalist"] .btn-secondary span,
+html[data-theme="minimalist"] .sfx-test-btn span,
+html[data-theme="minimalist"] .sfx-test-btn div {
+  color: #FAFAFA !important;
+}
+
+html[data-theme="minimalist"] .btn-danger {
+  background-color: #2E1517 !important;
+  border: 1px solid #7F1D1D !important;
+  color: #F87171 !important;
+}
+
+html[data-theme="minimalist"] .nav-tab.active {
+  color: #FAFAFA !important;
+  border-bottom: 2px solid #FAFAFA !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+}
+
+html[data-theme="minimalist"] input,
+html[data-theme="minimalist"] select,
+html[data-theme="minimalist"] textarea,
+html[data-theme="minimalist"] .form-input,
+html[data-theme="minimalist"] .form-select,
+html[data-theme="minimalist"] .form-textarea,
+html[data-theme="minimalist"] .form-input-luxury {
+  background-color: #09090B !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  color: #FAFAFA !important;
+  font-family: inherit !important;
+}
+
+html[data-theme="minimalist"] table,
+html[data-theme="minimalist"] .polaris-table {
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+html[data-theme="minimalist"] thead th,
+html[data-theme="minimalist"] .polaris-table th {
+  background-color: rgba(255, 255, 255, 0.06) !important;
+  color: #FAFAFA !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15) !important;
+}
+html[data-theme="minimalist"] tbody td,
+html[data-theme="minimalist"] .polaris-table td {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+  color: #D4D4D8 !important;
+}
+
+/* Minimalist iPhone & Story Mockup Frame */
+html[data-theme="minimalist"] .dl-iphone-bezel,
+html[data-theme="minimalist"] .wa-phone-mockup {
+  background: #09090B !important;
+  border: 2px solid rgba(255, 255, 255, 0.18) !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8) !important;
+}
+html[data-theme="minimalist"] .dl-iphone-dynamic-island {
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+}
+html[data-theme="minimalist"] .dl-iphone-screen,
+html[data-theme="minimalist"] .wa-story-screen {
+  background: #050507 !important;
+}
+
+/* ==========================================================================
+   8. POLARIS (tema bawaan)
+   Token dan gaya komponen tema ini sekarang ada di css/polaris-craft.css.
+   ========================================================================== */
+html[data-theme="polaris_classic"] .dl-iphone-bezel {
+  background: var(--bg-surface-elevated) !important;
+  border: 3px solid var(--border-subtle) !important;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6) !important;
+}
+
+html[data-theme="polaris_classic"] .dl-iphone-screen {
+  background: var(--bg-space) !important;
+}
+
+/* ==========================================================================
+   9. POLARIS SOLAR LIGHT (Clean Frosted Daylight — Apple / Vercel Grade)
+   ========================================================================== */
+html[data-theme="solar_light"],
+body[data-theme="solar_light"] {
+  --bg-space: #f8fafc;
+  --bg-surface: rgba(255, 255, 255, 0.9);
+  --bg-surface-elevated: #ffffff;
+  --bg-glass: rgba(255, 255, 255, 0.85);
+  --bg-glass-hover: #f1f5f9;
+
+  --border-subtle: rgba(226, 232, 240, 0.9);
+  --border-active: #0284c7;
+  --border-glow: rgba(2, 132, 199, 0.2);
+
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
+  --text-muted: #64748b;
+
+  --accent-cyan: #0284c7;
+  --accent-indigo: #4f46e5;
+  --accent-purple: #7c3aed;
+  --accent-emerald: #059669;
+  --accent-rose: #e11d48;
+  --accent-amber: #d97706;
+  --accent-champagne: #0284c7;
+
+  --spotlight-color: rgba(2, 132, 199, 0.08);
+
+  --shadow-luxury: 0 12px 32px -8px rgba(0, 0, 0, 0.08), 0 2px 6px rgba(0, 0, 0, 0.03);
+  --radius-lg: 16px;
+  --radius-md: 12px;
+}
+
+html[data-theme="solar_light"] body,
+body[data-theme="solar_light"] {
+  background-color: #f8fafc !important;
+  background-image: 
+    radial-gradient(at 15% 15%, rgba(56, 189, 248, 0.16), transparent 50%),
+    radial-gradient(at 85% 20%, rgba(168, 85, 247, 0.12), transparent 45%),
+    radial-gradient(at 50% 85%, rgba(14, 165, 233, 0.1), transparent 50%) !important;
+  color: #0f172a !important;
+  font-family: 'Outfit', -apple-system, sans-serif !important;
+}
+
+html[data-theme="solar_light"] #starfield-canvas {
+  display: block !important;
+  opacity: 0.75 !important;
+}
+html[data-theme="solar_light"] .ambient-nebula,
+html[data-theme="solar_light"] .crt-scanlines-container {
+  display: none !important;
+}
+
+html[data-theme="solar_light"] h1,
+html[data-theme="solar_light"] h2,
+html[data-theme="solar_light"] h3,
+html[data-theme="solar_light"] h4,
+html[data-theme="solar_light"] h5,
+html[data-theme="solar_light"] h6,
+html[data-theme="solar_light"] strong,
+html[data-theme="solar_light"] b,
+html[data-theme="solar_light"] .card-title,
+html[data-theme="solar_light"] .modal-title,
+html[data-theme="solar_light"] .vercel-brand-text {
+  color: #0f172a !important;
+  -webkit-text-fill-color: #0f172a !important;
+}
+
+html[data-theme="solar_light"] .card-luxury,
+html[data-theme="solar_light"] .config-card,
+html[data-theme="solar_light"] .feature-group-card,
+html[data-theme="solar_light"] .settings-group,
+html[data-theme="solar_light"] .polaris-card,
+html[data-theme="solar_light"] .vercel-card,
+html[data-theme="solar_light"] .stat-card,
+html[data-theme="solar_light"] .modal-card,
+html[data-theme="solar_light"] .modal-content,
+html[data-theme="solar_light"] .kinetix-modal-card {
+  background: rgba(255, 255, 255, 0.92) !important;
+  border: 1px solid rgba(226, 232, 240, 0.9) !important;
+  box-shadow: 0 12px 32px -8px rgba(0, 0, 0, 0.07), 0 2px 6px rgba(0, 0, 0, 0.03) !important;
+  backdrop-filter: blur(24px) !important;
+  -webkit-backdrop-filter: blur(24px) !important;
+  color: #0f172a !important;
+}
+
+html[data-theme="solar_light"] .card-luxury:hover {
+  border-color: #0284c7 !important;
+  box-shadow: 0 16px 36px -8px rgba(2, 132, 199, 0.15), 0 4px 12px rgba(0, 0, 0, 0.04) !important;
+}
+
+html[data-theme="solar_light"] .platform-chip-card {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  color: #0f172a !important;
+}
+
+html[data-theme="solar_light"] .form-input,
+html[data-theme="solar_light"] .form-select,
+html[data-theme="solar_light"] .form-textarea {
+  background-color: #f1f5f9 !important;
+  border: 1.5px solid #cbd5e1 !important;
+  color: #0f172a !important;
+}
+
+html[data-theme="solar_light"] .form-input:focus,
+html[data-theme="solar_light"] .form-select:focus,
+html[data-theme="solar_light"] .form-textarea:focus {
+  background-color: #ffffff !important;
+  border-color: #0284c7 !important;
+  box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.18) !important;
+}
+
+html[data-theme="solar_light"] .btn-primary,
+html[data-theme="solar_light"] .btn-rainbow,
+html[data-theme="solar_light"] .btn-action,
+html[data-theme="solar_light"] .btn-shine-effect {
+  background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%) !important;
+  color: #ffffff !important;
+  font-weight: 750 !important;
+  border: none !important;
+  box-shadow: 0 4px 14px rgba(2, 132, 199, 0.3) !important;
+}
+
+html[data-theme="solar_light"] .btn-secondary {
+  background: #f1f5f9 !important;
+  border: 1px solid #cbd5e1 !important;
+  color: #0f172a !important;
+}
+
+html[data-theme="solar_light"] thead th,
+html[data-theme="solar_light"] .polaris-table th {
+  background-color: #f1f5f9 !important;
+  color: #0284c7 !important;
+  border-bottom: 2px solid #e2e8f0 !important;
+}
+
+html[data-theme="solar_light"] tbody td,
+html[data-theme="solar_light"] .polaris-table td {
+  border-bottom: 1px solid #f1f5f9 !important;
+  color: #334155 !important;
+}
+
+html[data-theme="solar_light"] .nav-tab {
+  color: #64748b !important;
+}
+
+html[data-theme="solar_light"] .nav-tab:hover {
+  color: #0f172a !important;
+}
+
+html[data-theme="solar_light"] .nav-tab.active {
+  color: #0284c7 !important;
+}
+
+html[data-theme="solar_light"] .quick-theme-select {
+  background-color: #ffffff !important;
+  border-color: #cbd5e1 !important;
+  color: #0f172a !important;
+}
+
+html[data-theme="solar_light"] .quick-theme-select option {
+  background: #ffffff !important;
+  color: #0f172a !important;
+}
+
+html[data-theme="solar_light"] .dl-iphone-bezel {
+  background: #e2e8f0 !important;
+  border: 3px solid #cbd5e1 !important;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.12) !important;
+}
+
+html[data-theme="solar_light"] .dl-iphone-screen {
+  background: #f8fafc !important;
+}
+
+/* ==========================================================================
+   10. EMERALD MATRIX (Toxic Green Cyber Matrix Terminal — Upgraded HUD)
+   ========================================================================== */
+html[data-theme="emerald_matrix"],
+body[data-theme="emerald_matrix"] {
+  --bg-canvas: #020d06;
+  --bg-surface: rgba(4, 24, 12, 0.8);
+  --bg-surface-elevated: #072e16;
+  --bg-glass: rgba(4, 24, 12, 0.8);
+  --bg-glass-hover: rgba(7, 36, 18, 0.9);
+
+  --accent-cyan: #00ff66;
+  --accent-indigo: #10b981;
+  --accent-purple: #34d399;
+  --accent-emerald: #00ff66;
+  --accent-rose: #ff0055;
+  --accent-amber: #eab308;
+  --accent-champagne: #00ff66;
+
+  --border-subtle: rgba(0, 255, 102, 0.2);
+  --border-active: #00ff66;
+  --border-glow: rgba(0, 255, 102, 0.4);
+
+  --text-primary: #ecfdf5;
+  --text-secondary: #a7f3d0;
+  --text-muted: #6ee7b7;
+
+  --spotlight-color: rgba(0, 255, 102, 0.16);
+
+  --shadow-luxury: 0 16px 40px -10px rgba(0, 0, 0, 0.85), 0 0 25px rgba(0, 255, 102, 0.15);
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+html[data-theme="emerald_matrix"] body,
+body[data-theme="emerald_matrix"] {
+  background-color: #020d06 !important;
+  background-image: 
+    radial-gradient(ellipse at 50% 10%, rgba(0, 255, 102, 0.12) 0%, transparent 60%),
+    linear-gradient(rgba(0, 255, 102, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 102, 0.04) 1px, transparent 1px) !important;
+  background-size: 100% 100%, 28px 28px, 28px 28px !important;
+  color: #ecfdf5 !important;
+}
+
+html[data-theme="emerald_matrix"] #starfield-canvas {
+  display: block !important;
+  opacity: 0.9 !important;
+}
+
+html[data-theme="emerald_matrix"] .card-luxury,
+html[data-theme="emerald_matrix"] .config-card,
+html[data-theme="emerald_matrix"] .feature-group-card,
+html[data-theme="emerald_matrix"] .settings-group,
+html[data-theme="emerald_matrix"] .polaris-card,
+html[data-theme="emerald_matrix"] .vercel-card,
+html[data-theme="emerald_matrix"] .stat-card,
+html[data-theme="emerald_matrix"] .modal-card,
+html[data-theme="emerald_matrix"] .modal-content,
+html[data-theme="emerald_matrix"] .kinetix-modal-card {
+  background: rgba(4, 24, 12, 0.82) !important;
+  border: 1px solid rgba(0, 255, 102, 0.28) !important;
+  box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.85), 0 0 25px rgba(0, 255, 102, 0.12) !important;
+  backdrop-filter: blur(24px) !important;
+  -webkit-backdrop-filter: blur(24px) !important;
+}
+
+html[data-theme="emerald_matrix"] .card-luxury:hover {
+  border-color: #00ff66 !important;
+  box-shadow: 0 20px 48px -10px rgba(0, 0, 0, 0.9), 0 0 35px rgba(0, 255, 102, 0.25) !important;
+}
+
+html[data-theme="emerald_matrix"] .form-input,
+html[data-theme="emerald_matrix"] .form-select,
+html[data-theme="emerald_matrix"] .form-textarea {
+  background-color: rgba(2, 13, 6, 0.85) !important;
+  border: 1.5px solid rgba(0, 255, 102, 0.3) !important;
+  color: #00ff66 !important;
+  font-family: 'JetBrains Mono', monospace !important;
+}
+
+html[data-theme="emerald_matrix"] .form-input:focus,
+html[data-theme="emerald_matrix"] .form-select:focus,
+html[data-theme="emerald_matrix"] .form-textarea:focus {
+  border-color: #00ff66 !important;
+  box-shadow: 0 0 16px rgba(0, 255, 102, 0.4) !important;
+}
+
+html[data-theme="emerald_matrix"] .btn-primary,
+html[data-theme="emerald_matrix"] .btn-rainbow,
+html[data-theme="emerald_matrix"] .btn-action,
+html[data-theme="emerald_matrix"] .btn-shine-effect {
+  background: linear-gradient(135deg, #00ff66 0%, #059669 100%) !important;
+  color: #020d06 !important;
+  font-weight: 800 !important;
+  border: none !important;
+  box-shadow: 0 0 25px rgba(0, 255, 102, 0.4) !important;
+}
+
+html[data-theme="emerald_matrix"] .btn-secondary {
+  background: rgba(0, 255, 102, 0.08) !important;
+  border: 1px solid rgba(0, 255, 102, 0.28) !important;
+  color: #00ff66 !important;
+}
+
+html[data-theme="emerald_matrix"] thead th,
+html[data-theme="emerald_matrix"] .polaris-table th {
+  background-color: rgba(7, 46, 22, 0.9) !important;
+  color: #00ff66 !important;
+  border-bottom: 2px solid #00ff66 !important;
+}
+
+html[data-theme="emerald_matrix"] tbody td,
+html[data-theme="emerald_matrix"] .polaris-table td {
+  border-bottom: 1px solid rgba(0, 255, 102, 0.1) !important;
+  color: #a7f3d0 !important;
+}
+
+html[data-theme="emerald_matrix"] .dl-iphone-bezel {
+  background: #05180c !important;
+  border: 3px solid #00ff66 !important;
+  box-shadow: 0 0 35px rgba(0, 255, 102, 0.35) !important;
+}
+
+html[data-theme="emerald_matrix"] .dl-iphone-screen {
+  background: #020d06 !important;
+}
+
+html[data-theme="emerald_matrix"] .quick-theme-select option {
+  background: #020d06 !important;
+  color: #00ff66 !important;
+}
+
+/* ==========================================================================
+   11. SUNSET CRIMSON (Blood Moon / Ruby Neon Nocturne — Upgraded Luxury)
+   ========================================================================== */
+html[data-theme="sunset_crimson"],
+body[data-theme="sunset_crimson"] {
+  --bg-canvas: #0b0307;
+  --bg-surface: rgba(22, 6, 15, 0.82);
+  --bg-surface-elevated: #28091a;
+  --bg-glass: rgba(22, 6, 15, 0.82);
+  --bg-glass-hover: rgba(36, 10, 24, 0.9);
+
+  --accent-cyan: #ff0055;
+  --accent-indigo: #f43f5e;
+  --accent-purple: #ff5500;
+  --accent-emerald: #10b981;
+  --accent-rose: #ff0055;
+  --accent-amber: #fbbf24;
+  --accent-champagne: #ff0055;
+
+  --border-subtle: rgba(255, 0, 85, 0.2);
+  --border-active: #ff0055;
+  --border-glow: rgba(255, 0, 85, 0.4);
+
+  --text-primary: #fff1f2;
+  --text-secondary: #fecdd3;
+  --text-muted: #fda4af;
+
+  --spotlight-color: rgba(255, 0, 85, 0.16);
+
+  --shadow-luxury: 0 16px 40px -10px rgba(0, 0, 0, 0.85), 0 0 25px rgba(255, 0, 85, 0.18);
+}
+
+html[data-theme="sunset_crimson"] body,
+body[data-theme="sunset_crimson"] {
+  background-color: #0b0307 !important;
+  background-image: 
+    radial-gradient(ellipse at 50% 100%, rgba(255, 0, 85, 0.2) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, rgba(244, 63, 94, 0.12) 0%, transparent 50%),
+    radial-gradient(ellipse at 20% 40%, rgba(255, 85, 0, 0.1) 0%, transparent 50%) !important;
+  color: #fff1f2 !important;
+}
+
+html[data-theme="sunset_crimson"] #starfield-canvas {
+  display: block !important;
+  opacity: 0.9 !important;
+}
+
+html[data-theme="sunset_crimson"] .card-luxury,
+html[data-theme="sunset_crimson"] .config-card,
+html[data-theme="sunset_crimson"] .feature-group-card,
+html[data-theme="sunset_crimson"] .settings-group,
+html[data-theme="sunset_crimson"] .polaris-card,
+html[data-theme="sunset_crimson"] .vercel-card,
+html[data-theme="sunset_crimson"] .stat-card,
+html[data-theme="sunset_crimson"] .modal-card,
+html[data-theme="sunset_crimson"] .modal-content,
+html[data-theme="sunset_crimson"] .kinetix-modal-card {
+  background: rgba(22, 6, 15, 0.85) !important;
+  border: 1px solid rgba(255, 0, 85, 0.28) !important;
+  box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.85), 0 0 25px rgba(255, 0, 85, 0.15) !important;
+  backdrop-filter: blur(24px) !important;
+  -webkit-backdrop-filter: blur(24px) !important;
+}
+
+html[data-theme="sunset_crimson"] .card-luxury:hover {
+  border-color: #ff0055 !important;
+  box-shadow: 0 20px 48px -10px rgba(0, 0, 0, 0.9), 0 0 35px rgba(255, 0, 85, 0.25) !important;
+}
+
+html[data-theme="sunset_crimson"] .form-input,
+html[data-theme="sunset_crimson"] .form-select,
+html[data-theme="sunset_crimson"] .form-textarea {
+  background-color: rgba(11, 3, 7, 0.85) !important;
+  border: 1.5px solid rgba(255, 0, 85, 0.3) !important;
+  color: #fff1f2 !important;
+}
+
+html[data-theme="sunset_crimson"] .form-input:focus,
+html[data-theme="sunset_crimson"] .form-select:focus,
+html[data-theme="sunset_crimson"] .form-textarea:focus {
+  border-color: #ff0055 !important;
+  box-shadow: 0 0 16px rgba(255, 0, 85, 0.4) !important;
+}
+
+html[data-theme="sunset_crimson"] .btn-primary,
+html[data-theme="sunset_crimson"] .btn-rainbow,
+html[data-theme="sunset_crimson"] .btn-action,
+html[data-theme="sunset_crimson"] .btn-shine-effect {
+  background: linear-gradient(135deg, #ff0055 0%, #ff5500 100%) !important;
+  color: #ffffff !important;
+  font-weight: 800 !important;
+  border: none !important;
+  box-shadow: 0 0 25px rgba(255, 0, 85, 0.4) !important;
+}
+
+html[data-theme="sunset_crimson"] .btn-secondary {
+  background: rgba(255, 0, 85, 0.08) !important;
+  border: 1px solid rgba(255, 0, 85, 0.25) !important;
+  color: #ff0055 !important;
+}
+
+html[data-theme="sunset_crimson"] thead th,
+html[data-theme="sunset_crimson"] .polaris-table th {
+  background-color: rgba(40, 9, 26, 0.9) !important;
+  color: #ff0055 !important;
+  border-bottom: 2px solid #ff0055 !important;
+}
+
+html[data-theme="sunset_crimson"] tbody td,
+html[data-theme="sunset_crimson"] .polaris-table td {
+  border-bottom: 1px solid rgba(255, 0, 85, 0.1) !important;
+  color: #fecdd3 !important;
+}
+
+html[data-theme="sunset_crimson"] .dl-iphone-bezel {
+  background: #16060f !important;
+  border: 3px solid #ff0055 !important;
+  box-shadow: 0 0 35px rgba(255, 0, 85, 0.35) !important;
+}
+
+html[data-theme="sunset_crimson"] .dl-iphone-screen {
+  background: #0b0307 !important;
+}
+
+html[data-theme="sunset_crimson"] .quick-theme-select option {
+  background: #0b0307 !important;
+  color: #ff0055 !important;
+}
+
+/* ==========================================================================
+   12. GLASSMORPHISM STUDIO THEME (Ultra Frosted Glass, Specular Highlights)
+   ========================================================================== */
+html[data-theme="glassmorphism"],
+body[data-theme="glassmorphism"] {
+  --bg-space: #050814;
+  --bg-surface: rgba(255, 255, 255, 0.05);
+  --bg-surface-elevated: rgba(255, 255, 255, 0.09);
+  --bg-glass: rgba(255, 255, 255, 0.07);
+  --bg-glass-hover: rgba(255, 255, 255, 0.13);
+
+  --border-subtle: rgba(255, 255, 255, 0.14);
+  --border-active: rgba(255, 255, 255, 0.45);
+  --border-glow: rgba(56, 189, 248, 0.45);
+
+  --text-primary: #FFFFFF;
+  --text-secondary: rgba(255, 255, 255, 0.85);
+  --text-muted: rgba(255, 255, 255, 0.55);
+
+  --accent-cyan: #38bdf8;
+  --accent-indigo: #818cf8;
+  --accent-purple: #c084fc;
+  --accent-emerald: #34d399;
+  --accent-amber: #fbbf24;
+  --accent-rose: #f43f5e;
+  --accent-champagne: #e0e7ff;
+
+  --font-sans: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 22px;
+  --radius-xl: 28px;
+  --radius-full: 9999px;
+
+  --shadow-luxury: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.22);
+  --shadow-glow-cyan: 0 0 25px rgba(56, 189, 248, 0.4);
+  --shadow-glow-emerald: 0 0 25px rgba(52, 211, 153, 0.4);
+}
+
+html[data-theme="glassmorphism"] body,
+body[data-theme="glassmorphism"] {
+  background-color: #050814 !important;
+  background-image: 
+    radial-gradient(circle at 20% 20%, rgba(56, 189, 248, 0.2) 0%, transparent 45%),
+    radial-gradient(circle at 80% 80%, rgba(192, 132, 252, 0.18) 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(52, 211, 153, 0.1) 0%, transparent 60%) !important;
+  color: #FFFFFF !important;
+  font-family: 'Outfit', -apple-system, sans-serif !important;
+}
+
+html[data-theme="glassmorphism"] #starfield-canvas {
+  display: block !important;
+  opacity: 0.85 !important;
+}
+
+html[data-theme="glassmorphism"] h1,
+html[data-theme="glassmorphism"] h2,
+html[data-theme="glassmorphism"] h3,
+html[data-theme="glassmorphism"] .card-title,
+html[data-theme="glassmorphism"] .vercel-brand-text {
+  color: #FFFFFF !important;
+  text-shadow: 0 2px 10px rgba(255, 255, 255, 0.25);
+}
+
+html[data-theme="glassmorphism"] .polaris-card,
+html[data-theme="glassmorphism"] .vercel-card,
+html[data-theme="glassmorphism"] .stat-card,
+html[data-theme="glassmorphism"] .config-card,
+html[data-theme="glassmorphism"] .card-luxury,
+html[data-theme="glassmorphism"] .tilt-card,
+html[data-theme="glassmorphism"] .modal-card,
+html[data-theme="glassmorphism"] .modal-content,
+html[data-theme="glassmorphism"] .kinetix-modal-card,
+html[data-theme="glassmorphism"] .settings-group,
+html[data-theme="glassmorphism"] .feature-group-card,
+html[data-theme="glassmorphism"] .log-entry-card,
+html[data-theme="glassmorphism"] .cluster-gauge-card,
+html[data-theme="glassmorphism"] .platform-chip-card,
+html[data-theme="glassmorphism"] .control-slider-card,
+html[data-theme="glassmorphism"] .overview-hero-card {
+  background: rgba(255, 255, 255, 0.06) !important;
+  backdrop-filter: blur(24px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  box-shadow: 0 16px 40px -12px rgba(0, 0, 0, 0.5), inset 0 1px 1px 0 rgba(255, 255, 255, 0.25) !important;
+  color: #FFFFFF !important;
+}
+
+html[data-theme="glassmorphism"] .btn-primary,
+html[data-theme="glassmorphism"] .btn-rainbow,
+html[data-theme="glassmorphism"] .btn-action,
+html[data-theme="glassmorphism"] .btn-shine-effect {
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.85) 0%, rgba(192, 132, 252, 0.85) 100%) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  color: #FFFFFF !important;
+  font-weight: 750 !important;
+  box-shadow: 0 8px 24px rgba(56, 189, 248, 0.3) !important;
+}
+
+html[data-theme="glassmorphism"] .btn-secondary,
+html[data-theme="glassmorphism"] .sfx-test-btn {
+  background: rgba(255, 255, 255, 0.08) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  color: #FFFFFF !important;
+}
+
+html[data-theme="glassmorphism"] .btn-danger {
+  background: linear-gradient(135deg, rgba(244, 63, 94, 0.85) 0%, rgba(225, 29, 72, 0.85) 100%) !important;
+  backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  color: #FFFFFF !important;
+}
+
+html[data-theme="glassmorphism"] .nav-tab.active {
+  background: rgba(255, 255, 255, 0.12) !important;
+  backdrop-filter: blur(16px) !important;
+  border-bottom: 2px solid #38bdf8 !important;
+  color: #38bdf8 !important;
+}
+
+html[data-theme="glassmorphism"] input,
+html[data-theme="glassmorphism"] select,
+html[data-theme="glassmorphism"] textarea,
+html[data-theme="glassmorphism"] .form-input,
+html[data-theme="glassmorphism"] .form-select,
+html[data-theme="glassmorphism"] .form-textarea,
+html[data-theme="glassmorphism"] .form-input-luxury {
+  background: rgba(255, 255, 255, 0.06) !important;
+  backdrop-filter: blur(16px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  color: #FFFFFF !important;
+}
+
+html[data-theme="glassmorphism"] table,
+html[data-theme="glassmorphism"] .polaris-table {
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+}
+html[data-theme="glassmorphism"] thead th,
+html[data-theme="glassmorphism"] .polaris-table th {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: #38bdf8 !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+html[data-theme="glassmorphism"] tbody td,
+html[data-theme="glassmorphism"] .polaris-table td {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  color: #f1f5f9 !important;
+}
+
+html[data-theme="glassmorphism"] .wa-story-screen,
+html[data-theme="glassmorphism"] .dl-iphone-screen {
+  background: rgba(5, 8, 20, 0.85) !important;
+  backdrop-filter: blur(24px) !important;
+}
+
+html[data-theme="glassmorphism"] .quick-theme-select option {
+  background: #050814 !important;
+  color: #38bdf8 !important;
+}
+
+/* ==========================================================================
+   13. MODERN SAAS PRO THEME (Microsoft, Dropbox & Slack — Photo 03)
+   ========================================================================== */
+html[data-theme="modern_saas"],
+body[data-theme="modern_saas"] {
+  --bg-space: #0B0F19;
+  --bg-surface: #131B2E;
+  --bg-surface-elevated: #1E293B;
+  --bg-glass: rgba(19, 27, 46, 0.92);
+  --bg-glass-hover: rgba(30, 41, 59, 0.95);
+
+  --border-subtle: rgba(148, 163, 184, 0.16);
+  --border-active: #6366F1;
+  --border-glow: rgba(99, 102, 241, 0.35);
+
+  --text-primary: #F8FAFC;
+  --text-secondary: #CBD5E1;
+  --text-muted: #94A3B8;
+
+  --accent-cyan: #0EA5E9;
+  --accent-indigo: #6366F1;
+  --accent-purple: #8B5CF6;
+  --accent-emerald: #10B981;
+  --accent-amber: #F59E0B;
+  --accent-rose: #EF4444;
+  --accent-champagne: #6366F1;
+
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 18px;
+  --radius-full: 9999px;
+
+  --shadow-luxury: 0 10px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+  --shadow-glow-cyan: 0 0 20px rgba(14, 165, 233, 0.3);
+  --shadow-glow-emerald: 0 0 20px rgba(16, 185, 129, 0.3);
+}
+
+html[data-theme="modern_saas"] body,
+body[data-theme="modern_saas"] {
+  background-color: #0B0F19 !important;
+  background-image: 
+    linear-gradient(180deg, rgba(99, 102, 241, 0.05) 0%, rgba(14, 165, 233, 0.04) 100%),
+    radial-gradient(circle at 50% 0%, rgba(99, 102, 241, 0.12) 0%, transparent 60%) !important;
+  color: #F8FAFC !important;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+}
+
+html[data-theme="modern_saas"] #starfield-canvas {
+  display: block !important;
+  opacity: 0.75 !important;
+}
+
+html[data-theme="modern_saas"] h1,
+html[data-theme="modern_saas"] h2,
+html[data-theme="modern_saas"] h3,
+html[data-theme="modern_saas"] .card-title,
+html[data-theme="modern_saas"] .vercel-brand-text {
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 750 !important;
+  color: #F8FAFC !important;
+  letter-spacing: -0.02em !important;
+}
+
+html[data-theme="modern_saas"] .polaris-card,
+html[data-theme="modern_saas"] .vercel-card,
+html[data-theme="modern_saas"] .stat-card,
+html[data-theme="modern_saas"] .config-card,
+html[data-theme="modern_saas"] .card-luxury,
+html[data-theme="modern_saas"] .tilt-card,
+html[data-theme="modern_saas"] .modal-card,
+html[data-theme="modern_saas"] .modal-content,
+html[data-theme="modern_saas"] .kinetix-modal-card,
+html[data-theme="modern_saas"] .settings-group,
+html[data-theme="modern_saas"] .feature-group-card,
+html[data-theme="modern_saas"] .log-entry-card,
+html[data-theme="modern_saas"] .cluster-gauge-card,
+html[data-theme="modern_saas"] .platform-chip-card,
+html[data-theme="modern_saas"] .control-slider-card,
+html[data-theme="modern_saas"] .overview-hero-card {
+  background-color: #131B2E !important;
+  border: 1px solid rgba(148, 163, 184, 0.18) !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -2px rgba(0, 0, 0, 0.15) !important;
+  color: #F8FAFC !important;
+}
+
+html[data-theme="modern_saas"] .btn-primary,
+html[data-theme="modern_saas"] .btn-rainbow,
+html[data-theme="modern_saas"] .btn-action,
+html[data-theme="modern_saas"] .btn-shine-effect {
+  background: linear-gradient(135deg, #6366F1 0%, #4F46E5 100%) !important;
+  border: 1px solid #818cf8 !important;
+  color: #FFFFFF !important;
+  font-weight: 700 !important;
+  box-shadow: 0 4px 14px rgba(99, 102, 241, 0.35) !important;
+}
+
+html[data-theme="modern_saas"] .btn-secondary,
+html[data-theme="modern_saas"] .sfx-test-btn {
+  background-color: #1E293B !important;
+  border: 1px solid rgba(148, 163, 184, 0.25) !important;
+  color: #F8FAFC !important;
+}
+
+html[data-theme="modern_saas"] .btn-danger {
+  background: #EF4444 !important;
+  border: 1px solid #F87171 !important;
+  color: #FFFFFF !important;
+}
+
+html[data-theme="modern_saas"] .nav-tab.active {
+  background: rgba(99, 102, 241, 0.12) !important;
+  border-bottom: 2px solid #6366F1 !important;
+  color: #818cf8 !important;
+}
+
+html[data-theme="modern_saas"] input,
+html[data-theme="modern_saas"] select,
+html[data-theme="modern_saas"] textarea,
+html[data-theme="modern_saas"] .form-input,
+html[data-theme="modern_saas"] .form-select,
+html[data-theme="modern_saas"] .form-textarea,
+html[data-theme="modern_saas"] .form-input-luxury {
+  background-color: #0B0F19 !important;
+  border: 1px solid rgba(148, 163, 184, 0.25) !important;
+  color: #F8FAFC !important;
+}
+
+html[data-theme="modern_saas"] table,
+html[data-theme="modern_saas"] .polaris-table {
+  border: 1px solid rgba(148, 163, 184, 0.18) !important;
+}
+html[data-theme="modern_saas"] thead th,
+html[data-theme="modern_saas"] .polaris-table th {
+  background-color: #1E293B !important;
+  color: #6366F1 !important;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.25) !important;
+}
+html[data-theme="modern_saas"] tbody td,
+html[data-theme="modern_saas"] .polaris-table td {
+  border-bottom: 1px solid rgba(148, 163, 184, 0.12) !important;
+  color: #CBD5E1 !important;
+}
+
+html[data-theme="modern_saas"] .wa-story-screen,
+html[data-theme="modern_saas"] .dl-iphone-screen {
+  background: #0B0F19 !important;
+}
+
+html[data-theme="modern_saas"] .quick-theme-select option {
+  background: #0B0F19 !important;
+  color: #6366F1 !important;
+}
+
+/* ==========================================================================
+   14. IMMERSIVE 3D METAVERSE THEME (Lusion.co, NFT.com — Photo 04)
+   ========================================================================== */
+html[data-theme="immersive_3d"],
+body[data-theme="immersive_3d"] {
+  --bg-space: #02020A;
+  --bg-surface: rgba(14, 11, 35, 0.85);
+  --bg-surface-elevated: #18123A;
+  --bg-glass: rgba(14, 11, 35, 0.88);
+  --bg-glass-hover: rgba(26, 18, 56, 0.95);
+
+  --border-subtle: rgba(0, 245, 255, 0.22);
+  --border-active: #00F5FF;
+  --border-glow: rgba(255, 0, 122, 0.55);
+
+  --text-primary: #FFFFFF;
+  --text-secondary: #00F5FF;
+  --text-muted: #B4A2DB;
+
+  --accent-cyan: #00F5FF;
+  --accent-indigo: #8B5CF6;
+  --accent-purple: #FF007A;
+  --accent-emerald: #00FFA3;
+  --accent-amber: #FFB800;
+  --accent-rose: #FF0055;
+  --accent-champagne: #00F5FF;
+
+  --font-sans: 'Space Grotesk', 'Outfit', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 26px;
+  --radius-full: 9999px;
+
+  --shadow-luxury: 0 15px 35px rgba(0, 0, 0, 0.7), 0 0 30px rgba(0, 245, 255, 0.2), 0 0 15px rgba(255, 0, 122, 0.2);
+  --shadow-glow-cyan: 0 0 25px rgba(0, 245, 255, 0.5);
+  --shadow-glow-emerald: 0 0 25px rgba(0, 255, 163, 0.5);
+}
+
+html[data-theme="immersive_3d"] body,
+body[data-theme="immersive_3d"] {
+  background-color: #02020A !important;
+  background-image: 
+    radial-gradient(ellipse at 50% 0%, rgba(139, 92, 246, 0.25) 0%, transparent 65%),
+    radial-gradient(circle at 10% 90%, rgba(0, 245, 255, 0.18) 0%, transparent 50%),
+    radial-gradient(circle at 90% 90%, rgba(255, 0, 122, 0.18) 0%, transparent 50%) !important;
+  color: #FFFFFF !important;
+  font-family: 'Space Grotesk', 'Outfit', sans-serif !important;
+}
+
+html[data-theme="immersive_3d"] #starfield-canvas {
+  display: block !important;
+  opacity: 0.95 !important;
+}
+
+html[data-theme="immersive_3d"] h1,
+html[data-theme="immersive_3d"] h2,
+html[data-theme="immersive_3d"] h3,
+html[data-theme="immersive_3d"] .card-title,
+html[data-theme="immersive_3d"] .vercel-brand-text {
+  color: #00F5FF !important;
+  text-shadow: 0 0 15px rgba(0, 245, 255, 0.5), 0 0 30px rgba(255, 0, 122, 0.3) !important;
+}
+
+html[data-theme="immersive_3d"] .polaris-card,
+html[data-theme="immersive_3d"] .vercel-card,
+html[data-theme="immersive_3d"] .stat-card,
+html[data-theme="immersive_3d"] .config-card,
+html[data-theme="immersive_3d"] .card-luxury,
+html[data-theme="immersive_3d"] .tilt-card,
+html[data-theme="immersive_3d"] .modal-card,
+html[data-theme="immersive_3d"] .modal-content,
+html[data-theme="immersive_3d"] .kinetix-modal-card,
+html[data-theme="immersive_3d"] .settings-group,
+html[data-theme="immersive_3d"] .feature-group-card,
+html[data-theme="immersive_3d"] .log-entry-card,
+html[data-theme="immersive_3d"] .cluster-gauge-card,
+html[data-theme="immersive_3d"] .platform-chip-card,
+html[data-theme="immersive_3d"] .control-slider-card,
+html[data-theme="immersive_3d"] .overview-hero-card {
+  background-color: rgba(14, 11, 35, 0.85) !important;
+  border: 1px solid rgba(0, 245, 255, 0.35) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 245, 255, 0.15) !important;
+  transform-style: preserve-3d !important;
+  color: #FFFFFF !important;
+}
+
+html[data-theme="immersive_3d"] .btn-primary,
+html[data-theme="immersive_3d"] .btn-rainbow,
+html[data-theme="immersive_3d"] .btn-action,
+html[data-theme="immersive_3d"] .btn-shine-effect {
+  background: linear-gradient(135deg, #00F5FF 0%, #8B5CF6 50%, #FF007A 100%) !important;
+  color: #FFFFFF !important;
+  font-weight: 800 !important;
+  border: none !important;
+  box-shadow: 0 0 25px rgba(0, 245, 255, 0.4) !important;
+}
+
+html[data-theme="immersive_3d"] .btn-secondary,
+html[data-theme="immersive_3d"] .sfx-test-btn {
+  background: rgba(14, 11, 35, 0.9) !important;
+  border: 1px solid #00F5FF !important;
+  color: #00F5FF !important;
+  box-shadow: 0 0 12px rgba(0, 245, 255, 0.2) !important;
+}
+
+html[data-theme="immersive_3d"] .btn-danger {
+  background: linear-gradient(135deg, #FF0055 0%, #8B5CF6 100%) !important;
+  border: 1px solid #FF0055 !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 0 20px rgba(255, 0, 85, 0.4) !important;
+}
+
+html[data-theme="immersive_3d"] .nav-tab.active {
+  background: rgba(0, 245, 255, 0.12) !important;
+  border-bottom: 2px solid #00F5FF !important;
+  color: #00F5FF !important;
+  text-shadow: 0 0 12px rgba(0, 245, 255, 0.7);
+}
+
+html[data-theme="immersive_3d"] input,
+html[data-theme="immersive_3d"] select,
+html[data-theme="immersive_3d"] textarea,
+html[data-theme="immersive_3d"] .form-input,
+html[data-theme="immersive_3d"] .form-select,
+html[data-theme="immersive_3d"] .form-textarea,
+html[data-theme="immersive_3d"] .form-input-luxury {
+  background-color: #02020A !important;
+  border: 1px solid #00F5FF !important;
+  color: #00F5FF !important;
+  box-shadow: 0 0 10px rgba(0, 245, 255, 0.2) !important;
+}
+
+html[data-theme="immersive_3d"] table,
+html[data-theme="immersive_3d"] .polaris-table {
+  border: 1px solid rgba(0, 245, 255, 0.3) !important;
+}
+html[data-theme="immersive_3d"] thead th,
+html[data-theme="immersive_3d"] .polaris-table th {
+  background-color: rgba(0, 245, 255, 0.12) !important;
+  color: #00F5FF !important;
+  border-bottom: 1px solid #00F5FF !important;
+}
+html[data-theme="immersive_3d"] tbody td,
+html[data-theme="immersive_3d"] .polaris-table td {
+  border-bottom: 1px solid rgba(0, 245, 255, 0.15) !important;
+  color: #FFFFFF !important;
+}
+
+html[data-theme="immersive_3d"] .wa-story-screen,
+html[data-theme="immersive_3d"] .dl-iphone-screen {
+  background: #02020A !important;
+}
+
+html[data-theme="immersive_3d"] .quick-theme-select option {
+  background: #02020A !important;
+  color: #00F5FF !important;
+}
+
+/* ==========================================================================
+   15. HERITAGE RETRO VINTAGE THEME (Jack Daniel's & Blue Bottle — Photo 05)
+   ========================================================================== */
+html[data-theme="retro_vintage"],
+body[data-theme="retro_vintage"] {
+  --bg-space: #140E0A;
+  --bg-surface: #1E150F;
+  --bg-surface-elevated: #2C1E16;
+  --bg-glass: rgba(30, 21, 15, 0.92);
+  --bg-glass-hover: rgba(44, 30, 22, 0.96);
+
+  --border-subtle: rgba(217, 119, 6, 0.25);
+  --border-active: #D97706;
+  --border-glow: rgba(217, 119, 6, 0.45);
+
+  --text-primary: #F5EBE1;
+  --text-secondary: #D4C3B3;
+  --text-muted: #9E8875;
+
+  --accent-cyan: #D97706;
+  --accent-indigo: #B45309;
+  --accent-purple: #92400E;
+  --accent-emerald: #059669;
+  --accent-amber: #F59E0B;
+  --accent-rose: #DC2626;
+  --accent-champagne: #F5EBE1;
+
+  --font-sans: 'Georgia', 'Playfair Display', serif;
+  --font-mono: 'Courier New', monospace;
+
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 10px;
+  --radius-full: 9999px;
+
+  --shadow-luxury: 4px 4px 0px #000000, 0 10px 20px rgba(0, 0, 0, 0.5);
+  --shadow-glow-cyan: 0 0 20px rgba(217, 119, 6, 0.4);
+  --shadow-glow-emerald: 0 0 20px rgba(5, 150, 105, 0.4);
+}
+
+html[data-theme="retro_vintage"] body,
+body[data-theme="retro_vintage"] {
+  background-color: #140E0A !important;
+  background-image: 
+    radial-gradient(ellipse at 50% 0%, rgba(217, 119, 6, 0.15) 0%, transparent 60%),
+    radial-gradient(ellipse at 50% 100%, rgba(180, 83, 9, 0.12) 0%, transparent 60%) !important;
+  color: #F5EBE1 !important;
+  font-family: 'Georgia', 'Playfair Display', serif !important;
+}
+
+html[data-theme="retro_vintage"] #starfield-canvas {
+  display: block !important;
+  opacity: 0.8 !important;
+}
+
+html[data-theme="retro_vintage"] h1,
+html[data-theme="retro_vintage"] h2,
+html[data-theme="retro_vintage"] h3,
+html[data-theme="retro_vintage"] .card-title,
+html[data-theme="retro_vintage"] .vercel-brand-text {
+  font-family: 'Playfair Display', 'Georgia', serif !important;
+  color: #D97706 !important;
+  letter-spacing: 0.03em !important;
+}
+
+html[data-theme="retro_vintage"] .polaris-card,
+html[data-theme="retro_vintage"] .vercel-card,
+html[data-theme="retro_vintage"] .stat-card,
+html[data-theme="retro_vintage"] .config-card,
+html[data-theme="retro_vintage"] .card-luxury,
+html[data-theme="retro_vintage"] .tilt-card,
+html[data-theme="retro_vintage"] .modal-card,
+html[data-theme="retro_vintage"] .modal-content,
+html[data-theme="retro_vintage"] .kinetix-modal-card,
+html[data-theme="retro_vintage"] .settings-group,
+html[data-theme="retro_vintage"] .feature-group-card,
+html[data-theme="retro_vintage"] .log-entry-card,
+html[data-theme="retro_vintage"] .cluster-gauge-card,
+html[data-theme="retro_vintage"] .platform-chip-card,
+html[data-theme="retro_vintage"] .control-slider-card,
+html[data-theme="retro_vintage"] .overview-hero-card {
+  background-color: #1E150F !important;
+  border: 2px solid #5C3D28 !important;
+  box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.6) !important;
+  color: #F5EBE1 !important;
+}
+
+html[data-theme="retro_vintage"] .btn-primary,
+html[data-theme="retro_vintage"] .btn-rainbow,
+html[data-theme="retro_vintage"] .btn-action,
+html[data-theme="retro_vintage"] .btn-shine-effect {
+  background: linear-gradient(135deg, #D97706 0%, #B45309 100%) !important;
+  border: 1px solid #F5EBE1 !important;
+  color: #140E0A !important;
+  font-weight: 800 !important;
+  box-shadow: 2px 2px 0px #000000 !important;
+}
+
+html[data-theme="retro_vintage"] .btn-secondary,
+html[data-theme="retro_vintage"] .sfx-test-btn {
+  background: #2C1E16 !important;
+  border: 1px solid #D97706 !important;
+  color: #F5EBE1 !important;
+}
+
+html[data-theme="retro_vintage"] .btn-danger {
+  background: #DC2626 !important;
+  border: 1px solid #B91C1C !important;
+  color: #F5EBE1 !important;
+}
+
+html[data-theme="retro_vintage"] .nav-tab.active {
+  background: rgba(217, 119, 6, 0.15) !important;
+  border-bottom: 2px solid #D97706 !important;
+  color: #D97706 !important;
+}
+
+html[data-theme="retro_vintage"] input,
+html[data-theme="retro_vintage"] select,
+html[data-theme="retro_vintage"] textarea,
+html[data-theme="retro_vintage"] .form-input,
+html[data-theme="retro_vintage"] .form-select,
+html[data-theme="retro_vintage"] .form-textarea,
+html[data-theme="retro_vintage"] .form-input-luxury {
+  background-color: #140E0A !important;
+  border: 1px solid #D97706 !important;
+  color: #F5EBE1 !important;
+  font-family: 'Courier New', monospace !important;
+}
+
+html[data-theme="retro_vintage"] table,
+html[data-theme="retro_vintage"] .polaris-table {
+  border: 2px solid #5C3D28 !important;
+}
+html[data-theme="retro_vintage"] thead th,
+html[data-theme="retro_vintage"] .polaris-table th {
+  background-color: #2C1E16 !important;
+  color: #D97706 !important;
+  border-bottom: 2px solid #D97706 !important;
+}
+html[data-theme="retro_vintage"] tbody td,
+html[data-theme="retro_vintage"] .polaris-table td {
+  border-bottom: 1px solid #5C3D28 !important;
+  color: #D4C3B3 !important;
+}
+
+html[data-theme="retro_vintage"] .wa-story-screen,
+html[data-theme="retro_vintage"] .dl-iphone-screen {
+  background: #140E0A !important;
+}
+
+html[data-theme="retro_vintage"] .quick-theme-select option {
+  background: #140E0A !important;
+  color: #D97706 !important;
+}
+
+/* ==========================================================================
+   16. DARK MODE PRO CONSOLE THEME (PlayStation, Spotify & GitHub — Photo 06)
+   ========================================================================== */
+html[data-theme="dark_mode_pro"],
+body[data-theme="dark_mode_pro"] {
+  --bg-space: #06090E;
+  --bg-surface: #0D1117;
+  --bg-surface-elevated: #161B22;
+  --bg-glass: rgba(13, 17, 23, 0.94);
+  --bg-glass-hover: rgba(22, 27, 34, 0.98);
+
+  --border-subtle: #30363D;
+  --border-active: #1DB954;
+  --border-glow: rgba(29, 185, 84, 0.4);
+
+  --text-primary: #F0F6FC;
+  --text-secondary: #8B949E;
+  --text-muted: #6E7681;
+
+  --accent-cyan: #0070D1;
+  --accent-indigo: #38BDF8;
+  --accent-purple: #A855F7;
+  --accent-emerald: #1DB954;
+  --accent-amber: #E3B341;
+  --accent-rose: #F85149;
+  --accent-champagne: #1DB954;
+
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-full: 9999px;
+
+  --shadow-luxury: 0 16px 32px rgba(1, 4, 9, 0.85), 0 0 1px 1px rgba(240, 246, 252, 0.1);
+  --shadow-glow-cyan: 0 0 20px rgba(0, 112, 209, 0.45);
+  --shadow-glow-emerald: 0 0 20px rgba(29, 185, 84, 0.45);
+}
+
+html[data-theme="dark_mode_pro"] body,
+body[data-theme="dark_mode_pro"] {
+  background-color: #06090E !important;
+  background-image: 
+    radial-gradient(circle at 20% 10%, rgba(0, 112, 209, 0.12) 0%, transparent 45%),
+    radial-gradient(circle at 80% 90%, rgba(29, 185, 84, 0.12) 0%, transparent 45%) !important;
+  color: #F0F6FC !important;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+}
+
+html[data-theme="dark_mode_pro"] #starfield-canvas {
+  display: block !important;
+  opacity: 0.85 !important;
+}
+
+html[data-theme="dark_mode_pro"] h1,
+html[data-theme="dark_mode_pro"] h2,
+html[data-theme="dark_mode_pro"] h3,
+html[data-theme="dark_mode_pro"] .card-title,
+html[data-theme="dark_mode_pro"] .vercel-brand-text {
+  color: #F0F6FC !important;
+  font-weight: 700 !important;
+}
+
+html[data-theme="dark_mode_pro"] .polaris-card,
+html[data-theme="dark_mode_pro"] .vercel-card,
+html[data-theme="dark_mode_pro"] .stat-card,
+html[data-theme="dark_mode_pro"] .config-card,
+html[data-theme="dark_mode_pro"] .card-luxury,
+html[data-theme="dark_mode_pro"] .tilt-card,
+html[data-theme="dark_mode_pro"] .modal-card,
+html[data-theme="dark_mode_pro"] .modal-content,
+html[data-theme="dark_mode_pro"] .kinetix-modal-card,
+html[data-theme="dark_mode_pro"] .settings-group,
+html[data-theme="dark_mode_pro"] .feature-group-card,
+html[data-theme="dark_mode_pro"] .log-entry-card,
+html[data-theme="dark_mode_pro"] .cluster-gauge-card,
+html[data-theme="dark_mode_pro"] .platform-chip-card,
+html[data-theme="dark_mode_pro"] .control-slider-card,
+html[data-theme="dark_mode_pro"] .overview-hero-card {
+  background-color: #0D1117 !important;
+  border: 1px solid #30363D !important;
+  box-shadow: 0 8px 24px rgba(1, 4, 9, 0.7) !important;
+  color: #F0F6FC !important;
+}
+
+html[data-theme="dark_mode_pro"] .btn-primary,
+html[data-theme="dark_mode_pro"] .btn-rainbow,
+html[data-theme="dark_mode_pro"] .btn-action,
+html[data-theme="dark_mode_pro"] .btn-shine-effect {
+  background: #1DB954 !important;
+  border: 1px solid #1ed760 !important;
+  color: #000000 !important;
+  font-weight: 800 !important;
+  box-shadow: 0 0 15px rgba(29, 185, 84, 0.35) !important;
+}
+html[data-theme="dark_mode_pro"] .btn-primary span,
+html[data-theme="dark_mode_pro"] .btn-rainbow span,
+html[data-theme="dark_mode_pro"] .btn-action span,
+html[data-theme="dark_mode_pro"] .btn-shine-effect span {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+}
+
+html[data-theme="dark_mode_pro"] .btn-secondary,
+html[data-theme="dark_mode_pro"] .sfx-test-btn {
+  background-color: #161B22 !important;
+  border: 1px solid #30363D !important;
+  color: #F0F6FC !important;
+}
+
+html[data-theme="dark_mode_pro"] .btn-danger {
+  background: #DA3633 !important;
+  border: 1px solid #F85149 !important;
+  color: #FFFFFF !important;
+}
+
+html[data-theme="dark_mode_pro"] .nav-tab.active {
+  background: rgba(29, 185, 84, 0.12) !important;
+  border-bottom: 2px solid #1DB954 !important;
+  color: #1DB954 !important;
+}
+
+html[data-theme="dark_mode_pro"] input,
+html[data-theme="dark_mode_pro"] select,
+html[data-theme="dark_mode_pro"] textarea,
+html[data-theme="dark_mode_pro"] .form-input,
+html[data-theme="dark_mode_pro"] .form-select,
+html[data-theme="dark_mode_pro"] .form-textarea,
+html[data-theme="dark_mode_pro"] .form-input-luxury {
+  background-color: #010409 !important;
+  border: 1px solid #30363D !important;
+  color: #F0F6FC !important;
+}
+
+html[data-theme="dark_mode_pro"] table,
+html[data-theme="dark_mode_pro"] .polaris-table {
+  border: 1px solid #30363D !important;
+}
+html[data-theme="dark_mode_pro"] thead th,
+html[data-theme="dark_mode_pro"] .polaris-table th {
+  background-color: #161B22 !important;
+  color: #1DB954 !important;
+  border-bottom: 1px solid #30363D !important;
+}
+html[data-theme="dark_mode_pro"] tbody td,
+html[data-theme="dark_mode_pro"] .polaris-table td {
+  border-bottom: 1px solid #21262D !important;
+  color: #8B949E !important;
+}
+
+html[data-theme="dark_mode_pro"] .wa-story-screen,
+html[data-theme="dark_mode_pro"] .dl-iphone-screen {
+  background: #010409 !important;
+}
+
+html[data-theme="dark_mode_pro"] .quick-theme-select option {
+  background: #0D1117 !important;
+  color: #1DB954 !important;
+}
+
+
+/* ==========================================================================
+   SILKY SMOOTH SCREEN TRANSITION OVERLAY (Zero Trap, Non-Intrusive)
+   ========================================================================== */
+#kinetix-transition-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1), backdrop-filter 0.2s ease, visibility 0.2s ease;
+}
+
+#kinetix-transition-overlay.active {
+  opacity: 1;
+  visibility: visible;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.kinetix-transition-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 24px;
+  background: var(--bg-surface-elevated, #0e1222);
+  border: 1.5px solid var(--border-active, #38bdf8);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px var(--border-glow, rgba(56, 189, 248, 0.3));
+  border-radius: 9999px;
+  color: var(--text-primary, #ffffff);
+  font-size: 0.88rem;
+  font-weight: 750;
+  transform: scale(0.92);
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+#kinetix-transition-overlay.active .kinetix-transition-pill {
+  transform: scale(1);
+}
+
+.kinetix-transition-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-top-color: var(--accent-cyan, #38bdf8);
+  border-radius: 50%;
+  animation: kinetixSpin 0.6s linear infinite;
+  display: inline-block;
+}
+
+@keyframes kinetixSpin {
+  to { transform: rotate(360deg); }
+}
+
+/* CRT Scanlines Overlay */
+.crt-scanlines-container {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.45) 3px
+  );
+}
+
+/* ==========================================================================
+   QUICK THEME SELECT DROPDOWN (1-CLICK HEADER HUB)
+   ========================================================================== */
+.quick-theme-select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: var(--bg-surface-elevated, rgba(255,255,255,0.06));
+  border: 1.5px solid var(--border-active, rgba(56,189,248,0.4));
+  color: var(--text-primary, #f8fafc);
+  padding: 5px 28px 5px 12px;
+  border-radius: 9999px;
+  font-size: 0.74rem;
+  font-weight: 750;
+  cursor: pointer;
+  outline: none;
+  font-family: inherit;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: var(--shadow-luxury);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%2338bdf8' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+}
+
+.quick-theme-select:hover {
+  border-color: var(--accent-cyan);
+  box-shadow: 0 0 12px var(--border-glow);
+}
+
+.quick-theme-select option {
+  background: #090b14;
+  color: #f8fafc;
+  font-weight: 600;
+}
+
+/* Neobrutalism override for dropdown options */
+html[data-theme="neobrutalism"] .quick-theme-select option {
+  background: #FFFFFF !important;
+  color: #000000 !important;
+}
+
+/* Amber terminal override for dropdown options */
+html[data-theme="amber_terminal"] .quick-theme-select option {
+  background: #100800 !important;
+  color: #FFB000 !important;
+}
+
+/* ==========================================================================
+   KINETIX THEME GALLERY MODAL
+   ========================================================================== */
+#kinetix-theme-modal {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 100000 !important;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 20px;
+  background: rgba(0, 0, 0, 0.82);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+#kinetix-theme-modal.show {
+  display: flex !important;
+}
+.kinetix-modal-card {
+  width: 100%;
+  max-width: 900px;
+  max-height: 86vh;
+  overflow-y: auto;
+  border-radius: var(--radius-xl);
+  background: var(--bg-surface);
+  border: 1.5px solid var(--border-subtle);
+  box-shadow: var(--shadow-luxury);
+  color: var(--text-primary);
+  padding: 28px;
+  position: relative;
+  margin: auto;
+  animation: modalPop 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+@keyframes modalPop {
+  from { opacity: 0; transform: scale(0.95) translateY(12px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+.theme-grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+.theme-card-option {
+  border-radius: var(--radius-lg);
+  border: 1.5px solid var(--border-subtle);
+  background: var(--bg-surface-elevated);
+  padding: 18px;
+  cursor: pointer;
+  transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+  position: relative;
+  overflow: hidden;
+}
+.theme-card-option:hover {
+  transform: translateY(-2px);
+  border-color: var(--border-active);
+  box-shadow: var(--shadow-luxury);
+}
+.theme-card-option.active {
+  border-color: var(--accent-cyan) !important;
+  box-shadow: 0 0 15px var(--border-glow);
+}
+.theme-color-palette {
+  display: flex;
+  gap: 6px;
+  margin-top: 12px;
+}
+.theme-color-dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px solid rgba(0,0,0,0.2);
+}
+
+/* ==========================================================================
+   KINETIX STUDIO TAB & PARTICLE PLAYGROUND
+   ========================================================================== */
+#pane-kinetix-studio {
+  display: none;
+  animation: fadeIn 0.3s ease;
+}
+#pane-kinetix-studio.active {
+  display: block !important;
+}
+.particle-canvas-wrapper {
+  width: 100%;
+  height: 480px;
+  border-radius: var(--radius-xl);
+  border: 1.5px solid var(--border-subtle);
+  background: var(--bg-surface-elevated);
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-luxury);
+}
+#kinetix-particle-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.particle-controls-panel {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+.control-slider-card {
+  padding: 16px;
+  border-radius: var(--radius-lg);
+  border: 1.5px solid var(--border-subtle);
+  background: var(--bg-surface);
+}
+
+/* ==========================================================================
+   UNIFIED THEME SYSTEM: HERMES AI, CUSTOM AUDIO & DOWNLOADER EXTENSIONS
+   ========================================================================== */
+
+/* Universal Dimension & Alignment Locks (Zero CLS across all 11 themes) */
+.nav-tab,
+.btn-polaris,
+.btn-primary,
+.btn-secondary,
+.btn-danger,
+.form-input,
+.form-select,
+.form-textarea,
+.card-luxury,
+.custom-sfx-slot-card,
+.quick-theme-select {
+  box-sizing: border-box !important;
+}
+
+/* Custom Audio Studio Styling */
+.custom-sfx-slot-card {
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.custom-sfx-slot-card:hover {
+  border-color: var(--accent-cyan) !important;
+  transform: translateY(-1px);
+}
+
+/* --- Neobrutalism Extensions --- */
+html[data-theme="neobrutalism"] .custom-sfx-slot-card {
+  background-color: #FFFFFF !important;
+  border: 1.5px solid #000000 !important;
+  box-shadow: 2.5px 2.5px 0px #000000 !important;
+  color: #000000 !important;
+}
+html[data-theme="neobrutalism"] #custom-bgm-status-box {
+  background-color: #FFFDF0 !important;
+  border: 1.5px solid #000000 !important;
+  box-shadow: 2.5px 2.5px 0px #000000 !important;
+  color: #000000 !important;
+}
+html[data-theme="neobrutalism"] #section-audio-custom-bgm {
+  background-color: #FFFDF0 !important;
+  border: 1.5px dashed #000000 !important;
+  color: #000000 !important;
+}
+html[data-theme="neobrutalism"] .hermes-chat-wrapper {
+  background-color: #FFFFFF !important;
+  border: 1.5px solid #000000 !important;
+  box-shadow: 4px 4px 0px #000000 !important;
+  border-radius: 8px !important;
+}
+html[data-theme="neobrutalism"] .hermes-chat-header {
+  background-color: #FFFDF0 !important;
+  border-bottom: 1.5px solid #000000 !important;
+}
+html[data-theme="neobrutalism"] .hermes-nav-btn {
+  color: #000000 !important;
+  font-weight: 800 !important;
+  border: 1.5px solid transparent !important;
+  background: transparent !important;
+  border-radius: 6px !important;
+}
+html[data-theme="neobrutalism"] .hermes-nav-btn.active {
+  background-color: #FFE600 !important;
+  border: 1.5px solid #000000 !important;
+  box-shadow: 2px 2px 0px #000000 !important;
+  color: #000000 !important;
+}
+html[data-theme="neobrutalism"] .hermes-bubble {
+  background-color: #FFFDF0 !important;
+  border: 1.5px solid #000000 !important;
+  color: #000000 !important;
+  box-shadow: 2px 2px 0px #000000 !important;
+  border-radius: 6px !important;
+}
+html[data-theme="neobrutalism"] .prompt-box-card {
+  background-color: #FFFFFF !important;
+  border: 1.5px solid #000000 !important;
+  box-shadow: 3px 3px 0px #000000 !important;
+  border-radius: 8px !important;
+}
+
+/* --- Solar Light (Clean Daylight) Extensions --- */
+html[data-theme="solar_light"] .custom-sfx-slot-card {
+  background-color: #FFFFFF !important;
+  border: 1px solid #E2E8F0 !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+  color: #0F172A !important;
+}
+html[data-theme="solar_light"] #custom-bgm-status-box {
+  background-color: #F8FAFC !important;
+  border: 1px solid #BAE6FD !important;
+  color: #0F172A !important;
+}
+html[data-theme="solar_light"] #section-audio-custom-bgm {
+  background-color: #F8FAFC !important;
+  border: 1px dashed #94A3B8 !important;
+  color: #0F172A !important;
+}
+html[data-theme="solar_light"] .hermes-chat-wrapper {
+  background-color: #FFFFFF !important;
+  border: 1px solid #E2E8F0 !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05) !important;
+}
+html[data-theme="solar_light"] .hermes-chat-header {
+  background-color: #F8FAFC !important;
+  border-bottom: 1px solid #E2E8F0 !important;
+}
+html[data-theme="solar_light"] .hermes-bubble {
+  background-color: #F1F5F9 !important;
+  border: 1px solid #E2E8F0 !important;
+  color: #0F172A !important;
+}
+html[data-theme="solar_light"] .prompt-box-card {
+  background-color: #FFFFFF !important;
+  border: 1px solid #CBD5E1 !important;
+}
+
+/* --- Amber Terminal (Retro CRT) Extensions --- */
+html[data-theme="amber_terminal"] .custom-sfx-slot-card {
+  background-color: rgba(26, 14, 0, 0.85) !important;
+  border: 1px solid #8A5F00 !important;
+  color: #FFB000 !important;
+}
+html[data-theme="amber_terminal"] #custom-bgm-status-box {
+  background-color: rgba(26, 14, 0, 0.95) !important;
+  border: 1px solid #FFB000 !important;
+  color: #FFB000 !important;
+}
+html[data-theme="amber_terminal"] #section-audio-custom-bgm {
+  background-color: rgba(16, 8, 0, 0.9) !important;
+  border: 1px dashed #8A5F00 !important;
+  color: #FFB000 !important;
+}
+html[data-theme="amber_terminal"] .hermes-chat-wrapper {
+  background-color: rgba(16, 8, 0, 0.95) !important;
+  border: 1px solid #8A5F00 !important;
+  box-shadow: 0 0 20px rgba(255, 176, 0, 0.2) !important;
+}
+html[data-theme="amber_terminal"] .hermes-bubble {
+  background-color: rgba(26, 14, 0, 0.9) !important;
+  border: 1px solid #D49200 !important;
+  color: #FFB000 !important;
+  font-family: var(--font-mono) !important;
+}
+
+/* --- Editorial Luxury Extensions --- */
+html[data-theme="editorial"] .custom-sfx-slot-card {
+  background-color: #1E1B18 !important;
+  border: 1px solid rgba(212, 175, 55, 0.25) !important;
+  color: #F7F4EE !important;
+}
+html[data-theme="editorial"] #custom-bgm-status-box {
+  background-color: rgba(30, 27, 24, 0.9) !important;
+  border: 1px solid rgba(212, 175, 55, 0.4) !important;
+  color: #D4AF37 !important;
+}
+html[data-theme="editorial"] .hermes-chat-wrapper {
+  background-color: #1E1B18 !important;
+  border: 1px solid rgba(212, 175, 55, 0.3) !important;
+}
+html[data-theme="editorial"] .hermes-bubble {
+  background-color: rgba(20, 18, 16, 0.9) !important;
+  border: 1px solid rgba(212, 175, 55, 0.2) !important;
+  color: #F7F4EE !important;
+}
+
+/* --- Cyberpunk HUD Extensions --- */
+html[data-theme="cyberpunk"] .custom-sfx-slot-card {
+  background-color: #0E0724 !important;
+  border: 1px solid rgba(0, 240, 255, 0.35) !important;
+  color: #F8FAFC !important;
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.1) !important;
+}
+html[data-theme="cyberpunk"] #custom-bgm-status-box {
+  background-color: rgba(14, 7, 36, 0.95) !important;
+  border: 1px solid #00F0FF !important;
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.2) !important;
+}
+html[data-theme="cyberpunk"] .hermes-chat-wrapper {
+  background-color: #0E0724 !important;
+  border: 1px solid #00F0FF !important;
+  box-shadow: 0 0 25px rgba(0, 240, 255, 0.2) !important;
+}
+html[data-theme="cyberpunk"] .hermes-bubble {
+  background-color: #180D38 !important;
+  border: 1px solid rgba(255, 0, 127, 0.4) !important;
+  color: #F8FAFC !important;
+}
+
+/* --- Emerald Matrix Extensions --- */
+html[data-theme="emerald_matrix"] .custom-sfx-slot-card {
+  background-color: #05180C !important;
+  border: 1px solid rgba(0, 255, 102, 0.35) !important;
+  color: #ECFDF5 !important;
+}
+html[data-theme="emerald_matrix"] #custom-bgm-status-box {
+  background-color: rgba(5, 24, 12, 0.95) !important;
+  border: 1px solid #00FF66 !important;
+  box-shadow: 0 0 15px rgba(0, 255, 102, 0.25) !important;
+}
+html[data-theme="emerald_matrix"] .hermes-chat-wrapper {
+  background-color: #05180C !important;
+  border: 1px solid #00FF66 !important;
+  box-shadow: 0 0 20px rgba(0, 255, 102, 0.2) !important;
+}
+
+/* --- Sunset Crimson Extensions --- */
+html[data-theme="sunset_crimson"] .custom-sfx-slot-card {
+  background-color: #16060F !important;
+  border: 1px solid rgba(255, 0, 85, 0.35) !important;
+  color: #FFF1F2 !important;
+}
+html[data-theme="sunset_crimson"] #custom-bgm-status-box {
+  background-color: rgba(22, 6, 15, 0.95) !important;
+  border: 1px solid #FF0055 !important;
+  box-shadow: 0 0 15px rgba(255, 0, 85, 0.25) !important;
+}
+html[data-theme="sunset_crimson"] .hermes-chat-wrapper {
+  background-color: #16060F !important;
+  border: 1px solid #FF0055 !important;
+  box-shadow: 0 0 20px rgba(255, 0, 85, 0.2) !important;
+}
+
+/* ==========================================================================
+   THEME ADAPTATION: POLARIS OMNISEARCH & WA SANDBOX
+   ========================================================================== */
+/* Solar Light */
+html[data-theme="solar_light"] .omnisearch-dialog {
+  background: #ffffff !important;
+  border: 1.5px solid #cbd5e1 !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15) !important;
+}
+html[data-theme="solar_light"] .omnisearch-input {
+  color: #0f172a !important;
+}
+html[data-theme="solar_light"] .omnisearch-input::placeholder {
+  color: #94a3b8 !important;
+}
+html[data-theme="solar_light"] .omnisearch-header,
+html[data-theme="solar_light"] .omnisearch-filter-bar,
+html[data-theme="solar_light"] .omnisearch-footer {
+  background: #f8fafc !important;
+  border-color: #e2e8f0 !important;
+}
+html[data-theme="solar_light"] .omnisearch-item-title {
+  color: #0f172a !important;
+}
+html[data-theme="solar_light"] .omnisearch-item-desc {
+  color: #64748b !important;
+}
+html[data-theme="solar_light"] .omnisearch-filter-pill {
+  background: #f1f5f9 !important;
+  color: #475569 !important;
+  border-color: #cbd5e1 !important;
+}
+html[data-theme="solar_light"] .omnisearch-filter-pill.active {
+  background: #0284c7 !important;
+  color: #ffffff !important;
+}
+html[data-theme="solar_light"] .omnisearch-item:hover,
+html[data-theme="solar_light"] .omnisearch-item.active {
+  background: rgba(2, 132, 199, 0.08) !important;
+  border-color: rgba(2, 132, 199, 0.3) !important;
+}
+
+/* Neobrutalism */
+html[data-theme="neobrutalism"] .omnisearch-dialog {
+  background: #ffffff !important;
+  border: 3px solid #000000 !important;
+  border-radius: 4px !important;
+  box-shadow: 8px 8px 0px #000000 !important;
+}
+html[data-theme="neobrutalism"] .omnisearch-input {
+  color: #000000 !important;
+  font-weight: 700 !important;
+}
+html[data-theme="neobrutalism"] .omnisearch-item:hover,
+html[data-theme="neobrutalism"] .omnisearch-item.active {
+  background: #ffe600 !important;
+  border-color: #000000 !important;
+  color: #000000 !important;
+}
+html[data-theme="neobrutalism"] .omnisearch-filter-pill.active {
+  background: #ffe600 !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+}
+
+/* Amber Terminal */
+html[data-theme="amber_terminal"] .omnisearch-dialog {
+  background: #100800 !important;
+  border: 1.5px solid #ffb000 !important;
+  box-shadow: 0 0 35px rgba(255, 176, 0, 0.25) !important;
+}
+html[data-theme="amber_terminal"] .omnisearch-input {
+  color: #ffb000 !important;
+  font-family: 'JetBrains Mono', monospace !important;
+}
+html[data-theme="amber_terminal"] .omnisearch-item:hover,
+html[data-theme="amber_terminal"] .omnisearch-item.active {
+  background: rgba(255, 176, 0, 0.15) !important;
+  border-color: #ffb000 !important;
+}
+
+/* Cyberpunk HUD */
+html[data-theme="cyberpunk"] .omnisearch-dialog {
+  border-color: #00f0ff !important;
+  box-shadow: 0 0 40px rgba(0, 240, 255, 0.3) !important;
+}
+html[data-theme="cyberpunk"] .omnisearch-item:hover,
+html[data-theme="cyberpunk"] .omnisearch-item.active {
+  background: rgba(0, 240, 255, 0.12) !important;
+  border-color: #00f0ff !important;
+}
+
+/* ==========================================================================
+   UNIVERSAL THEME CASCADE REINFORCEMENTS ("GAK ADA YANG GAK KE UBAH")
+   Ensure all 11 themes adapt 100% of UI elements, modals, cards, badges, inputs
+   ========================================================================== */
+
+/* Light Themes Text Adaptation */
+html[data-theme="solar_light"] [style*="color: #fff"],
+html[data-theme="solar_light"] [style*="color:#fff"],
+html[data-theme="solar_light"] [style*="color: #ffffff"],
+html[data-theme="solar_light"] [style*="color:#ffffff"],
+html[data-theme="solar_light"] [style*="rgba(255,255,255"],
+html[data-theme="neobrutalism"] [style*="color: #fff"],
+html[data-theme="neobrutalism"] [style*="color:#fff"],
+html[data-theme="neobrutalism"] [style*="color: #ffffff"],
+html[data-theme="neobrutalism"] [style*="color:#ffffff"],
+html[data-theme="neobrutalism"] [style*="rgba(255,255,255"] {
+  color: var(--text-primary) !important;
+}
+
+/* Light Themes Surface Adaptation */
+html[data-theme="solar_light"] [style*="background: #0b0f19"],
+html[data-theme="solar_light"] [style*="background:#0b0f19"],
+html[data-theme="solar_light"] [style*="background: #0f172a"],
+html[data-theme="solar_light"] [style*="background:#0f172a"],
+html[data-theme="neobrutalism"] [style*="background: #0b0f19"],
+html[data-theme="neobrutalism"] [style*="background:#0b0f19"],
+html[data-theme="neobrutalism"] [style*="background: #0f172a"],
+html[data-theme="neobrutalism"] [style*="background:#0f172a"] {
+  background: var(--bg-surface) !important;
+}
+
+/* Border Adaptations across all themes */
+html[data-theme="solar_light"] [style*="border: 1px solid rgba(255,255,255"],
+html[data-theme="neobrutalism"] [style*="border: 1px solid rgba(255,255,255"] {
+  border-color: var(--border-subtle) !important;
+}
+
+/* ==================== SECURITY SENTINEL UNIVERSAL THEME OVERRIDES ==================== */
+.security-sentinel-card {
+  background: var(--bg-surface) !important;
+  border: 1.5px solid var(--border-subtle) !important;
+  color: var(--text-primary) !important;
+  box-shadow: var(--shadow-sm) !important;
+}
+
+.security-sentinel-card .sentinel-switch-box {
+  background: var(--bg-surface-elevated) !important;
+  border: 1px solid var(--border-subtle) !important;
+  color: var(--text-primary) !important;
+}
+
+.security-sentinel-card .stat-card {
+  background: var(--bg-surface-elevated) !important;
+  border: 1px solid var(--border-subtle) !important;
+  color: var(--text-primary) !important;
+}
+
+.security-sentinel-card .sec-sandbox-box {
+  background: var(--bg-surface-elevated) !important;
+  border: 1px solid var(--border-subtle) !important;
+  color: var(--text-primary) !important;
+}
+
+.security-sentinel-card .sec-incident-row {
+  background: var(--bg-surface-elevated) !important;
+  border: 1px solid var(--border-subtle) !important;
+  color: var(--text-primary) !important;
+}
+
+html[data-theme="neobrutalism"] .security-sentinel-card {
+  background: #ffffff !important;
+  border: 3px solid #000000 !important;
+  box-shadow: 5px 5px 0px #000000 !important;
+  border-radius: 0px !important;
+}
+
+html[data-theme="neobrutalism"] .security-sentinel-card .stat-card,
+html[data-theme="neobrutalism"] .security-sentinel-card .sentinel-switch-box,
+html[data-theme="neobrutalism"] .security-sentinel-card .sec-sandbox-box,
+html[data-theme="neobrutalism"] .security-sentinel-card .sec-incident-row {
+  background: #ffffff !important;
+  border: 2px solid #000000 !important;
+  box-shadow: 2px 2px 0px #000000 !important;
+  border-radius: 0px !important;
+}
+
+html[data-theme="solar_light"] .security-sentinel-card {
+  background: #ffffff !important;
+  border: 1px solid rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05) !important;
+}
+
+html[data-theme="solar_light"] .security-sentinel-card .stat-card,
+html[data-theme="solar_light"] .security-sentinel-card .sentinel-switch-box,
+html[data-theme="solar_light"] .security-sentinel-card .sec-sandbox-box,
+html[data-theme="solar_light"] .security-sentinel-card .sec-incident-row {
+  background: #f8fafc !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+}
+
+
+
+
+
+/* ==================== THEME OVERRIDES FOR NEOBRUTALISM ==================== */
+html[data-theme="neobrutalism"] .platform-chip-card {
+  background-color: #FFFFFF !important;
+  border: 2px solid #000000 !important;
+  box-shadow: 3px 3px 0px #000000 !important;
+  border-radius: 4px !important;
+  color: #000000 !important;
+}
+
+html[data-theme="neobrutalism"] .platform-chip-card div {
+  color: #000000 !important;
+}
+
+html[data-theme="neobrutalism"] .platform-chip-card:hover {
+  background-color: #FFE600 !important;
+  transform: translate(-2px, -2px) !important;
+  box-shadow: 5px 5px 0px #000000 !important;
+}
+
+html[data-theme="neobrutalism"] .qr-display-card,
+html[data-theme="neobrutalism"] .qr-display-card {
+  background-color: #FFFFFF !important;
+  border: 2px solid #000000 !important;
+  box-shadow: 3px 3px 0px #000000 !important;
+  border-radius: 4px !important;
+  color: #000000 !important;
+}
+
+html[data-theme="neobrutalism"] .qr-display-card div,
+html[data-theme="neobrutalism"] .qr-display-card {
+  color: #000000 !important;
+}
+
+html[data-theme="neobrutalism"] .sec-incident-row {
+  background-color: #FFFFFF !important;
+  border: 2px solid #000000 !important;
+  box-shadow: 2px 2px 0px #000000 !important;
+  color: #000000 !important;
+}
+
+html[data-theme="neobrutalism"] .sec-incident-row span {
+  color: #000000 !important;
+}
+
+html[data-theme="neobrutalism"] #cluster-online-display,
+html[data-theme="neobrutalism"] #cluster-qr-placeholder {
+  background-color: #FFFFFF !important;
+  border: 2px solid #000000 !important;
+  color: #000000 !important;
+}
+
+html[data-theme="neobrutalism"] #cluster-online-display div,
+html[data-theme="neobrutalism"] #cluster-qr-placeholder div {
+  color: #000000 !important;
+}
+
+html[data-theme="neobrutalism"] .wa-sandbox-phone-frame {
+  border: 3px solid #000000 !important;
+  box-shadow: 6px 6px 0px #000000 !important;
+  border-radius: 8px !important;
+}
+
+html[data-theme="neobrutalism"] .wa-sandbox-header {
+  background-color: #FFE600 !important;
+  border-bottom: 2px solid #000000 !important;
+  color: #000000 !important;
+}
+
+html[data-theme="neobrutalism"] .wa-sandbox-header #wa-sandbox-bot-title {
+  color: #000000 !important;
+}
+
+/* ==================== THEME OVERRIDES FOR SOLAR LIGHT ==================== */
+html[data-theme="solar_light"] .platform-chip-card {
+  background-color: #FFFFFF !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04) !important;
+  color: #1e293b !important;
+}
+
+html[data-theme="solar_light"] .platform-chip-card div {
+  color: #1e293b !important;
+}
+
+html[data-theme="solar_light"] .platform-chip-card:hover {
+  border-color: #f59e0b !important;
+  background-color: #fffbeb !important;
+  box-shadow: 0 8px 20px rgba(245, 158, 11, 0.15) !important;
+}
+
+html[data-theme="solar_light"] .qr-display-card,
+html[data-theme="solar_light"] .qr-display-card {
+  background-color: #FFFFFF !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04) !important;
+  color: #1e293b !important;
+}
+
+html[data-theme="solar_light"] .qr-display-card div,
+html[data-theme="solar_light"] .qr-display-card {
+  color: #334155 !important;
+}
+
+html[data-theme="solar_light"] .sec-incident-row {
+  background-color: #f8fafc !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  color: #1e293b !important;
+}
+
+html[data-theme="solar_light"] .sec-incident-row span {
+  color: #1e293b !important;
+}
+
+html[data-theme="solar_light"] #cluster-online-display,
+html[data-theme="solar_light"] #cluster-qr-placeholder {
+  background-color: #f8fafc !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  color: #1e293b !important;
+}

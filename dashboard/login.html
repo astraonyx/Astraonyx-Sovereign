@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="polaris_classic">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Masuk - Astraonyx</title>
+  <link rel="icon" type="image/svg+xml" href="assets/brand/astraonyx-mark.svg">
+  <link rel="alternate icon" type="image/png" href="assets/brand/astraonyx-glyph.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wdth,wght@75..100,400..700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/polaris.css">
+  <link rel="stylesheet" href="css/polaris-motion.css">
+  <link rel="stylesheet" href="css/polaris-masterpiece.css">
+  <link rel="stylesheet" href="css/polaris-craft.css?v=1">
+  <link rel="stylesheet" href="css/polaris-public.css?v=1">
+  <meta name="theme-color" content="#12171f">
+  
+</head>
+<body class="pub">
+  <!-- Interactive Cosmic Nebula Canvas -->
+  <canvas id="astra-nexus-canvas" class="astra-nexus-canvas" aria-hidden="true"></canvas>
+
+  <!-- Top Navigation Bar -->
+  <header class="pub-top">
+    <a href="welcome.html" class="pub-brand">
+      <img src="assets/brand/astraonyx-mark.svg" alt="Astraonyx" class="pub-brand-logo" width="34" height="34" style="object-fit:contain;filter:drop-shadow(0 0 12px rgba(0, 240, 255, 0.65));">
+      <span class="pub-brand-name" style="font-weight:750;letter-spacing:-0.02em;">Astraonyx</span>
+    </a>
+    <a href="welcome.html" class="btn-back-home">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+      <span>Kembali ke Beranda</span>
+    </a>
+  </header>
+
+  <!-- ==================== COMMAND DECK CONSOLE ==================== -->
+  <main class="auth-gateway-section" id="auth-section">
+    <div class="auth-console-deck">
+
+
+
+      <!-- RIGHT PANEL: Authentication Form Gateway -->
+      <section class="console-panel-form">
+        <div class="auth-brand"><img src="assets/brand/astraonyx-mark.svg" alt="Astraonyx" class="auth-brand-logo" width="48" height="48" style="object-fit:contain;filter:drop-shadow(0 0 16px rgba(0, 240, 255, 0.7));flex-shrink:0;"><div><b>Astraonyx</b><span>Sovereign Operating System</span></div></div>
+        <h1 class="form-header-title" id="auth-title">Masuk</h1>
+        <p class="form-header-subtitle" id="auth-sub">Pakai username atau nomor WhatsApp yang sudah terdaftar.</p>
+
+        <!-- Tab Auth Selector (Hanya muncul saat bukan step OTP) -->
+        <div id="auth-tab-selector" class="auth-tab-pill-track">
+          <button type="button" id="tab-login-btn" class="auth-tab-btn active">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><polyline points="10 17 15 12 10 7"></polyline><line x1="15" y1="12" x2="3" y2="12"></line></svg>
+            Masuk
+          </button>
+          <button type="button" id="tab-register-btn" class="auth-tab-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
+            Daftar
+          </button>
+        </div>
+
+        <!-- Auth Error Notification Banner -->
+        <div id="auth-error-msg" style="display: none; padding: 14px 18px; background: color-mix(in srgb, var(--accent-rose) 16%, transparent); border: 1.5px solid color-mix(in srgb, var(--accent-rose) 40%, transparent); border-radius: 14px; color: #fca5a5; font-size: 0.88rem; margin-bottom: 22px; line-height: 1.5; box-shadow: 0 4px 20px color-mix(in srgb, var(--accent-rose) 15%, transparent);"></div>
+
+        <!-- Step 1: Form Login -->
+        <form id="login-form">
+          <div class="form-group">
+            <label class="form-label" for="login-username">
+              <span>Username atau Nomor WhatsApp</span>
+            </label>
+            <div class="input-wrapper">
+              <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+              <input type="text" id="login-username" class="form-input form-input-luxury" placeholder="Username atau nomor WA" required autocomplete="username">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="login-password">
+              <span>Password</span>
+            </label>
+            <div class="input-wrapper">
+              <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+              <input type="password" id="login-password" class="form-input form-input-luxury" placeholder="••••••••••••" required autocomplete="current-password">
+              <button type="button" class="password-toggle-btn" id="btn-toggle-login-pass" title="Tampilkan/Sembunyikan Password">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+              </button>
+            </div>
+          </div>
+
+          <button type="submit" id="login-submit-btn" class="btn-submit-gateway">
+            <span>Masuk</span>
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </button>
+        </form>
+
+        <!-- Step 2: Form Verifikasi 2FA / OTP 6-Digit (Tornado Slowmo) -->
+        <form id="otp-form" style="display: none; text-align: center;">
+          <div style="margin-bottom: 16px;">
+            <div style="font-size: 1.05rem; font-weight: 850; color: var(--accent-cyan); margin-bottom: 6px; display: flex; align-items: center; justify-content: center; gap: 8px;">
+              <span>Verifikasi dua langkah (Master PIN)</span>
+            </div>
+            <p style="font-size: 0.84rem; color: var(--text-secondary); margin-bottom: 10px;">Masukkan 6 digit Master PIN akun Anda.</p>
+            
+            <!-- One-click auto-fill pill -->
+            <div class="pin-hint-pill" id="pin-autofill-btn" title="Isi otomatis dengan PIN bawaan">
+              <span>Isi PIN bawaan <strong>111111</strong></span>
+            </div>
+          </div>
+
+          <div class="otp-boxes-wrapper" id="otp-boxes-wrapper">
+            <div class="otp-boxes-grid" id="otp-boxes-grid">
+              <input type="password" maxlength="1" class="otp-box-digit" data-index="0" inputmode="numeric" autocomplete="off">
+              <input type="password" maxlength="1" class="otp-box-digit" data-index="1" inputmode="numeric" autocomplete="off">
+              <input type="password" maxlength="1" class="otp-box-digit" data-index="2" inputmode="numeric" autocomplete="off">
+              <input type="password" maxlength="1" class="otp-box-digit" data-index="3" inputmode="numeric" autocomplete="off">
+              <input type="password" maxlength="1" class="otp-box-digit" data-index="4" inputmode="numeric" autocomplete="off">
+              <input type="password" maxlength="1" class="otp-box-digit" data-index="5" inputmode="numeric" autocomplete="off">
+            </div>
+
+            <!-- Central Target Orb -->
+            <div class="otp-tornado-center" id="otp-tornado-center">
+              <div class="otp-center-spinner" id="otp-center-spinner"></div>
+              <svg class="checkmark-svg" id="otp-checkmark-svg" viewBox="0 0 24 24" style="display: none;">
+                <path d="M4 12.5L9.5 18L20 6"></path>
+              </svg>
+              <svg class="cross-svg" id="otp-cross-svg" viewBox="0 0 24 24" style="display: none;">
+                <path d="M6 6L18 18M6 18L18 6"></path>
+              </svg>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 12px; margin-top: 24px;">
+            <button type="button" id="btn-cancel-otp" class="btn-polaris btn-secondary" style="flex: 1; border-radius: 12px; height: 48px; font-weight: 700;">
+              Batal
+            </button>
+            <button type="submit" id="btn-submit-otp" class="btn-submit-gateway" style="flex: 2; height: 48px; margin: 0;">
+              Konfirmasi Masuk
+            </button>
+          </div>
+        </form>
+
+        <!-- Step 3: Form Register (WAJIB Nomor WhatsApp & Support PIN) -->
+        <form id="register-form" style="display: none;">
+          <div class="form-group">
+            <label class="form-label" for="reg-username">
+              <span>Username Baru</span>
+              <span style="font-size: 0.72rem; color: var(--text-muted);">Min. 3 karakter</span>
+            </label>
+            <div class="input-wrapper">
+              <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+              <input type="text" id="reg-username" class="form-input form-input-luxury" placeholder="Pilih username baru" required minlength="3" autocomplete="username">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="reg-phone">
+              <span>Nomor WhatsApp <span style="color: var(--accent-emerald);">*</span></span>
+              <span style="font-size: 0.72rem; color: var(--accent-emerald); font-weight: 700;">Wajib Terdeteksi WA</span>
+            </label>
+            <div class="input-wrapper">
+              <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+              <input type="tel" id="reg-phone" class="form-input form-input-luxury" placeholder="08xxxxxxxxxx / 628xxxxxxxxxx" required minlength="9" autocomplete="tel">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="reg-password">
+              <span>Password Baru</span>
+              <span style="font-size: 0.72rem; color: var(--text-muted);">Min. 6 karakter</span>
+            </label>
+            <div class="input-wrapper">
+              <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+              <input type="password" id="reg-password" class="form-input form-input-luxury" placeholder="Minimal 6 karakter" required minlength="6" autocomplete="new-password">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="reg-password-confirm">
+              <span>Konfirmasi Password</span>
+            </label>
+            <div class="input-wrapper">
+              <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+              <input type="password" id="reg-password-confirm" class="form-input form-input-luxury" placeholder="Ulangi password di atas" required minlength="6" autocomplete="new-password">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="reg-pin">
+              <span>Master PIN (opsional)</span>
+              <span style="font-size: 0.72rem; color: var(--text-muted);">Default: 111111</span>
+            </label>
+            <div class="input-wrapper">
+              <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 2l-2 2m-1.5 1.5L14 9l-3 3-2-2-3 3 2 2-3 3 2 2 3-3 2 2 3-3-2-2 3.5-3.5 1.5-1.5z"></path></svg>
+              <input type="password" id="reg-pin" class="form-input form-input-luxury" placeholder="6 angka, kosong = 111111" maxlength="6" pattern="\d{6}" inputmode="numeric" style="letter-spacing: 3px;">
+            </div>
+          </div>
+
+          <button type="submit" id="register-submit-btn" class="btn-submit-gateway">
+            <span>Daftar Akun Baru</span>
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </button>
+        </form>
+
+        <!-- Step 3.b: Form Verifikasi 2 Kode OTP SMS (6 Digit + 6 Digit) Pendaftaran -->
+        <form id="register-sms-form" style="display: none; text-align: center;">
+          <div style="margin-bottom: 16px;">
+            <div class="sms-channel-badge">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+              <span>Dikirim lewat SMS, bukan WhatsApp</span>
+            </div>
+            <div style="font-size: 1.15rem; font-weight: 850; color: var(--accent-cyan); margin-bottom: 6px;">
+              Verifikasi SMS (dua kode OTP)
+            </div>
+            <p style="font-size: 0.84rem; color: var(--text-secondary); line-height: 1.5;">
+              2 Kode OTP verifikasi (6 digit + 6 digit) telah dikirimkan via SMS ke nomor <strong id="reg-sms-phone-display" style="color: var(--text-primary);"></strong>.
+            </p>
+          </div>
+
+          <!-- Dual OTP Container (OTP 1 & OTP 2) -->
+          <div class="dual-otp-container">
+            <div class="dual-otp-card">
+              <label class="dual-otp-label">
+                <span>Kode OTP 1</span>
+                <span style="font-size: 0.7rem; color: var(--text-muted);">(6 Digit)</span>
+              </label>
+              <input type="text" id="reg-sms-otp1" class="dual-otp-input" maxlength="6" pattern="\d{6}" inputmode="numeric" placeholder="••••••" autocomplete="off" required>
+            </div>
+            <div class="dual-otp-card">
+              <label class="dual-otp-label">
+                <span>Kode OTP 2</span>
+                <span style="font-size: 0.7rem; color: var(--text-muted);">(6 Digit)</span>
+              </label>
+              <input type="text" id="reg-sms-otp2" class="dual-otp-input" maxlength="6" pattern="\d{6}" inputmode="numeric" placeholder="••••••" autocomplete="off" required>
+            </div>
+          </div>
+
+          <!-- SMS Simulator Preview Helper -->
+          <div id="reg-sms-preview-box" style="display: none; background: color-mix(in srgb, var(--accent-cyan) 8%, transparent); border: 1px dashed color-mix(in srgb, var(--accent-cyan) 35%, transparent); border-radius: 12px; padding: 10px 14px; margin-bottom: 14px; font-size: 0.8rem; text-align: left;">
+            <div style="color: var(--accent-cyan); font-weight: 700; margin-bottom: 4px;">Simulator SMS outbox</div>
+            <div id="reg-sms-preview-content" style="color: var(--text-secondary); font-family: var(--font-mono); font-size: 0.78rem;"></div>
+          </div>
+
+          <div style="display: flex; gap: 12px; margin-top: 18px;">
+            <button type="button" id="btn-back-reg" class="btn-polaris btn-secondary" style="flex: 1; border-radius: 12px; height: 48px; font-weight: 700;">
+              Kembali
+            </button>
+            <button type="submit" id="btn-submit-reg-sms" class="btn-submit-gateway" style="flex: 2; height: 48px; margin: 0;">
+              Verifikasi & Selesai
+            </button>
+          </div>
+        </form>
+
+        <!-- Step 4: Form Penautan Nomor WhatsApp untuk Akun Belum Tertaut (Langsung ke Master PIN) -->
+        <form id="bind-phone-form" style="display: none; text-align: center;">
+          <div style="margin-bottom: 20px;">
+            <div class="sms-channel-badge" style="background: color-mix(in srgb, var(--accent-emerald) 15%, transparent); border-color: color-mix(in srgb, var(--accent-emerald) 40%, transparent); color: var(--accent-emerald);">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+              <span>Tautkan nomor WhatsApp</span>
+            </div>
+            <div style="font-size: 1.25rem; font-weight: 850; color: var(--text-primary); margin-bottom: 6px;">
+              Kaitkan Nomor WhatsApp
+            </div>
+            <p style="font-size: 0.84rem; color: var(--text-secondary); line-height: 1.5;">
+              Akun <strong id="bind-username-display" style="color: var(--accent-cyan);"></strong> belum terhubung ke nomor WhatsApp. Masukkan nomor WhatsApp aktif Anda untuk menautkan akun (1 Akun = 1 Nomor).
+            </p>
+          </div>
+
+          <div class="form-group" style="text-align: left; margin-bottom: 18px;">
+            <label class="form-label" for="bind-phone-input">
+              <span>Nomor WhatsApp Aktif</span>
+              <span style="font-size: 0.72rem; color: var(--accent-emerald); font-weight: 700;">Wajib Terdeteksi WA</span>
+            </label>
+            <div class="input-wrapper">
+              <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+              <input type="tel" id="bind-phone-input" class="form-input form-input-luxury" placeholder="08xxxxxxxxxx / 628xxxxxxxxxx" required minlength="9" autocomplete="tel">
+            </div>
+            <span style="font-size: 0.72rem; color: var(--text-muted); margin-top: 5px; display: block;">Contoh: 08123456789 atau 628123456789. Nomor harus terdaftar sebagai pengguna WhatsApp yang aktif.</span>
+          </div>
+
+          <div style="display: flex; gap: 12px; margin-top: 24px;">
+            <button type="button" id="btn-cancel-bind" class="btn-polaris btn-secondary" style="flex: 1; border-radius: 12px; height: 50px; font-weight: 700;">
+              Batal
+            </button>
+            <button type="submit" id="btn-submit-bind-direct" class="btn-submit-gateway" style="flex: 2; height: 50px; margin: 0;">
+              <span>Lanjut ke Master PIN</span>
+            </button>
+          </div>
+        </form>
+
+        </section>
+
+    </div>
+  </main>
+
+  <script src="js/polaris-motion.js"></script>
+  <script src="js/polaris-components.js"></script>
+  <script src="js/auth.js"></script>
+
+  <script>
+    // Tab switching synchronizer
+    document.addEventListener('DOMContentLoaded', () => {
+      const tabLogin = document.getElementById('tab-login-btn');
+      const tabReg = document.getElementById('tab-register-btn');
+      const loginForm = document.getElementById('login-form');
+      const regForm = document.getElementById('register-form');
+      
+      const setHead = (m) => {
+        const t = document.getElementById('auth-title'), d = document.getElementById('auth-sub');
+        if (!t || !d) return;
+        t.textContent = m === 'register' ? 'Daftar' : 'Masuk';
+        d.textContent = m === 'register' ? 'Buat akun baru. Nomor WhatsApp harus aktif dan terdaftar.' : 'Pakai username atau nomor WhatsApp yang sudah terdaftar.';
+      };
+
+      const activateLogin = () => {
+        setHead('login');
+        if (tabLogin && tabReg) {
+          tabLogin.classList.add('active');
+          tabReg.classList.remove('active');
+        }
+        if (loginForm && regForm) {
+          loginForm.style.display = 'block';
+          regForm.style.display = 'none';
+        }
+        const err = document.getElementById('auth-error-msg');
+        if (err) err.style.display = 'none';
+        const uInput = document.getElementById('login-username');
+        if (uInput) setTimeout(() => uInput.focus(), 200);
+      };
+
+      const activateRegister = () => {
+        setHead('register');
+        if (tabLogin && tabReg) {
+          tabReg.classList.add('active');
+          tabLogin.classList.remove('active');
+        }
+        if (loginForm && regForm) {
+          loginForm.style.display = 'none';
+          regForm.style.display = 'block';
+        }
+        const err = document.getElementById('auth-error-msg');
+        if (err) err.style.display = 'none';
+        const rInput = document.getElementById('reg-username');
+        if (rInput) setTimeout(() => rInput.focus(), 200);
+      };
+
+      if (tabLogin && tabReg) {
+        tabLogin.addEventListener('click', activateLogin);
+        tabReg.addEventListener('click', activateRegister);
+      }
+
+      // Check reason & msg from URL (Auto-logout on another device login, ban, or phone required)
+      const urlParams = new URLSearchParams(window.location.search);
+      const reason = urlParams.get('reason');
+      const customMsg = urlParams.get('msg');
+      if (reason || customMsg) {
+        const err = document.getElementById('auth-error-msg');
+        if (err) {
+          let text = customMsg ? decodeURIComponent(customMsg) : '';
+          if (reason === 'other_device') {
+            text = text || 'Sesi berakhir karena akun ini login di perangkat lain. Satu akun hanya boleh aktif di satu perangkat.';
+          } else if (reason === 'banned') {
+            text = text || 'Akun kamu dinonaktifkan oleh owner (Cosmos).';
+          } else if (reason === 'require_phone') {
+            text = text || 'Akun kamu belum punya nomor WhatsApp terdaftar. Masuk lagi untuk melengkapi verifikasi.';
+          }
+          err.textContent = text;
+          err.style.display = 'block';
+        }
+      }
+
+      // Check hash (e.g. #register)
+      if (window.location.hash === '#register') {
+        activateRegister();
+      }
+
+      // Password toggle button
+      const togglePass = document.getElementById('btn-toggle-login-pass');
+      const passInput = document.getElementById('login-password');
+      if (togglePass && passInput) {
+        togglePass.addEventListener('click', () => {
+          const isPass = passInput.type === 'password';
+          passInput.type = isPass ? 'text' : 'password';
+          togglePass.innerHTML = isPass
+            ? '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>'
+            : '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>';
+        });
+      }
+
+      // 1-Click Master PIN Autofill button
+      const pinBtn = document.getElementById('pin-autofill-btn');
+      if (pinBtn) {
+        pinBtn.addEventListener('click', () => {
+          const digits = document.querySelectorAll('.otp-box-digit');
+          const defaultPin = '111111';
+          digits.forEach((d, idx) => {
+            d.value = defaultPin[idx] || '1';
+          });
+          const lastDigit = digits[digits.length - 1];
+          if (lastDigit) lastDigit.focus();
+        });
+      }
+    });
+  </script>
+
+  <script>
+    (function () {
+      const c = document.getElementById('astra-nexus-canvas');
+      if (!c) return;
+      const ctx = c.getContext('2d');
+      let w = c.width = window.innerWidth;
+      let h = c.height = window.innerHeight;
+      window.addEventListener('resize', () => { w = c.width = window.innerWidth; h = c.height = window.innerHeight; });
+      const pts = Array.from({ length: 35 }, () => ({
+        x: Math.random() * w, y: Math.random() * h,
+        vx: (Math.random() - 0.5) * 0.4, vy: (Math.random() - 0.5) * 0.4,
+        r: Math.random() * 1.5 + 0.6, o: Math.random() * 0.4 + 0.2
+      }));
+      function anim() {
+        ctx.clearRect(0, 0, w, h);
+        pts.forEach(p => {
+          p.x += p.vx; p.y += p.vy;
+          if (p.x < 0) p.x = w; if (p.x > w) p.x = 0;
+          if (p.y < 0) p.y = h; if (p.y > h) p.y = 0;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(226, 232, 240, ${p.o})`;
+          ctx.fill();
+        });
+        requestAnimationFrame(anim);
+      }
+      anim();
+    })();
+  </script>
+</body>
+</html>

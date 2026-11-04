@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Polaris - Interactive 3D Spline & Spotlight Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/polaris.css">
+  <link rel="stylesheet" href="css/polaris-motion.css">
+  <script type="module" src="https://unpkg.com/@splinetool/viewer@latest/build/spline-viewer.js"></script>
+  <style>
+    body {
+      min-height: 100vh;
+      background-color: #0D0E0A;
+      color: #EFEADC;
+      font-family: 'Public Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    .spline-stage-container {
+      max-width: 1320px;
+      margin: 32px auto;
+      padding: 0 20px;
+      position: relative;
+      z-index: 10;
+    }
+
+    /* Spline Showcase Master Card */
+    .spline-master-card {
+      background: rgba(20, 21, 15, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 28px;
+      min-height: 580px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 32px 80px rgba(0, 0, 0, 0.8), 0 0 60px rgba(227, 164, 60, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .spline-master-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.3) 25%, rgba(227, 164, 60, 0.8) 50%, rgba(181, 83, 63, 0.5) 75%, transparent 100%);
+      z-index: 2;
+    }
+
+    .spline-card-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.25fr;
+      min-height: 560px;
+      position: relative;
+      z-index: 3;
+    }
+
+    @media (max-width: 960px) {
+      .spline-card-grid {
+        grid-template-columns: 1fr;
+      }
+      .spline-canvas-wrapper {
+        min-height: 380px;
+      }
+    }
+
+    .spline-info-side {
+      padding: 48px 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      z-index: 4;
+    }
+
+    .spline-canvas-wrapper {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      min-height: 500px;
+      overflow: hidden;
+      border-radius: 0 28px 28px 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at 60% 50%, rgba(227, 164, 60, 0.08) 0%, transparent 70%);
+    }
+
+    spline-viewer {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      inset: 0;
+      border: none;
+      outline: none;
+    }
+
+    /* Controls Tray */
+    .spline-controls-tray {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      padding: 18px 32px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(5, 8, 16, 0.6);
+      position: relative;
+      z-index: 4;
+    }
+
+    .scene-pill {
+      padding: 6px 14px;
+      border-radius: 9999px;
+      font-size: 0.76rem;
+      font-weight: 600;
+      color: #A6A18C;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .scene-pill:hover,
+    .scene-pill.active {
+      color: #E3A43C;
+      background: rgba(227, 164, 60, 0.12);
+      border-color: rgba(227, 164, 60, 0.35);
+      box-shadow: 0 0 16px rgba(227, 164, 60, 0.2);
+    }
+
+    /* Code Snippet Box */
+    .code-preview-box {
+      background: rgba(4, 7, 15, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 18px;
+      padding: 24px;
+      margin-top: 28px;
+      position: relative;
+    }
+    .code-preview-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    .copy-btn {
+      padding: 5px 12px;
+      border-radius: 8px;
+      font-size: 0.74rem;
+      font-weight: 650;
+      color: #C7C0AC;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+    .copy-btn:hover {
+      background: rgba(227, 164, 60, 0.15);
+      color: #E3A43C;
+      border-color: rgba(227, 164, 60, 0.4);
+    }
+  </style>
+</head>
+<body>
+  <!-- Magnetic Cursor -->
+  <div id="polaris-cursor"></div>
+  <div id="polaris-cursor-follower"></div>
+
+  <!-- Ambient Kinetic Starfield Canvas -->
+  <canvas id="starfield-canvas"></canvas>
+  <div class="ambient-nebula nebula-1"></div>
+  <div class="ambient-nebula nebula-2"></div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container"></div>
+
+  <!-- Vercel-Style Luxury Dual-Tier Sticky Navbar -->
+  <header class="vercel-header-wrapper">
+    <div class="vercel-top-bar">
+      <div class="vercel-left-group">
+        <a href="index.html" class="vercel-logo-mark">
+          <div class="vercel-brand-icon">
+            <svg viewBox="0 0 76 65" width="16" height="16" fill="currentColor">
+              <path d="M37.5274 0L75.0548 65H0L37.5274 0Z" fill="#ffffff" />
+            </svg>
+          </div>
+          <span class="vercel-brand-text">POLARIS</span>
+        </a>
+        <span class="vercel-slash-divider">/</span>
+        <div class="vercel-workspace-pill">
+          <span style="font-weight: 600; color: #EFEADC;">Astraonyx</span>
+          <span style="color: rgba(255,255,255,0.25);">/</span>
+          <span style="color: #E3A43C; font-weight: 700;">3D Spline Studio</span>
+          <span class="vercel-env-badge"><span class="vercel-pulse-dot"></span>PROD</span>
+        </div>
+      </div>
+
+      <div class="vercel-center-search" onclick="window.location.href='index.html#commands'" title="Quick search commands (⌘K)">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: #A6A18C;"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <span style="color: #8A846E; font-size: 0.76rem;">Search commands, bots, configs...</span>
+        </div>
+        <kbd class="vercel-kbd-shortcut">⌘K</kbd>
+      </div>
+
+      <div class="vercel-right-group">
+        <div class="status-beacon-container" style="padding: 3px 10px; background: rgba(255,255,255,0.04); border-radius: 9999px; border: 1px solid rgba(255,255,255,0.06);">
+          <span id="beacon-dot" class="beacon-dot online"></span>
+          <span id="beacon-label" class="beacon-label" style="font-size: 0.72rem; font-weight: 700; color: #6B8F52;">3D ENGINE ACTIVE</span>
+        </div>
+
+        <div class="vercel-theme-switcher">
+          <button type="button" class="theme-pill-btn" data-theme="light" title="Light Theme">☀️</button>
+          <button type="button" class="theme-pill-btn active" data-theme="dark" title="Dark Space Theme">🌙</button>
+        </div>
+
+        <div class="vercel-user-pill">
+          <div style="font-size: 0.78rem;">
+            <span id="header-username" style="font-weight: 700; color: var(--accent-cyan);">Admin</span>
+            <span id="header-role" class="badge badge-role-cosmos" style="margin-left: 6px; font-size: 0.62rem;">COSMOS</span>
+          </div>
+          <button onclick="window.location.href='login.html'" class="btn-polaris btn-danger btn-sm" style="padding: 4px 12px; font-size: 0.7rem; border-radius: 9999px;">Logout</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Standalone Navigation Strip -->
+    <div class="vercel-tabs-bar">
+      <div class="vercel-tabs-scroll-container">
+        <nav class="nav-tabs" id="vercel-nav-tabs">
+          <div class="vercel-tab-hover-pill" id="vercel-tab-hover-pill"></div>
+          <div class="vercel-tab-active-indicator" id="vercel-tab-active-indicator"></div>
+
+          <a href="index.html" class="nav-tab magnetic-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+            <span>Bot Hub (Dashboard)</span>
+          </a>
+          <a href="spline.html" class="nav-tab active magnetic-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            <span>3D Spline Studio</span>
+          </a>
+          <a href="hermes.html" class="nav-tab magnetic-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.4 5.4 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+            <span>Hermes AI Studio</span>
+          </a>
+          <a href="terminal.html" class="nav-tab magnetic-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>
+            <span>Live Terminal</span>
+          </a>
+          <a href="downloader.html" class="nav-tab magnetic-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            <span>Downloader Hub</span>
+          </a>
+          <a href="analytics.html" class="nav-tab magnetic-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+            <span>Analytics</span>
+          </a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Stage -->
+  <main class="spline-stage-container">
+    <div class="spline-master-card spline-spotlight-card">
+      <div class="spotlight-glow"></div>
+
+      <div class="spline-card-grid">
+        <!-- Left Editorial Content -->
+        <div class="spline-info-side">
+          <div style="display: inline-flex; align-items: center; gap: 8px; padding: 4px 14px; border-radius: 9999px; background: rgba(227, 164, 60, 0.1); border: 1px solid rgba(227, 164, 60, 0.25); margin-bottom: 20px; width: fit-content;">
+            <span style="display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: #E3A43C; box-shadow: 0 0 10px #E3A43C;"></span>
+            <span style="font-size: 0.72rem; font-weight: 750; color: #E3A43C; text-transform: uppercase; letter-spacing: 0.08em; font-family: 'IBM Plex Mono', monospace;">INTERACTIVE 3D WEBGL ENGINE</span>
+          </div>
+
+          <h1 style="font-size: 3rem; font-weight: 900; line-height: 1.1; background: linear-gradient(180deg, #ffffff 0%, #C7C0AC 55%, #8A846E 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 18px; letter-spacing: -0.03em;">
+            Interactive 3D
+          </h1>
+
+          <p style="font-size: 1.02rem; color: #A6A18C; line-height: 1.65; max-width: 480px; margin-bottom: 28px;">
+            Bring your UI to life with beautiful 3D scenes. Create immersive experiences that capture attention, spark engagement, and elevate your product design.
+          </p>
+
+          <div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap;">
+            <button class="btn-rainbow" onclick="document.getElementById('code-section').scrollIntoView({ behavior: 'smooth' })">
+              <span>⚡</span> Get Unlimited Access
+            </button>
+            <a href="index.html" class="btn-polaris btn-secondary" style="border-radius: 12px; font-size: 0.85rem;">
+              <span>←</span> Kembali ke Bot Hub
+            </a>
+          </div>
+        </div>
+
+        <!-- Right Live 3D Spline Canvas -->
+        <div class="spline-canvas-wrapper">
+          <spline-viewer id="active-spline-viewer" url="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"></spline-viewer>
+        </div>
+      </div>
+
+      <!-- Controls & Scene Selector Tray -->
+      <div class="spline-controls-tray">
+        <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+          <span style="font-size: 0.78rem; font-weight: 700; color: #C7C0AC; font-family: 'IBM Plex Mono', monospace;">SELECT SCENE:</span>
+          <button class="scene-pill active" data-scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode">Orbit Core (Default)</button>
+          <button class="scene-pill" data-scene="https://prod.spline.design/6Wq1Q7YGyM-iab9i/scene.splinecode">Cosmic Bot</button>
+          <button class="scene-pill" data-scene="https://prod.spline.design/4c8mK5Xg5k8j9q8y/scene.splinecode">Fluid Hologram</button>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <button class="btn-polaris btn-emerald btn-sm" onclick="alert('3D Scene Loaded & Ready for WhatsApp Bot Integration!')">
+            <span>✓</span> WebGL Render Verified
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Code Integration Section -->
+    <div class="code-preview-box" id="code-section">
+      <div class="code-preview-header">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span style="font-size: 1.1rem;">💻</span>
+          <strong style="color: #fff; font-size: 0.92rem;">React + shadcn Component Implementation (`components/ui/splite.tsx`)</strong>
+        </div>
+        <button class="copy-btn" id="btn-copy-code">
+          <span>📋</span> Salin Kode Komponen
+        </button>
+      </div>
+
+      <pre style="margin: 0; padding: 16px; background: rgba(0, 0, 0, 0.4); border-radius: 12px; overflow-x: auto; font-family: 'IBM Plex Mono', monospace; font-size: 0.8rem; color: #E3A43C; line-height: 1.55;"><code id="react-spline-code">'use client'
+
+import { Suspense, lazy } from 'react'
+import { Card } from "@/components/ui/card"
+import { Spotlight } from "@/components/ui/spotlight"
+
+const Spline = lazy(() => import('@splinetool/react-spline'))
+
+interface SplineSceneProps {
+  scene: string
+  className?: string
+}
+
+export function SplineScene({ scene, className }: SplineSceneProps) {
+  return (
+    <Suspense 
+      fallback={
+        <div className="w-full h-full flex items-center justify-center">
+          <span className="loader"></span>
+        </div>
+      }
+    >
+      <Spline scene={scene} className={className} />
+    </Suspense>
+  )
+}
+
+export function SplineSceneBasic() {
+  return (
+    <Card className="w-full h-[500px] bg-black/[0.96] relative overflow-hidden">
+      <Spotlight className="-top-40 left-0 md:left-60 md:-top-20" fill="white" />
+      <div className="flex h-full">
+        <div className="flex-1 p-8 relative z-10 flex flex-col justify-center">
+          <h1 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400">
+            Interactive 3D
+          </h1>
+          <p className="mt-4 text-neutral-300 max-w-lg">
+            Bring your UI to life with beautiful 3D scenes. Create immersive experiences 
+            that capture attention and enhance your design.
+          </p>
+        </div>
+        <div className="flex-1 relative">
+          <SplineScene scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode" className="w-full h-full" />
+        </div>
+      </div>
+    </Card>
+  )
+}</code></pre>
+    </div>
+  </main>
+
+  <script src="js/polaris-motion.js"></script>
+  <script src="js/polaris-components.js"></script>
+  <script src="js/auth.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Scene switcher pills
+      const viewer = document.getElementById('active-spline-viewer');
+      const pills = document.querySelectorAll('.scene-pill');
+      pills.forEach((p) => {
+        p.addEventListener('click', () => {
+          pills.forEach((el) => el.classList.remove('active'));
+          p.classList.add('active');
+          const url = p.getAttribute('data-scene');
+          if (viewer && url) {
+            viewer.setAttribute('url', url);
+          }
+        });
+      });
+
+      // Copy code snippet
+      const copyBtn = document.getElementById('btn-copy-code');
+      if (copyBtn) {
+        copyBtn.addEventListener('click', () => {
+          const code = document.getElementById('react-spline-code').textContent;
+          navigator.clipboard.writeText(code).then(() => {
+            copyBtn.innerHTML = '<span>✓</span> Tersalin ke Clipboard!';
+            setTimeout(() => {
+              copyBtn.innerHTML = '<span>📋</span> Salin Kode Komponen';
+            }, 2500);
+          });
+        });
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,141 @@
+/* ==========================================================================
+   ASTRAONYX SOVEREIGN PILLAR SWITCHER DOCK
+   Bottom-left tactile control trigger with Apple fluid dynamics
+   Zero em-dash compliance
+   ========================================================================== */
+
+#bottom-pillar-dock {
+  position: fixed;
+  bottom: 16px;
+  left: 16px;
+  z-index: 850;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 14px 8px 10px;
+  background: rgba(16, 12, 28, 0.78);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 9999px;
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.3),
+    0 12px 36px rgba(0, 0, 0, 0.45);
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              background 0.3s ease,
+              border-color 0.3s ease,
+              box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", sans-serif;
+}
+
+#bottom-pillar-dock:hover {
+  transform: translateY(-2px) scale(1.02);
+  background: rgba(26, 20, 44, 0.88);
+  border-color: rgba(229, 185, 79, 0.35);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    0 16px 44px rgba(0, 0, 0, 0.55),
+    0 0 24px rgba(229, 185, 79, 0.15);
+}
+
+#bottom-pillar-dock:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.dock-icon-wrapper {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.dock-icon-img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  mix-blend-mode: screen;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#bottom-pillar-dock:hover .dock-icon-img {
+  transform: rotate(12deg) scale(1.1);
+}
+
+.dock-meta-cluster {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.dock-pillar-name {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+.dock-sub-hint {
+  font-size: 0.65rem;
+  font-weight: 500;
+  color: #c5bfdb;
+  letter-spacing: 0.02em;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.dock-kbd {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.62rem;
+  padding: 1px 5px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+  color: #e5b94f;
+  font-weight: 600;
+}
+
+.dock-orbit-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  color: #c5bfdb;
+  margin-left: 2px;
+  flex-shrink: 0;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#bottom-pillar-dock:hover .dock-orbit-arrow {
+  background: rgba(229, 185, 79, 0.2);
+  color: #ffffff;
+  transform: translateX(2px);
+}
+
+@media (max-width: 768px) {
+  #bottom-pillar-dock {
+    bottom: 12px;
+    left: 12px;
+    padding: 6px 10px 6px 8px;
+    gap: 8px;
+  }
+  .dock-sub-hint span:first-child {
+    display: none;
+  }
+}

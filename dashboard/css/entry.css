@@ -1,0 +1,175 @@
+/* Astraonyx — Gaya Layar Masuk & Autentikasi (entry.css)
+   Sesuai CONTRACT.md, tokens.css, dan estetika deep obsidian luxury. */
+
+@layer reset, tokens, base, components, shell, pillar, utilities;
+
+@layer base {
+  body.ax-entry-body {
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--void);
+    color: var(--text);
+    font-family: var(--font-ui);
+    padding: var(--sp-4);
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* Orbit background decorative backdrop */
+  .ax-entry-backdrop {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.6;
+  }
+  .ax-entry-backdrop svg {
+    width: min(800px, 120vw);
+    height: min(800px, 120vw);
+    color: var(--line);
+  }
+
+  .ax-entry-card {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 440px;
+    background: var(--surface);
+    border: 1px solid var(--line-strong);
+    border-radius: var(--r-lg);
+    padding: var(--sp-8) var(--sp-6);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(8px);
+  }
+
+  @media (max-width: 480px) {
+    .ax-entry-card {
+      padding: var(--sp-6) var(--sp-4);
+      border-radius: var(--r-md);
+    }
+  }
+
+  .ax-entry-brand {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-3);
+    margin-bottom: var(--sp-6);
+    text-decoration: none;
+  }
+  .ax-entry-brand img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+  }
+  .ax-entry-brand__text {
+    display: flex;
+    flex-direction: column;
+  }
+  .ax-entry-brand__title {
+    font-family: var(--font-display);
+    font-size: var(--fs-xl);
+    font-weight: 600;
+    color: var(--text);
+    letter-spacing: 0.04em;
+    line-height: var(--lh-tight);
+  }
+  .ax-entry-brand__sub {
+    font-size: var(--fs-xs);
+    color: var(--gold);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* Form & typography classes matching login.js */
+  .ax-ent__title {
+    font-family: var(--font-display);
+    font-size: var(--fs-3xl);
+    font-weight: 600;
+    color: var(--text);
+    margin: 0 0 var(--sp-2) 0;
+    line-height: var(--lh-tight);
+  }
+
+  .ax-ent__sub {
+    font-size: var(--fs-sm);
+    color: var(--text-2);
+    margin: 0 0 var(--sp-6) 0;
+    line-height: var(--lh-body);
+  }
+
+  .ax-ent__status {
+    margin-bottom: var(--sp-4);
+  }
+
+  .ax-ent__form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-4);
+  }
+
+  .ax-ent__form .ax-field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-1);
+  }
+
+  .ax-ent__form .ax-label {
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .ax-ent__input {
+    width: 100%;
+    min-height: var(--hit);
+    padding: 0 var(--sp-3);
+    background: var(--bg-field);
+    border: 1px solid var(--line-strong);
+    border-radius: var(--r-sm);
+    color: var(--text);
+    font-family: var(--font-ui);
+    font-size: var(--fs-ui);
+    transition: border-color var(--dur-1), box-shadow var(--dur-1);
+  }
+  .ax-ent__input:focus {
+    outline: none;
+    border-color: var(--gold);
+    box-shadow: 0 0 0 2px var(--bg-gold-wash);
+  }
+
+  .ax-ent__notes {
+    margin-top: var(--sp-6);
+    padding-top: var(--sp-4);
+    border-top: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-2);
+    font-size: var(--fs-xs);
+    color: var(--text-3);
+    line-height: var(--lh-snug);
+  }
+  .ax-ent__notes a {
+    color: var(--blue);
+    text-decoration: none;
+    transition: color var(--dur-1);
+  }
+  .ax-ent__notes a:hover {
+    color: var(--gold);
+    text-decoration: underline;
+  }
+
+  .ax-entry-footer {
+    position: relative;
+    z-index: 1;
+    margin-top: var(--sp-6);
+    font-size: var(--fs-xs);
+    color: var(--text-3);
+    text-align: center;
+  }
+}

@@ -1,0 +1,832 @@
+/* ==========================================================================
+   POLARIS CHESS.COM STUDIO & STARLIUM GAMING STYLESHEET
+   Authentic Wooden Chessboard, Staunton Vector Pieces, Evaluation Bar,
+   Drag-and-Drop Follow-Cursor Engine, and Wood-Grain Game Control Deck
+   ========================================================================== */
+
+/* 1. CHESS STUDIO MAIN WRAPPER */
+.chess-studio-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 28px;
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  user-select: none;
+  font-family: var(--font-sans);
+}
+
+@media (max-width: 1100px) {
+  .chess-studio-container {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+/* 2. BOARD SECTION (EVAL BAR + BOARD + PLAYER CARDS) */
+.chess-board-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.chess-stage-flex {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+}
+
+/* Real-time Vertical Evaluation Bar */
+.chess-eval-bar-wrapper {
+  width: 24px;
+  height: 520px;
+  max-height: 80vw;
+  background: #2b2b29;
+  border: 1.5px solid rgba(255, 255, 255, 0.12);
+  border-radius: 6px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.8), 0 4px 15px rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.chess-eval-bar-fill {
+  width: 100%;
+  height: 50%;
+  background: #ffffff;
+  transition: height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.chess-eval-score-badge {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 850;
+  padding: 1px 4px;
+  border-radius: 4px;
+  pointer-events: none;
+  z-index: 5;
+  white-space: nowrap;
+}
+.chess-eval-score-badge.white-top {
+  bottom: 6px;
+  color: #111827;
+  background: rgba(255, 255, 255, 0.85);
+}
+.chess-eval-score-badge.black-top {
+  top: 6px;
+  color: #ffffff;
+  background: rgba(0, 0, 0, 0.75);
+}
+
+/* Player Info Strip (Top & Bottom) */
+.chess-player-strip {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 14px;
+  background: rgba(20, 24, 35, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  margin: 6px 0;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.chess-player-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.chess-player-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  background: #1e293b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  border: 1.5px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+  overflow: hidden;
+}
+
+.chess-player-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.chess-player-name {
+  font-weight: 750;
+  font-size: 0.88rem;
+  color: #f1f5f9;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.chess-player-elo {
+  font-size: 0.72rem;
+  color: #94a3b8;
+  font-family: var(--font-mono);
+  font-weight: 600;
+}
+
+.chess-captured-tray {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  min-height: 18px;
+}
+
+.chess-captured-piece-mini {
+  width: 16px;
+  height: 16px;
+  opacity: 0.85;
+}
+
+.chess-player-timer {
+  font-family: var(--font-mono);
+  font-size: 1.05rem;
+  font-weight: 850;
+  padding: 4px 12px;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #f8fafc;
+  letter-spacing: 0.5px;
+}
+
+.chess-player-timer.active-turn {
+  background: #22c55e;
+  color: #052e16;
+  border-color: #4ade80;
+  box-shadow: 0 0 12px rgba(34, 197, 94, 0.5);
+}
+
+/* 3. REALISTIC WOODEN CHESSBOARD FRAME */
+.chess-wood-frame {
+  position: relative;
+  padding: 22px;
+  background: #382415;
+  background-image: 
+    radial-gradient(ellipse at 50% 50%, rgba(139, 87, 42, 0.25) 0%, rgba(35, 20, 10, 0.85) 100%),
+    repeating-linear-gradient(45deg, rgba(255,255,255,0.015) 0, rgba(255,255,255,0.015) 2px, transparent 2px, transparent 6px);
+  border: 3px solid #5a381e;
+  border-radius: 12px;
+  box-shadow: 
+    0 24px 50px rgba(0, 0, 0, 0.85),
+    0 0 35px rgba(0, 0, 0, 0.9),
+    inset 0 2px 4px rgba(255, 255, 255, 0.15),
+    inset 0 -3px 8px rgba(0, 0, 0, 0.8);
+}
+
+/* Border Coordinates (a-h, 1-8) */
+.board-coords-file-top,
+.board-coords-file-bottom {
+  display: flex;
+  position: absolute;
+  left: 22px;
+  right: 22px;
+  height: 20px;
+  align-items: center;
+  justify-content: space-around;
+  pointer-events: none;
+}
+.board-coords-file-top { top: 2px; }
+.board-coords-file-bottom { bottom: 2px; }
+
+.board-coords-rank-left,
+.board-coords-rank-right {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 22px;
+  bottom: 22px;
+  width: 20px;
+  align-items: center;
+  justify-content: space-around;
+  pointer-events: none;
+}
+.board-coords-rank-left { left: 2px; }
+.board-coords-rank-right { right: 2px; }
+
+.coord-label {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #c49a6c;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.9);
+  width: 100%;
+  text-align: center;
+}
+
+/* 8x8 Board Grid */
+.chess-board-grid {
+  width: 520px;
+  height: 520px;
+  max-width: 80vw;
+  max-height: 80vw;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(8, 1fr);
+  border: 2px solid #2e1a0d;
+  box-shadow: inset 0 0 16px rgba(0, 0, 0, 0.7);
+  overflow: hidden;
+  position: relative;
+  touch-action: none;
+}
+
+/* Authentic Wooden Squares */
+.chess-square {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: filter 0.15s ease;
+}
+
+/* Light Squares: Natural Maple Wood */
+.chess-square.sq-light {
+  background-color: #eed9b3;
+  background-image: linear-gradient(135deg, #f7e6ca 0%, #ecd4ad 50%, #e2c79a 100%);
+}
+
+/* Dark Squares: Rich Walnut Wood */
+.chess-square.sq-dark {
+  background-color: #b58863;
+  background-image: linear-gradient(135deg, #c0916b 0%, #b2835e 50%, #a2744f 100%);
+}
+
+.chess-square:hover {
+  filter: brightness(1.06);
+}
+
+/* Square States */
+.chess-square.sq-selected {
+  background: rgba(234, 179, 8, 0.65) !important;
+  box-shadow: inset 0 0 14px rgba(202, 138, 4, 0.9);
+}
+
+.chess-square.sq-last-from {
+  background: rgba(245, 158, 11, 0.35) !important;
+}
+
+.chess-square.sq-last-to {
+  background: rgba(245, 158, 11, 0.5) !important;
+  box-shadow: inset 0 0 10px rgba(245, 158, 11, 0.8);
+}
+
+/* Move Hint: Green Dot */
+.chess-square.sq-hint-move::after {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: rgba(34, 197, 94, 0.85);
+  box-shadow: 0 0 10px rgba(34, 197, 94, 0.7);
+  pointer-events: none;
+  animation: pulseGreenDot 1.4s infinite ease-in-out;
+}
+
+/* Capture Hint: Target Ring */
+.chess-square.sq-hint-capture::after {
+  content: '';
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 3.5px dashed #ef4444;
+  box-shadow: 0 0 14px rgba(239, 68, 68, 0.8);
+  pointer-events: none;
+  animation: rotateCaptureRing 4s linear infinite;
+}
+
+/* King in Check Glowing Pulse */
+.chess-square.sq-in-check {
+  background: rgba(239, 68, 68, 0.75) !important;
+  box-shadow: 0 0 25px rgba(239, 68, 68, 1), inset 0 0 16px rgba(239, 68, 68, 0.9) !important;
+  animation: kingCheckPulse 1.1s infinite alternate ease-in-out;
+}
+
+/* 4. STAUNTON PIECE STYLING */
+.staunton-piece-svg {
+  width: 88%;
+  height: 88%;
+  object-fit: contain;
+  pointer-events: none;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.55));
+  transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.chess-square:hover .staunton-piece-svg {
+  transform: scale(1.08) translateY(-2px);
+}
+
+.piece-bounce-anim {
+  animation: pieceDropBounce 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* 5. DRAG-AND-DROP FLOATING PIECE (FOLLOWS CURSOR) */
+.chess-drag-piece-follower {
+  position: fixed;
+  pointer-events: none;
+  z-index: 10000;
+  width: 68px;
+  height: 68px;
+  transform: translate(-50%, -50%) scale(1.18);
+  filter: drop-shadow(0 16px 28px rgba(0, 0, 0, 0.75)) drop-shadow(0 0 12px rgba(56, 189, 248, 0.5));
+  cursor: grabbing !important;
+  will-change: left, top;
+}
+
+.chess-square.sq-dragging .staunton-piece-svg {
+  opacity: 0.25;
+  filter: grayscale(0.5);
+}
+
+/* 6. RIGHT CONTROL DECK ("BERMAIN CATUR" PANEL) */
+.chess-control-deck {
+  width: 380px;
+  background: #1b1612;
+  background-image: 
+    radial-gradient(circle at 100% 0%, rgba(245, 158, 11, 0.08) 0%, transparent 40%),
+    linear-gradient(180deg, #241d18 0%, #171310 100%);
+  border: 2px solid #3d2b1f;
+  border-radius: 18px;
+  padding: 22px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.chess-deck-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.chess-deck-header h2 {
+  font-size: 1.35rem;
+  font-weight: 850;
+  color: #ffffff;
+  margin: 0;
+  letter-spacing: -0.3px;
+}
+
+/* Chess.com Style Menu Cards */
+.chess-menu-card-btn {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 13px 16px;
+  background: rgba(45, 36, 29, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  color: #f1f5f9;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  text-align: left;
+  user-select: none;
+  text-decoration: none;
+}
+
+.chess-menu-card-btn:hover {
+  background: rgba(65, 52, 42, 0.9);
+  border-color: rgba(245, 158, 11, 0.4);
+  transform: translateX(4px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
+}
+
+.chess-menu-card-btn.active {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.22) 0%, rgba(217, 119, 6, 0.12) 100%);
+  border-color: #f59e0b;
+  box-shadow: 0 4px 20px rgba(245, 158, 11, 0.25);
+}
+
+.chess-menu-card-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  flex-shrink: 0;
+}
+
+.chess-menu-card-title {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 2px;
+}
+
+.chess-menu-card-desc {
+  font-size: 0.74rem;
+  color: #a8988a;
+  line-height: 1.35;
+}
+
+/* Difficulty Pill Selector for Bot */
+.chess-difficulty-pills {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+  margin: 6px 0 10px;
+}
+
+.chess-diff-pill {
+  padding: 6px 4px;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #94a3b8;
+  font-size: 0.7rem;
+  font-weight: 750;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.chess-diff-pill:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+
+.chess-diff-pill.active {
+  background: #f59e0b;
+  color: #1a0f05;
+  border-color: #fbbf24;
+  box-shadow: 0 0 12px rgba(245, 158, 11, 0.5);
+}
+
+/* Coach Advice Box */
+.chess-coach-box {
+  background: rgba(30, 58, 138, 0.2);
+  border: 1.5px solid rgba(56, 189, 248, 0.35);
+  border-radius: 12px;
+  padding: 12px 14px;
+  font-size: 0.8rem;
+  color: #e0f2fe;
+  line-height: 1.45;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+/* Action Controls (New Game, Flip, Resign) */
+.chess-action-buttons {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.chess-deck-btn {
+  flex: 1;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  font-size: 0.82rem;
+  font-weight: 750;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+
+.chess-deck-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: #f59e0b;
+  transform: translateY(-1px);
+}
+
+.chess-deck-btn.primary {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  color: #171109;
+  border: none;
+  font-weight: 850;
+  box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
+}
+
+.chess-deck-btn.primary:hover {
+  filter: brightness(1.1);
+  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.6);
+}
+
+/* PGN Move History Box */
+.chess-pgn-history-container {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 10px 12px;
+  max-height: 140px;
+  overflow-y: auto;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  color: #cbd5e1;
+  line-height: 1.6;
+  scrollbar-width: thin;
+}
+
+/* Animations */
+@keyframes pulseGreenDot {
+  0%, 100% { transform: scale(0.9); opacity: 0.7; }
+  50% { transform: scale(1.25); opacity: 1; }
+}
+@keyframes rotateCaptureRing {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes kingCheckPulse {
+  from { box-shadow: 0 0 10px rgba(239, 68, 68, 0.6), inset 0 0 8px rgba(239, 68, 68, 0.6); }
+  to { box-shadow: 0 0 30px rgba(239, 68, 68, 1), inset 0 0 20px rgba(239, 68, 68, 0.9); }
+}
+@keyframes pieceDropBounce {
+  0% { transform: scale(1.22) translateY(-6px); opacity: 0.85; }
+  60% { transform: scale(0.96) translateY(1px); }
+  100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+/* ==========================================================================
+   POLARIS ARCADE & MULTIPLAYER GAMES STYLES
+   ========================================================================== */
+.arena-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 12px 0 24px;
+  width: 100%;
+}
+
+.game-ribbon {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 12px;
+  margin-bottom: 24px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.2) transparent;
+}
+
+.game-card-tab {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  padding: 12px 18px;
+  min-width: 160px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+  flex-shrink: 0;
+}
+
+.game-card-tab:hover {
+  border-color: var(--accent-cyan);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(56, 189, 248, 0.15);
+}
+
+.game-card-tab.active {
+  border-color: var(--accent-cyan);
+  background: linear-gradient(145deg, rgba(56, 189, 248, 0.18), rgba(192, 132, 252, 0.12));
+  box-shadow: 0 0 25px rgba(56, 189, 248, 0.2);
+}
+
+.game-icon {
+  font-size: 1.8rem;
+}
+
+.game-meta h3 {
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: #fff;
+  margin: 0;
+}
+
+.game-meta span {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+.game-stage {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 18px;
+  padding: 24px;
+  min-height: 580px;
+  position: relative;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+}
+
+.game-view { display: none; }
+.game-view.active { display: block; animation: fadeInView 0.3s ease; }
+@keyframes fadeInView { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Controls bar */
+.controls-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.nano-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.7rem;
+  padding: 3px 8px;
+  border-radius: 9999px;
+  background: rgba(251, 191, 36, 0.15);
+  color: var(--accent-amber);
+  border: 1px solid rgba(251, 191, 36, 0.3);
+  font-weight: 700;
+}
+
+/* Minesweeper */
+.minesweeper-board {
+  display: grid;
+  gap: 2px;
+  background: #1e293b;
+  padding: 6px;
+  border-radius: 10px;
+  border: 3px solid #334155;
+  user-select: none;
+  box-shadow: inset 0 2px 6px rgba(0,0,0,0.6);
+  margin: 0 auto;
+}
+.mine-cell {
+  background: #334155;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 0.85rem;
+  font-family: var(--font-mono);
+  cursor: pointer;
+  transition: background 0.1s;
+}
+.mine-cell:hover:not(.revealed) { background: #475569; }
+.mine-cell.revealed { background: #0f172a; cursor: default; }
+.mine-cell.mine { background: #dc2626 !important; }
+
+/* XOX */
+.xox-board {
+  width: 320px;
+  height: 320px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 8px;
+  margin: 0 auto;
+}
+.xox-cell {
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid var(--border-subtle);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  font-weight: 900;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.xox-cell:hover:empty { background: rgba(56, 189, 248, 0.15); border-color: var(--accent-cyan); }
+.xox-cell.x { color: var(--accent-cyan); text-shadow: 0 0 15px var(--accent-cyan); }
+.xox-cell.o { color: var(--accent-rose); text-shadow: 0 0 15px var(--accent-rose); }
+
+/* SOS */
+.sos-board {
+  display: grid;
+  gap: 6px;
+  margin: 0 auto;
+  background: rgba(0,0,0,0.3);
+  padding: 10px;
+  border-radius: 12px;
+  border: 2px solid var(--border-subtle);
+}
+.sos-cell {
+  width: 44px;
+  height: 44px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  font-weight: 900;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.15s;
+}
+.sos-cell:hover:empty { background: rgba(192, 132, 252, 0.2); }
+.sos-cell.p1-sos { background: rgba(56, 189, 248, 0.3) !important; color: #38bdf8; font-weight: 900; }
+.sos-cell.p2-sos { background: rgba(251, 113, 133, 0.3) !important; color: #fb7185; font-weight: 900; }
+
+/* Sudoku */
+.sudoku-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+.sudoku-board-wrapper {
+  position: relative;
+  padding: 16px;
+  background: radial-gradient(circle at center, #0f172a 0%, #07090e 100%);
+  border: 2px solid rgba(56, 189, 248, 0.35);
+  border-radius: 16px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.8), 0 0 30px rgba(56, 189, 248, 0.12);
+}
+.sudoku-board {
+  display: grid;
+  grid-template-columns: repeat(9, 44px);
+  grid-template-rows: repeat(9, 44px);
+  gap: 1px;
+  background: #334155;
+  border: 3px solid #64748b;
+  border-radius: 8px;
+  user-select: none;
+}
+@media (max-width: 600px) {
+  .sudoku-board {
+    grid-template-columns: repeat(9, 35px);
+    grid-template-rows: repeat(9, 35px);
+  }
+}
+.sudoku-cell {
+  background: #0f172a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  cursor: pointer;
+  position: relative;
+  transition: background 0.15s, transform 0.1s;
+  color: #f8fafc;
+}
+.sudoku-cell[data-col="2"], .sudoku-cell[data-col="5"] { border-right: 3px solid #64748b; }
+.sudoku-cell[data-row="2"], .sudoku-cell[data-row="5"] { border-bottom: 3px solid #64748b; }
+.sudoku-cell.given { color: #f8fafc; font-weight: 900; background: rgba(255, 255, 255, 0.04); }
+.sudoku-cell.user-filled { color: #38bdf8; font-weight: 800; }
+.sudoku-cell.highlight-peer { background: rgba(255, 255, 255, 0.05); }
+.sudoku-cell.highlight-same { background: rgba(192, 132, 252, 0.25); color: #c084fc; }
+.sudoku-cell.selected { background: rgba(56, 189, 248, 0.3) !important; outline: 2px solid var(--accent-cyan); z-index: 2; }
+.sudoku-cell.conflict { background: rgba(251, 113, 133, 0.3) !important; color: #fb7185 !important; animation: shakeCell 0.3s ease; }
+@keyframes shakeCell { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-4px); } 75% { transform: translateX(4px); } }
+.sudoku-notes { display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(3, 1fr); width: 100%; height: 100%; padding: 2px; pointer-events: none; }
+.sudoku-note-num { display: flex; align-items: center; justify-content: center; font-size: 0.52rem; font-weight: 600; color: #94a3b8; }
+.sudoku-keypad { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; max-width: 480px; }
+.sudoku-num-btn {
+  width: 44px;
+  height: 48px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: 1.2rem;
+  font-weight: 800;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.sudoku-num-btn:hover:not(:disabled) { background: rgba(56, 189, 248, 0.25); border-color: var(--accent-cyan); transform: translateY(-2px); }
+.sudoku-num-btn:disabled { opacity: 0.25; cursor: not-allowed; }
+.sudoku-num-count { font-size: 0.58rem; color: var(--text-muted); font-family: var(--font-sans); }
+

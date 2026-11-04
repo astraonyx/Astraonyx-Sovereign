@@ -1,0 +1,4 @@
+/* Gaya akun (profil, pengaturan, notifikasi, penyimpanan, pencarian). Dimiliki pengembang account.
+   Hanya di dalam @layer pillar; kelas berawalan ax-akn-; warna dan jarak hanya dari token (css/tokens.css). */
+@layer pillar {
+}

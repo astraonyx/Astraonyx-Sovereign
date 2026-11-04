@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Polaris - Media Downloader Hub (Standalone)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/polaris.css">
+  <link rel="stylesheet" href="css/polaris-motion.css">
+  <script src="js/jszip.min.js"></script>
+  <script src="js/pdf-lib.min.js"></script>
+  <style>
+    body {
+      min-height: 100vh;
+      background-color: #0D0E0A;
+      color: #EFEADC;
+      font-family: 'Public Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      overflow-x: hidden;
+      position: relative;
+    }
+    .downloader-standalone-container {
+      max-width: 1380px;
+      margin: 28px auto;
+      padding: 0 20px;
+      position: relative;
+      z-index: 10;
+    }
+  </style>
+</head>
+<body>
+  <!-- Magnetic Cursor -->
+  <div id="polaris-cursor"></div>
+  <div id="polaris-cursor-follower"></div>
+
+  <!-- Ambient Kinetic Starfield Canvas -->
+  <canvas id="starfield-canvas"></canvas>
+  <div class="ambient-nebula nebula-1"></div>
+  <div class="ambient-nebula nebula-2"></div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container"></div>
+
+  <!-- Vercel-Style Luxury Dual-Tier Sticky Navbar -->
+  <header class="vercel-header-wrapper">
+    <div class="vercel-top-bar">
+      <div class="vercel-left-group">
+        <a href="index.html" class="vercel-logo-mark">
+          <div class="vercel-brand-icon">
+            <svg viewBox="0 0 76 65" width="16" height="16" fill="currentColor">
+              <path d="M37.5274 0L75.0548 65H0L37.5274 0Z" fill="#ffffff" />
+            </svg>
+          </div>
+          <span class="vercel-brand-text">POLARIS</span>
+        </a>
+        <span class="vercel-slash-divider">/</span>
+        <div class="vercel-workspace-pill">
+          <span style="font-weight: 600; color: #EFEADC;">Astraonyx</span>
+          <span style="color: rgba(255,255,255,0.25);">/</span>
+          <span style="color: #E3A43C; font-weight: 700;">Downloader Hub</span>
+          <span class="vercel-env-badge"><span class="vercel-pulse-dot"></span>PROD</span>
+        </div>
+      </div>
+
+      <div class="vercel-center-search" onclick="window.location.href='index.html#commands'" title="Quick search commands (⌘K)">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: #A6A18C;"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <span style="color: #8A846E; font-size: 0.76rem;">Search commands, bots, configs...</span>
+        </div>
+        <kbd class="vercel-kbd-shortcut">⌘K</kbd>
+      </div>
+
+      <div class="vercel-right-group">
+        <div class="status-beacon-container" style="padding: 3px 10px; background: rgba(255,255,255,0.04); border-radius: 9999px; border: 1px solid rgba(255,255,255,0.06);">
+          <span id="beacon-dot" class="beacon-dot online"></span>
+          <span id="beacon-label" class="beacon-label" style="font-size: 0.72rem; font-weight: 700; color: #E3A43C;">DOWNLOADER ACTIVE</span>
+        </div>
+
+        <div class="vercel-theme-switcher">
+          <button type="button" class="theme-pill-btn" data-theme="light" title="Light Theme">☀️</button>
+          <button type="button" class="theme-pill-btn active" data-theme="dark" title="Dark Space Theme">🌙</button>
+        </div>
+
+        <div class="vercel-user-pill">
+          <div style="font-size: 0.78rem;">
+            <span id="header-username" style="font-weight: 700; color: var(--accent-cyan);">Admin</span>
+            <span id="header-role" class="badge badge-role-cosmos" style="margin-left: 6px; font-size: 0.62rem;">COSMOS</span>
+          </div>
+          <button onclick="window.location.href='login.html'" class="btn-polaris btn-danger btn-sm" style="padding: 4px 12px; font-size: 0.7rem; border-radius: 9999px;">Logout</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Standalone Navigation Strip -->
+    <div class="vercel-tabs-bar">
+      <div class="vercel-tabs-scroll-container">
+        <nav class="nav-tabs" id="vercel-nav-tabs">
+          <div class="vercel-tab-hover-pill" id="vercel-tab-hover-pill"></div>
+          <div class="vercel-tab-active-indicator" id="vercel-tab-active-indicator"></div>
+
+          <a href="index.html" class="nav-tab magnetic-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+            <span>Bot Hub (Dashboard)</span>
+          </a>
+          <a href="spline.html" class="nav-tab magnetic-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            <span>3D Spline Studio</span>
+          </a>
+          <a href="hermes.html" class="nav-tab magnetic-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.4 5.4 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+            <span>Hermes AI Studio</span>
+          </a>
+          <a href="terminal.html" class="nav-tab magnetic-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>
+            <span>Live Terminal</span>
+          </a>
+          <a href="downloader.html" class="nav-tab active magnetic-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            <span>Downloader Hub</span>
+          </a>
+          <a href="analytics.html" class="nav-tab magnetic-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+            <span>Analytics</span>
+          </a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Downloader Stage -->
+  <main class="downloader-standalone-container">
+    <div id="pane-downloader" class="tab-pane active" style="display: block;">
+      <!-- Header Banner -->
+      <div class="card-luxury" style="margin-bottom: 24px; border-color: rgba(227, 164, 60, 0.25); box-shadow: 0 0 30px rgba(227, 164, 60, 0.08);">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+          <div>
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 6px;">
+              <span style="font-size: 1.6rem;">📥</span>
+              <h2 style="font-size: 1.35rem; font-weight: 800; color: #fff; margin: 0;">
+                Downloader Hub <span style="font-size: 0.8rem; color: var(--accent-cyan); font-weight: 600; padding: 2px 8px; background: rgba(227, 164, 60, 0.1); border-radius: 6px; border: 1px solid rgba(227, 164, 60, 0.25);">Mori Media Downloader Engine (18+ Platforms)</span>
+              </h2>
+            </div>
+            <p style="font-size: 0.84rem; color: var(--text-muted); line-height: 1.5; margin: 0; max-width: 760px;">
+              Ekstrak dan unduh media tanpa watermark dari TikTok, Instagram Reels/Carousel, YouTube 1080p/MP3, Twitter/X, Spotify, Apple Music, Threads, RedNote, Douyin, Bilibili, Pinterest, SoundCloud, dan cloud drives. Dilengkapi pemutar media in-browser, galeri carousel, export PDF, dan unduhan batch ZIP.
+            </p>
+          </div>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
+            <button type="button" id="btn-dl-toggle-sound" class="btn-polaris btn-secondary btn-sm" style="font-size: 0.74rem; display: flex; align-items: center; gap: 6px;">
+              <span id="dl-sound-icon">🔊</span>
+              <span id="dl-sound-label">Efek Suara: ON</span>
+            </button>
+            <span class="badge badge-cyan" style="font-size: 0.72rem; padding: 4px 8px;">Single & Batch</span>
+            <span class="badge badge-emerald" style="font-size: 0.72rem; padding: 4px 8px;">Photo-to-PDF</span>
+            <span class="badge badge-violet" style="font-size: 0.72rem; padding: 4px 8px;">1-Click ZIP</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Downloader Hub Sub-Page Switcher (Mori vs OmniGet) -->
+      <div class="dl-subnav-bar" style="margin-bottom: 22px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; background: rgba(0,0,0,0.35); padding: 8px 12px; border-radius: var(--radius-lg); border: 1px solid rgba(255,255,255,0.08);">
+        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+          <button type="button" id="tab-btn-mori" class="btn-polaris dl-subnav-btn active" data-dl-subpage="mori" style="padding: 8px 18px; font-weight: 750; font-size: 0.82rem; border-radius: 8px; display: flex; align-items: center; gap: 8px; border: 1px solid var(--accent-cyan); background: rgba(227, 164, 60, 0.2); color: #fff; cursor: pointer;">
+            <span>🌟</span>
+            <span>Mori Media Core <span style="font-size: 0.68rem; padding: 2px 6px; background: rgba(227, 164, 60, 0.25); border-radius: 4px; color: var(--accent-cyan); margin-left: 4px;">v4.3.3</span></span>
+          </button>
+          <button type="button" id="tab-btn-omniget" class="btn-polaris btn-secondary dl-subnav-btn" data-dl-subpage="omniget" style="padding: 8px 18px; font-weight: 600; font-size: 0.82rem; border-radius: 8px; display: flex; align-items: center; gap: 8px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.04); color: var(--text-muted); cursor: pointer;">
+            <span>⚡</span>
+            <span>OmniGet Universal Studio <span style="font-size: 0.68rem; padding: 2px 6px; background: rgba(168, 85, 247, 0.25); border-radius: 4px; color: #c084fc; margin-left: 4px;">Course & Toolbox</span></span>
+          </button>
+        </div>
+        <div style="font-size: 0.74rem; color: var(--text-muted); display: flex; align-items: center; gap: 8px;">
+          <span style="display: inline-block; width: 8px; height: 8px; background: #10b981; border-radius: 50%; box-shadow: 0 0 8px #10b981;"></span>
+          <span id="dl-engine-indicator-text">Active: Mori Media Engine (18+ Platforms • Scraper Core v2)</span>
+        </div>
+      </div>
+
+      <!-- SUBPAGE 1: MORI MEDIA CORE (v4.3.3) -->
+      <div id="dl-subpage-mori" class="dl-subpage-view active">
+      <!-- Platform Chips Grid -->
+      <div class="platform-chips-grid" style="margin-bottom: 20px;">
+        <div class="platform-chip-card" onclick="document.getElementById('dl-url-input').focus(); document.getElementById('dl-url-input').placeholder='Tempel link TikTok (contoh: https://vt.tiktok.com/...)'">
+          <span style="font-size: 1.2rem;">🎵</span>
+          <div>
+            <div style="font-weight: 700; font-size: 0.78rem; color: #fff;">TikTok No-WM</div>
+            <div style="font-size: 0.65rem; color: #A6A18C;">HD Video & Audio</div>
+          </div>
+        </div>
+        <div class="platform-chip-card" onclick="document.getElementById('dl-url-input').focus(); document.getElementById('dl-url-input').placeholder='Tempel link YouTube (contoh: https://youtu.be/...)'">
+          <span style="font-size: 1.2rem;">▶️</span>
+          <div>
+            <div style="font-weight: 700; font-size: 0.78rem; color: #fff;">YouTube 1080p</div>
+            <div style="font-size: 0.65rem; color: #A6A18C;">MP4 & MP3 320kbps</div>
+          </div>
+        </div>
+        <div class="platform-chip-card" onclick="document.getElementById('dl-url-input').focus(); document.getElementById('dl-url-input').placeholder='Tempel link Instagram (Reels, Post, Carousel)'">
+          <span style="font-size: 1.2rem;">📸</span>
+          <div>
+            <div style="font-weight: 700; font-size: 0.78rem; color: #fff;">Instagram Reels</div>
+            <div style="font-size: 0.65rem; color: #A6A18C;">Reels, Stories, Post</div>
+          </div>
+        </div>
+        <div class="platform-chip-card" onclick="document.getElementById('dl-url-input').focus(); document.getElementById('dl-url-input').placeholder='Tempel link Spotify (Track, Album, Playlist)'">
+          <span style="font-size: 1.2rem;">🎧</span>
+          <div>
+            <div style="font-weight: 700; font-size: 0.78rem; color: #fff;">Spotify Music</div>
+            <div style="font-size: 0.65rem; color: #A6A18C;">Full Metadata & Cover</div>
+          </div>
+        </div>
+        <div class="platform-chip-card" onclick="document.getElementById('dl-url-input').focus(); document.getElementById('dl-url-input').placeholder='Tempel link Twitter / X video...'">
+          <span style="font-size: 1.2rem;">🐦</span>
+          <div>
+            <div style="font-weight: 700; font-size: 0.78rem; color: #fff;">Twitter / X</div>
+            <div style="font-size: 0.65rem; color: #A6A18C;">HD Video & GIF</div>
+          </div>
+        </div>
+        <div class="platform-chip-card" onclick="document.getElementById('dl-url-input').focus(); document.getElementById('dl-url-input').placeholder='Tempel link Pinterest pin...'">
+          <span style="font-size: 1.2rem;">📌</span>
+          <div>
+            <div style="font-weight: 700; font-size: 0.78rem; color: #fff;">Pinterest</div>
+            <div style="font-size: 0.65rem; color: #A6A18C;">High-Res Pin & Video</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mode Switcher Pill (Single vs Batch) -->
+      <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+        <button type="button" id="btn-dl-mode-single" class="btn-polaris btn-primary btn-sm" style="font-weight: 700; padding: 8px 18px; display: flex; align-items: center; gap: 8px;">
+          <span>🔗</span> Mode Tautan Tunggal (Single)
+        </button>
+        <button type="button" id="btn-dl-mode-batch" class="btn-polaris btn-secondary btn-sm" style="font-weight: 700; padding: 8px 18px; display: flex; align-items: center; gap: 8px;">
+          <span>📋</span> Mode Antrean Banyak Tautan (Batch Multi-Link)
+        </button>
+      </div>
+
+      <!-- 1. SINGLE URL INPUT BOX -->
+      <div id="dl-single-container" class="card-luxury" style="margin-bottom: 24px;">
+        <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; color: #fff;">
+          <span>🔗</span> Masukkan Tautan Media
+        </h3>
+        <p style="font-size: 0.78rem; color: var(--text-muted); margin-bottom: 16px;">
+          Tempel URL media publik apa pun. Sistem otomatis mengenali platform dan menyiapkan preview serta opsi unduhan.
+        </p>
+
+        <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 16px;">
+          <input type="text" id="dl-url-input" class="form-input form-input-luxury" style="flex: 1; min-width: 280px;" placeholder="Tempel tautan video/audio TikTok, IG Reels, YouTube, Spotify, X, Pinterest...">
+          <button id="btn-dl-extract" class="btn-polaris btn-primary btn-shine-effect" style="padding: 10px 24px; font-weight: 750;">
+            <span>⚡ Ekstrak Media</span>
+          </button>
+        </div>
+
+        <div id="dl-media-preview-container"></div>
+      </div>
+
+      <!-- 2. BATCH URL INPUT BOX -->
+      <div id="dl-batch-container" class="card-luxury" style="display: none; margin-bottom: 24px;">
+        <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; color: #fff;">
+          <span>📋</span> Antrean Unduhan Massal (Batch)
+        </h3>
+        <p style="font-size: 0.78rem; color: var(--text-muted); margin-bottom: 16px;">
+          Masukkan beberapa tautan (satu tautan per baris). Sistem akan memproses dan mengemasnya dalam format ZIP atau PDF.
+        </p>
+        <textarea id="dl-batch-input" class="form-textarea" rows="5" placeholder="https://vt.tiktok.com/...&#10;https://instagram.com/p/...&#10;https://youtube.com/watch?v=..."></textarea>
+        <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 12px;">
+          <button id="btn-dl-batch-start" class="btn-rainbow">
+            <span>🚀 Proses Antrean Batch</span>
+          </button>
+        </div>
+      </div>
+      </div> <!-- End #dl-subpage-mori -->
+
+      <!-- ==================== SUBPAGE 2: OMNIGET UNIVERSAL STUDIO ==================== -->
+      <div id="dl-subpage-omniget" class="dl-subpage-view" style="display: none;">
+        <!-- OmniGet Hero Banner -->
+        <div class="card-luxury" style="margin-bottom: 24px; border-color: rgba(168, 85, 247, 0.3); background: linear-gradient(135deg, rgba(168, 85, 247, 0.08) 0%, rgba(20, 21, 15, 0.8) 100%); box-shadow: 0 0 35px rgba(168, 85, 247, 0.1);">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+            <div>
+              <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 6px;">
+                <span style="font-size: 1.6rem;">⚡</span>
+                <h2 style="font-size: 1.35rem; font-weight: 800; color: #fff; margin: 0;">
+                  OmniGet Universal Studio <span style="font-size: 0.78rem; color: #c084fc; font-weight: 600; padding: 2px 8px; background: rgba(168, 85, 247, 0.15); border-radius: 6px; border: 1px solid rgba(168, 85, 247, 0.3);">Deep Extractor & Media Toolbox</span>
+                </h2>
+              </div>
+              <p style="font-size: 0.84rem; color: var(--text-muted); line-height: 1.5; margin: 0; max-width: 780px;">
+                Mesin unduh kursus lengkap (Udemy, Hotmart, Kiwify, Coursera) dengan ekstraksi silabus bab demi bab, inspektor swarm BitTorrent/Magnet link, serta 5 studio konversi multimedia: Video-to-GIF, Smart Video Compressor, Image Optimizer, Audio Normalizer EBU R128, dan PDF-to-Markdown AI.
+              </p>
+            </div>
+            <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
+              <span class="badge" style="background: rgba(168, 85, 247, 0.2); border: 1px solid rgba(168, 85, 247, 0.4); color: #c084fc; font-size: 0.72rem; padding: 4px 8px;">Course Downloader</span>
+              <span class="badge" style="background: rgba(56, 189, 248, 0.15); border: 1px solid rgba(56, 189, 248, 0.35); color: #38bdf8; font-size: 0.72rem; padding: 4px 8px;">BitTorrent Swarm</span>
+              <span class="badge" style="background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.35); color: #34d399; font-size: 0.72rem; padding: 4px 8px;">WA Safe < 64MB</span>
+              <span class="badge" style="background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.35); color: #fbbf24; font-size: 0.72rem; padding: 4px 8px;">EBU R128 Audio</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 1: Deep URL & Magnet Extractor -->
+        <div class="card-luxury" style="margin-bottom: 24px; border-color: rgba(168, 85, 247, 0.25);">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap; gap: 8px;">
+            <h3 style="font-size: 1.1rem; font-weight: 700; margin: 0; display: flex; align-items: center; gap: 8px; color: #fff;">
+              <span>🎯</span> OmniGet Deep Course & Magnet Extractor
+            </h3>
+            <span style="font-size: 0.74rem; color: #c084fc; font-weight: 600;">Mendukung Udemy, Hotmart, Kiwify, Coursera, Twitch, Reddit & Magnet Swarm</span>
+          </div>
+          <p style="font-size: 0.78rem; color: var(--text-muted); margin-bottom: 16px;">
+            Tempel tautan kursus, playlist berdurasi panjang, atau magnet link torrent. OmniGet memetakan struktur kurikulum, resolusi video HLS/MP4, dan lampiran materi.
+          </p>
+
+          <!-- Input Box -->
+          <form id="form-omniget-extract" onsubmit="return false;" style="margin-bottom: 14px;">
+            <div style="display: flex; gap: 10px; align-items: stretch; flex-wrap: wrap;">
+              <div style="position: relative; flex: 1; min-width: 280px;">
+                <span id="omniget-platform-icon" style="position: absolute; left: 14px; top: 50%; transform: translateY(-50%); font-size: 1.15rem; pointer-events: none;">⚡</span>
+                <input type="text" id="omniget-url-input" class="form-input" placeholder="Tempel URL kursus Udemy/Hotmart/Kiwify atau magnet:?xt=urn:btih:..." required style="padding-left: 44px; padding-right: 90px; height: 46px; font-size: 0.88rem;">
+                <button type="button" id="btn-omniget-paste" class="btn-polaris btn-secondary" style="position: absolute; right: 6px; top: 50%; transform: translateY(-50%); font-size: 0.72rem; padding: 6px 10px; height: 34px;" title="Tempel dari Clipboard">
+                  📋 Tempel
+                </button>
+              </div>
+              <button type="submit" id="btn-omniget-extract" class="btn-polaris btn-primary btn-shine-effect" style="height: 46px; padding: 0 24px; font-weight: 750; background: linear-gradient(135deg, #a855f7 0%, #6366f1 100%); border: none; display: flex; align-items: center; gap: 8px; flex-shrink: 0;">
+                <span id="btn-omniget-icon">⚡</span>
+                <span id="btn-omniget-text">Ekstrak OmniGet</span>
+              </button>
+            </div>
+          </form>
+
+          <!-- Quick Samples Pills -->
+          <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
+            <span style="font-size: 0.72rem; color: var(--text-muted); font-weight: 600;">Contoh Cepat:</span>
+            <button type="button" class="btn-polaris btn-secondary btn-sm omniget-sample-chip" data-sample="https://www.udemy.com/course/complete-python-bootcamp/" style="font-size: 0.7rem; padding: 4px 8px;">🎓 Udemy Python Bootcamp</button>
+            <button type="button" class="btn-polaris btn-secondary btn-sm omniget-sample-chip" data-sample="https://hotmart.com/pt-br/club/masterclass-digital" style="font-size: 0.7rem; padding: 4px 8px;">🔥 Hotmart Club</button>
+            <button type="button" class="btn-polaris btn-secondary btn-sm omniget-sample-chip" data-sample="https://kiwify.com.br/curso-pro" style="font-size: 0.7rem; padding: 4px 8px;">⚡ Kiwify Academy</button>
+            <button type="button" class="btn-polaris btn-secondary btn-sm omniget-sample-chip" data-sample="magnet:?xt=urn:btih:08ADA5A7A6183AAE1E09D831DF6748D566095A10&dn=Ubuntu-24.04-LTS-Desktop-x86_64.iso&tr=http%3A%2F%2Ftorrent.ubuntu.com%3A6969%2Fannounce" style="font-size: 0.7rem; padding: 4px 8px;">🧲 Ubuntu ISO (Magnet)</button>
+            <button type="button" class="btn-polaris btn-secondary btn-sm omniget-sample-chip" data-sample="https://www.coursera.org/learn/machine-learning" style="font-size: 0.7rem; padding: 4px 8px;">🏛️ Coursera ML</button>
+          </div>
+
+          <!-- Loading Skeleton -->
+          <div id="omniget-skeleton" style="display: none; margin-top: 18px; padding: 22px; background: rgba(0,0,0,0.3); border-radius: var(--radius-md); border: 1px dashed rgba(168, 85, 247, 0.4); text-align: center;">
+            <div class="spinner" style="margin: 0 auto 10px; width: 32px; height: 32px; border: 3px solid rgba(168, 85, 247, 0.2); border-top-color: #c084fc; border-radius: 50%; animation: spin 0.8s linear infinite;"></div>
+            <div style="font-weight: 700; color: #fff; font-size: 0.92rem;">OmniGet sedang memetakan kurikulum & streaming endpoints...</div>
+            <div style="font-size: 0.76rem; color: var(--text-muted); margin-top: 3px;">Memverifikasi token akses, resolusi video, dan swarm metadata</div>
+          </div>
+
+          <!-- Result Box Container -->
+          <div id="omniget-result-container" style="display: none; margin-top: 20px;">
+            <!-- Dynamic Injection for Course or Magnet -->
+          </div>
+        </div>
+
+        <!-- Section 2: OmniGet 5-in-1 Media Processing Toolbox -->
+        <div class="card-luxury" style="margin-bottom: 24px; border-color: rgba(56, 189, 248, 0.25);">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 10px;">
+            <div>
+              <h3 style="font-size: 1.15rem; font-weight: 700; display: flex; align-items: center; gap: 8px; color: #fff; margin: 0;">
+                <span>🛠️</span> OmniGet High-Speed Media Toolbox (Studio 5-in-1)
+              </h3>
+              <p style="font-size: 0.78rem; color: var(--text-muted); margin: 3px 0 0 0;">
+                Pemrosesan media instan didukung hardware-accelerated FFmpeg dan Jimp engine.
+              </p>
+            </div>
+            <!-- Tool Switcher Pills -->
+            <div id="omniget-tool-pills" style="display: flex; gap: 6px; flex-wrap: wrap;">
+              <button type="button" class="btn-polaris btn-sm omniget-tool-tab active" data-tool="gif" style="font-size: 0.72rem; padding: 5px 12px; border-radius: 20px;">🎬 Video ke GIF</button>
+              <button type="button" class="btn-polaris btn-secondary btn-sm omniget-tool-tab" data-tool="compress-video" style="font-size: 0.72rem; padding: 5px 12px; border-radius: 20px;">🗜️ Kompresi Video (WA)</button>
+              <button type="button" class="btn-polaris btn-secondary btn-sm omniget-tool-tab" data-tool="compress-image" style="font-size: 0.72rem; padding: 5px 12px; border-radius: 20px;">🖼️ Kompresi Gambar</button>
+              <button type="button" class="btn-polaris btn-secondary btn-sm omniget-tool-tab" data-tool="audio-norm" style="font-size: 0.72rem; padding: 5px 12px; border-radius: 20px;">🔊 Audio EBU R128</button>
+              <button type="button" class="btn-polaris btn-secondary btn-sm omniget-tool-tab" data-tool="pdf-md" style="font-size: 0.72rem; padding: 5px 12px; border-radius: 20px;">📄 PDF ke Markdown</button>
+            </div>
+          </div>
+
+          <!-- TOOL 1: Video to GIF -->
+          <div id="omniget-tool-panel-gif" class="omniget-tool-panel" style="display: block;">
+            <div style="background: rgba(0,0,0,0.3); padding: 18px; border-radius: var(--radius-md); border: 1px solid rgba(255,255,255,0.06);">
+              <h4 style="font-size: 0.95rem; font-weight: 700; color: #fff; margin: 0 0 8px 0; display: flex; align-items: center; gap: 6px;">
+                <span>🎬</span> Konverter Video ke GIF (Lanczos Palette & High FPS)
+              </h4>
+              <p style="font-size: 0.78rem; color: var(--text-muted); margin-bottom: 14px;">
+                Ubah cuplikan video menjadi format GIF animasi tanpa bintik (dithered palette optimal) untuk WhatsApp sticker atau preview web.
+              </p>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin-bottom: 14px;">
+                <div>
+                  <label style="font-size: 0.72rem; font-weight: 600; color: var(--text-muted); display: block; margin-bottom: 4px;">Pilih File Video / URL Media:</label>
+                  <input type="text" id="omniget-gif-input" class="form-input" placeholder="Path file / URL video (contoh: ./tmp/media/...)" value="./tmp/media/sample.mp4">
+                </div>
+                <div>
+                  <label style="font-size: 0.72rem; font-weight: 600; color: var(--text-muted); display: block; margin-bottom: 4px;">Detik Mulai (Start Time):</label>
+                  <input type="number" id="omniget-gif-start" class="form-input" value="0" min="0" max="300" step="1">
+                </div>
+                <div>
+                  <label style="font-size: 0.72rem; font-weight: 600; color: var(--text-muted); display: block; margin-bottom: 4px;">Durasi Cuplikan (detik, max 30s):</label>
+                  <input type="number" id="omniget-gif-duration" class="form-input" value="5" min="1" max="30" step="1">
+                </div>
+                <div>
+                  <label style="font-size: 0.72rem; font-weight: 600; color: var(--text-muted); display: block; margin-bottom: 4px;">Framerate (FPS):</label>
+                  <select id="omniget-gif-fps" class="form-input">
+                    <option value="12">12 FPS (Ukuran File Kecil)</option>
+                    <option value="15" selected>15 FPS (Standar Halus)</option>
+                    <option value="24">24 FPS (Cinematic High-FPS)</option>
+                  </select>
+                </div>
+              </div>
+              <button type="button" id="btn-omniget-make-gif" class="btn-polaris btn-primary btn-sm" style="font-weight: 700; padding: 9px 22px;">
+                <span>⚡ Proses Video ke GIF</span>
+              </button>
+              <div id="omniget-gif-output" style="display: none; margin-top: 16px; padding: 14px; background: rgba(0,0,0,0.5); border-radius: var(--radius-md); border: 1px solid rgba(56, 189, 248, 0.3);"></div>
+            </div>
+          </div>
+
+          <!-- TOOL 2: Smart Video Compressor -->
+          <div id="omniget-tool-panel-compress-video" class="omniget-tool-panel" style="display: none;">
+            <div style="background: rgba(0,0,0,0.3); padding: 18px; border-radius: var(--radius-md); border: 1px solid rgba(255,255,255,0.06);">
+              <h4 style="font-size: 0.95rem; font-weight: 700; color: #fff; margin: 0 0 8px 0; display: flex; align-items: center; gap: 6px;">
+                <span>🗜️</span> Smart Video Compressor (Target WhatsApp Status & Dokumen)
+              </h4>
+              <p style="font-size: 0.78rem; color: var(--text-muted); margin-bottom: 14px;">
+                Kompres video secara adaptif dengan format H.264 + AAC + yuv420p + faststart. Jaminan lolos batas 16MB WhatsApp Status dan 64MB Chat.
+              </p>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin-bottom: 14px;">
+                <div>
+                  <label style="font-size: 0.72rem; font-weight: 600; color: var(--text-muted); display: block; margin-bottom: 4px;">Berkas Video Sumber:</label>
+                  <input type="text" id="omniget-vc-input" class="form-input" placeholder="Path file / URL video" value="./tmp/media/sample.mp4">
+                </div>
+                <div>
+                  <label style="font-size: 0.72rem; font-weight: 600; color: var(--text-muted); display: block; margin-bottom: 4px;">Target Mode Ukuran:</label>
+                  <select id="omniget-vc-mode" class="form-input">
+                    <option value="16" selected>Target < 16 MB (WhatsApp Status Aman)</option>
+                    <option value="64">Target < 64 MB (WhatsApp Dokumen HD)</option>
+                    <option value="crf26">Keseimbangan Visual (CRF 26)</option>
+                    <option value="crf28">Kompresi Tinggi (CRF 28)</option>
+                  </select>
+                </div>
+                <div>
+                  <label style="font-size: 0.72rem; font-weight: 600; color: var(--text-muted); display: block; margin-bottom: 4px;">Batas Maksimal Resolusi:</label>
+                  <select id="omniget-vc-res" class="form-input">
+                    <option value="1080" selected>1080p Full HD</option>
+                    <option value="720">720p HD</option>
+                    <option value="480">480p SD (Sangat Hemat)</option>
+                  </select>
+                </div>
+              </div>
+              <button type="button" id="btn-omniget-compress-video" class="btn-polaris btn-primary btn-sm" style="font-weight: 700; padding: 9px 22px;">
+                <span>🗜️ Kompresi Video Sekarang</span>
+              </button>
+              <div id="omniget-vc-output" style="display: none; margin-top: 16px; padding: 14px; background: rgba(0,0,0,0.5); border-radius: var(--radius-md); border: 1px solid rgba(16, 185, 129, 0.3);"></div>
+            </div>
+          </div>
+
+          <!-- TOOL 3: Image Compressor -->
+          <div id="omniget-tool-panel-compress-image" class="omniget-tool-panel" style="display: none;">
+            <div style="background: rgba(0,0,0,0.3); padding: 18px; border-radius: var(--radius-md); border: 1px solid rgba(255,255,255,0.06);">
+              <h4 style="font-size: 0.95rem; font-weight: 700; color: #fff; margin: 0 0 8px 0; display: flex; align-items: center; gap: 6px;">
+                <span>🖼️</span> Kompresi & Optimasi Gambar (Lossless / Lossy Jimp)
+              </h4>
+              <p style="font-size: 0.78rem; color: var(--text-muted); margin-bottom: 14px;">
+                Kecilkan ukuran file foto hingga 80% lebih hemat tanpa kehilangan ketajaman detail visual.
+              </p>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin-bottom: 14px;">
+                <div>
+                  <label style="font-size: 0.72rem; font-weight: 600; color: var(--text-muted); display: block; margin-bottom: 4px;">Pilih Berkas Foto:</label>
+                  <input type="file" id="omniget-ic-file" class="form-input" accept="image/*" style="padding: 6px;">
+                </div>
+                <div>
+                  <label style="font-size: 0.72rem; font-weight: 600; color: var(--text-muted); display: flex; justify-content: space-between; margin-bottom: 4px;">
+                    <span>Kualitas Kompresi:</span>
+                    <span id="omniget-ic-quality-val" style="color: var(--accent-cyan); font-weight: 700;">75%</span>
+                  </label>
+                  <input type="range" id="omniget-ic-quality" min="20" max="100" value="75" style="width: 100%; cursor: pointer;">
+                </div>
+                <div>
+                  <label style="font-size: 0.72rem; font-weight: 600; color: var(--text-muted); display: block; margin-bottom: 4px;">Maksimal Lebar (Resize):</label>
+                  <select id="omniget-ic-width" class="form-input">
+                    <option value="1920" selected>1920px (Original HD)</option>
+                    <option value="1280">1280px (Optimal Web)</option>
+                    <option value="800">800px (Thumbnail Hemat)</option>
+                  </select>
+                </div>
+                <div>
+                  <label style="font-size: 0.72rem; font-weight: 600; color: var(--text-muted); display: block; margin-bottom: 4px;">Format Output:</label>
+                  <select id="omniget-ic-format" class="form-input">
+                    <option value="jpeg" selected>JPEG (.jpg)</option>
+                    <option value="png">PNG (.png)</option>
+                  </select>
+                </div>
+              </div>
+              <button type="button" id="btn-omniget-compress-img" class="btn-polaris btn-primary btn-sm" style="font-weight: 700; padding: 9px 22px;">
+                <span>🖼️ Kompresi Gambar</span>
+              </button>
+              <div id="omniget-ic-output" style="display: none; margin-top: 16px; padding: 14px; background: rgba(0,0,0,0.5); border-radius: var(--radius-md); border: 1px solid rgba(227, 164, 60, 0.3);"></div>
+            </div>
+          </div>
+
+          <!-- TOOL 4: Audio Loudness Normalizer -->
+          <div id="omniget-tool-panel-audio-norm" class="omniget-tool-panel" style="display: none;">
+            <div style="background: rgba(0,0,0,0.3); padding: 18px; border-radius: var(--radius-md); border: 1px solid rgba(255,255,255,0.06);">
+              <h4 style="font-size: 0.95rem; font-weight: 700; color: #fff; margin: 0 0 8px 0; display: flex; align-items: center; gap: 6px;">
+                <span>🔊</span> Audio Loudness Normalizer (Standar Siaran EBU R128)
+              </h4>
+              <p style="font-size: 0.78rem; color: var(--text-muted); margin-bottom: 14px;">
+                Ratakan volume vokal dan instrumen ke standar -14 LUFS (Spotify/Reels) atau -16 LUFS (Podcast/Voice Note) tanpa distorsi clipping.
+              </p>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin-bottom: 14px;">
+                <div>
+                  <label style="font-size: 0.72rem; font-weight: 600; color: var(--text-muted); display: block; margin-bottom: 4px;">Berkas Audio Sumber:</label>
+                  <input type="text" id="omniget-an-input" class="form-input" placeholder="Path file audio (.mp3 / .wav / .m4a)" value="./tmp/downloader/audio/sample.mp3">
+                </div>
+                <div>
+                  <label style="font-size: 0.72rem; font-weight: 600; color: var(--text-muted); display: block; margin-bottom: 4px;">Target Loudness Standar:</label>
+                  <select id="omniget-an-lufs" class="form-input">
+                    <option value="-14" selected>-14 LUFS (Media Sosial, Reels & TikTok Standar)</option>
+                    <option value="-16">-16 LUFS (Podcast & Audio Broadcast Standar)</option>
+                    <option value="-11">-11 LUFS (EDM / Club Loud Master)</option>
+                  </select>
+                </div>
+                <div>
+                  <label style="font-size: 0.72rem; font-weight: 600; color: var(--text-muted); display: block; margin-bottom: 4px;">Bitrate Audio:</label>
+                  <select id="omniget-an-bitrate" class="form-input">
+                    <option value="320k" selected>320 kbps (Lossless High-End)</option>
+                    <option value="192k">192 kbps (Standard High Quality)</option>
+                    <option value="128k">128 kbps (Hemat Ruang)</option>
+                  </select>
+                </div>
+              </div>
+              <button type="button" id="btn-omniget-norm-audio" class="btn-polaris btn-primary btn-sm" style="font-weight: 700; padding: 9px 22px;">
+                <span>🔊 Mulai Normalisasi Audio</span>
+              </button>
+              <div id="omniget-an-output" style="display: none; margin-top: 16px; padding: 14px; background: rgba(0,0,0,0.5); border-radius: var(--radius-md); border: 1px solid rgba(245, 158, 11, 0.3);"></div>
+            </div>
+          </div>
+
+          <!-- TOOL 5: PDF to Markdown -->
+          <div id="omniget-tool-panel-pdf-md" class="omniget-tool-panel" style="display: none;">
+            <div style="background: rgba(0,0,0,0.3); padding: 18px; border-radius: var(--radius-md); border: 1px solid rgba(255,255,255,0.06);">
+              <h4 style="font-size: 0.95rem; font-weight: 700; color: #fff; margin: 0 0 8px 0; display: flex; align-items: center; gap: 6px;">
+                <span>📄</span> PDF to Markdown AI Extractor
+              </h4>
+              <p style="font-size: 0.78rem; color: var(--text-muted); margin-bottom: 14px;">
+                Konversi berkas PDF modul, ebook, atau slide presentasi menjadi sintaks Markdown bersih dengan hierarki judul yang siap dimasukkan ke prompt AI Hermes.
+              </p>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; margin-bottom: 14px;">
+                <div>
+                  <label style="font-size: 0.72rem; font-weight: 600; color: var(--text-muted); display: block; margin-bottom: 4px;">Pilih Dokumen PDF:</label>
+                  <input type="file" id="omniget-pdf-file" class="form-input" accept="application/pdf" style="padding: 6px;">
+                </div>
+              </div>
+              <button type="button" id="btn-omniget-pdf-extract" class="btn-polaris btn-primary btn-sm" style="font-weight: 700; padding: 9px 22px;">
+                <span>📄 Ekstrak ke Markdown</span>
+              </button>
+              <div id="omniget-pdf-output" style="display: none; margin-top: 16px; padding: 14px; background: rgba(0,0,0,0.5); border-radius: var(--radius-md); border: 1px solid rgba(168, 85, 247, 0.3);"></div>
+            </div>
+          </div>
+        </div>
+      </div> <!-- End #dl-subpage-omniget -->
+    </div>
+  </main>
+
+  <script src="js/polaris-motion.js"></script>
+  <script src="js/polaris-components.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/ws.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

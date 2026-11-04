@@ -1,0 +1,235 @@
+/* dashboard/css/polaris-fx.css
+ * Lapisan interaksi & motion Polaris (pasangan js/polaris-fx.js).
+ * Prinsip: tenang, presisi, satu kurva spring; hanya opacity/transform/translate (tanpa layout shift);
+ * semua warna dari token tema; mati total saat prefers-reduced-motion.
+ */
+
+:root {
+  --fx-ease: var(--ease-spring, cubic-bezier(0.16, 1, 0.3, 1));
+  --fx-accent: var(--accent-cyan, #8db5f2);
+  --fx-ok: var(--accent-emerald, #6ccb9b);
+  --fx-bad: var(--accent-rose, #e8776f);
+  --fx-warn: var(--accent-amber, #e9b25e);
+  --fx-surface: var(--bg-surface-elevated, #1e2733);
+  --fx-line: var(--border-subtle, rgb(205 216 235 / 0.11));
+  --fx-ink: var(--text-primary, #e6eaf1);
+  --fx-ink-2: var(--text-secondary, #a5afc0);
+  --fx-radius: var(--radius-md, 8px);
+}
+
+/* ------------------------------------------------------------------ 1. toast v2 */
+#toast-container { gap: 10px; align-items: flex-end; }
+
+.fx-toast {
+  position: relative;
+  display: grid;
+  grid-template-columns: 20px 1fr auto;
+  align-items: start;
+  gap: 12px;
+  min-width: 280px;
+  max-width: min(380px, calc(100vw - 32px));
+  padding: 12px 10px 14px 14px;
+  background: var(--fx-surface);
+  border: 1px solid var(--fx-line);
+  border-radius: var(--fx-radius);
+  box-shadow: 0 10px 30px rgb(0 0 0 / 0.28);
+  color: var(--fx-ink);
+  font-size: 0.86rem;
+  line-height: 1.4;
+  overflow: hidden;
+  pointer-events: auto;
+  will-change: transform, opacity;
+  animation: fxToastIn 0.46s var(--fx-ease) both;
+}
+.fx-toast.is-leaving { animation: fxToastOut 0.26s ease-in forwards; }
+.fx-toast .fx-toast-ico { width: 20px; height: 20px; margin-top: 1px; color: var(--fx-accent); }
+.fx-toast.success .fx-toast-ico { color: var(--fx-ok); }
+.fx-toast.error .fx-toast-ico { color: var(--fx-bad); }
+.fx-toast.warning .fx-toast-ico { color: var(--fx-warn); }
+.fx-toast .fx-toast-ico svg { width: 20px; height: 20px; display: block; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.fx-toast .fx-toast-msg { min-width: 0; overflow-wrap: anywhere; padding-top: 1px; }
+.fx-toast .fx-toast-count {
+  display: inline-block; margin-left: 6px; padding: 0 6px; border-radius: 99px;
+  font-size: 0.7rem; font-weight: 700; background: color-mix(in srgb, var(--fx-ink) 14%, transparent);
+  animation: fxPop 0.3s var(--fx-ease);
+}
+.fx-toast .fx-toast-x {
+  width: 24px; height: 24px; display: inline-flex; align-items: center; justify-content: center;
+  border: 0; border-radius: 6px; background: transparent; color: var(--fx-ink-2); cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.fx-toast .fx-toast-x:hover { background: color-mix(in srgb, var(--fx-ink) 12%, transparent); color: var(--fx-ink); }
+.fx-toast .fx-toast-x svg { width: 14px; height: 14px; stroke: currentColor; stroke-width: 2; fill: none; stroke-linecap: round; }
+.fx-toast .fx-toast-bar {
+  position: absolute; left: 0; right: 0; bottom: 0; height: 2px; transform-origin: left;
+  background: var(--fx-accent); opacity: 0.85;
+  animation: fxToastBar var(--fx-dur, 4000ms) linear forwards;
+}
+.fx-toast.success .fx-toast-bar { background: var(--fx-ok); }
+.fx-toast.error .fx-toast-bar { background: var(--fx-bad); }
+.fx-toast.warning .fx-toast-bar { background: var(--fx-warn); }
+.fx-toast:hover .fx-toast-bar, .fx-toast:focus-within .fx-toast-bar, .fx-toast.is-paused .fx-toast-bar { animation-play-state: paused; }
+
+@keyframes fxToastIn { from { opacity: 0; transform: translateX(28px) scale(0.96); } to { opacity: 1; transform: none; } }
+@keyframes fxToastOut { to { opacity: 0; transform: translateX(20px) scale(0.97); } }
+@keyframes fxToastBar { from { transform: scaleX(1); } to { transform: scaleX(0); } }
+@keyframes fxPop { from { transform: scale(0.6); opacity: 0; } to { transform: none; opacity: 1; } }
+
+/* -------------------------------------------------------- 2. progres scroll & ke atas */
+.fx-progress {
+  position: fixed; top: 0; left: 0; right: 0; height: 2px; z-index: 100006;
+  transform: scaleX(var(--fx-p, 0)); transform-origin: left; pointer-events: none;
+  background: linear-gradient(90deg, var(--fx-accent), color-mix(in srgb, var(--fx-accent) 40%, var(--accent-purple, #b99ddb)));
+  opacity: 0; transition: opacity 0.25s;
+}
+.fx-progress.is-on { opacity: 1; }
+
+.fx-totop {
+  position: fixed; right: 20px; bottom: 20px; z-index: 9000; width: 42px; height: 42px;
+  display: grid; place-items: center; border-radius: 50%; cursor: pointer;
+  background: var(--fx-surface); color: var(--fx-ink); border: 1px solid var(--fx-line);
+  box-shadow: 0 8px 22px rgb(0 0 0 / 0.3);
+  opacity: 0; transform: translateY(14px) scale(0.9); pointer-events: none;
+  transition: opacity 0.25s, transform 0.4s var(--fx-ease), border-color 0.2s, color 0.2s;
+}
+.fx-totop.is-on { opacity: 1; transform: none; pointer-events: auto; }
+.fx-totop:hover { border-color: var(--fx-accent); color: var(--fx-accent); transform: translateY(-2px); }
+.fx-totop svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.fx-totop-ring { position: absolute; inset: -1px; width: calc(100% + 2px); height: calc(100% + 2px); transform: rotate(-90deg); pointer-events: none; }
+.fx-totop-ring circle { fill: none; stroke: var(--fx-accent); stroke-width: 2; stroke-linecap: round; stroke-dasharray: 126; stroke-dashoffset: calc(126 - 126 * var(--fx-p, 0)); }
+
+.polaris-top-header.fx-scrolled { box-shadow: 0 1px 0 var(--fx-line), 0 10px 24px -14px rgb(0 0 0 / 0.55); }
+
+/* ------------------------------------------------------------------- 3. reveal saat scroll */
+.fx-reveal { opacity: 0; translate: 0 14px; }
+.fx-reveal.fx-in {
+  opacity: 1; translate: 0 0;
+  transition: opacity 0.5s ease, translate 0.7s var(--fx-ease) !important;
+  transition-delay: calc(var(--fx-i, 0) * 55ms) !important;
+}
+
+/* ------------------------------------------------------- 4. kartu statistik interaktif */
+:where(.stat-card, .ov-strip > div) { position: relative; }
+.stat-card::after, .ov-strip > div::after {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0;
+  background: radial-gradient(220px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), color-mix(in srgb, var(--fx-accent) 12%, transparent), transparent 70%);
+  transition: opacity 0.3s;
+}
+.stat-card:hover::after, .ov-strip > div:hover::after { opacity: 1; }
+.stat-card { transition: transform 0.4s var(--fx-ease), border-color 0.25s; }
+.stat-card:hover { transform: translateY(-2px); border-color: color-mix(in srgb, var(--fx-accent) 40%, var(--fx-line)) !important; }
+.fx-count-bump { animation: fxBump 0.5s var(--fx-ease); }
+@keyframes fxBump { 0% { transform: scale(1); } 35% { transform: scale(1.08); } 100% { transform: scale(1); } }
+
+.gauge-progress-fill { transition: width 0.9s var(--fx-ease); }
+
+/* -------------------------------------------------------------- 5. fokus & tekan tombol */
+:where(button, a, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: 2px solid var(--fx-accent); outline-offset: 2px; border-radius: var(--fx-radius);
+}
+:where(.btn-polaris, .tb-icon-btn, .nav-tab, .sidebar-nav-item) { transition-property: transform, background-color, border-color, color, box-shadow, opacity; }
+:where(.btn-polaris, .tb-icon-btn):active { transform: translateY(1px) scale(0.98); transition-duration: 0.08s; }
+
+.polaris-table tbody tr { transition: background-color 0.18s; }
+.polaris-table tbody tr:hover { background: color-mix(in srgb, var(--fx-accent) 6%, transparent); }
+
+/* --------------------------------------------------------------------------- 6. modal */
+.modal-backdrop.active { animation: fxFade 0.22s ease both; }
+.modal-backdrop.active > .modal-card, .modal-backdrop.active > .modal-card-enter { animation: fxModal 0.42s var(--fx-ease) both; }
+@keyframes fxFade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes fxModal { from { opacity: 0; transform: translateY(18px) scale(0.965); } to { opacity: 1; transform: none; } }
+
+/* ------------------------------------------------------------------------ 7. skeleton */
+.fx-skeleton { position: relative; overflow: hidden; border-radius: var(--fx-radius); background: color-mix(in srgb, var(--fx-ink) 7%, transparent); color: transparent !important; user-select: none; }
+.fx-skeleton::after { content: ""; position: absolute; inset: 0; transform: translateX(-100%); background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--fx-ink) 10%, transparent), transparent); animation: fxShimmer 1.4s infinite; }
+@keyframes fxShimmer { to { transform: translateX(100%); } }
+
+/* -------------------------------------------------------------- 8. pusat notifikasi */
+.fx-bell { position: relative; }
+.fx-bell-dot {
+  position: absolute; top: 5px; right: 5px; min-width: 15px; height: 15px; padding: 0 4px; border-radius: 99px;
+  display: none; align-items: center; justify-content: center; font-size: 0.62rem; font-weight: 800; line-height: 1;
+  color: #0b0f14; background: var(--fx-accent); box-shadow: 0 0 0 2px var(--bg-surface, #171e28);
+}
+.fx-bell.has-unread .fx-bell-dot { display: inline-flex; animation: fxPop 0.35s var(--fx-ease); }
+.fx-bell.is-ringing svg { animation: fxRing 0.7s var(--fx-ease); transform-origin: 50% 0; }
+@keyframes fxRing { 0%,100% { transform: rotate(0); } 20% { transform: rotate(14deg); } 40% { transform: rotate(-12deg); } 60% { transform: rotate(8deg); } 80% { transform: rotate(-4deg); } }
+
+.fx-panel {
+  position: fixed; top: 58px; right: 16px; z-index: 100004; width: min(360px, calc(100vw - 24px));
+  max-height: min(70vh, 520px); display: flex; flex-direction: column;
+  background: var(--fx-surface); border: 1px solid var(--fx-line); border-radius: 12px; box-shadow: 0 24px 60px rgb(0 0 0 / 0.45);
+  transform-origin: top right; opacity: 0; transform: translateY(-8px) scale(0.97); pointer-events: none; visibility: hidden;
+  transition: opacity 0.2s, transform 0.35s var(--fx-ease), visibility 0s 0.35s;
+}
+.fx-panel.is-open { opacity: 1; transform: none; pointer-events: auto; visibility: visible; transition-delay: 0s; }
+.fx-panel-head { display: flex; align-items: center; justify-content: space-between; padding: 14px 16px 10px; border-bottom: 1px solid var(--fx-line); }
+.fx-panel-head h3 { margin: 0; font-size: 0.92rem; font-weight: 650; color: var(--fx-ink); }
+.fx-panel-clear { border: 0; background: transparent; color: var(--fx-ink-2); font-size: 0.78rem; cursor: pointer; padding: 4px 8px; border-radius: 6px; }
+.fx-panel-clear:hover { color: var(--fx-ink); background: color-mix(in srgb, var(--fx-ink) 10%, transparent); }
+.fx-panel-list { overflow: auto; padding: 6px; display: flex; flex-direction: column; gap: 2px; overscroll-behavior: contain; }
+.fx-panel-item { display: grid; grid-template-columns: 18px 1fr auto; gap: 10px; padding: 10px; border-radius: 8px; animation: fxItem 0.4s var(--fx-ease) both; animation-delay: calc(var(--fx-i, 0) * 30ms); }
+.fx-panel-item:hover { background: color-mix(in srgb, var(--fx-ink) 6%, transparent); }
+.fx-panel-item .fx-toast-ico { width: 18px; height: 18px; color: var(--fx-accent); margin-top: 1px; }
+.fx-panel-item.success .fx-toast-ico { color: var(--fx-ok); }
+.fx-panel-item.error .fx-toast-ico { color: var(--fx-bad); }
+.fx-panel-item.warning .fx-toast-ico { color: var(--fx-warn); }
+.fx-panel-item .fx-toast-ico svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.fx-panel-item p { margin: 0; font-size: 0.84rem; line-height: 1.4; color: var(--fx-ink); overflow-wrap: anywhere; }
+.fx-panel-item time { font-size: 0.72rem; color: var(--fx-ink-2); white-space: nowrap; padding-top: 2px; }
+.fx-panel-empty { padding: 34px 16px; text-align: center; color: var(--fx-ink-2); font-size: 0.84rem; }
+.fx-panel-empty svg { display: block; width: 34px; height: 34px; margin: 0 auto 10px; fill: none; stroke: currentColor; stroke-width: 1.4; opacity: 0.7; stroke-linecap: round; stroke-linejoin: round; }
+@keyframes fxItem { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+/* ----------------------------------------------------------------- 9. lembar pintasan */
+.fx-sheet-backdrop {
+  position: fixed; inset: 0; z-index: 100010; display: grid; place-items: center; padding: 20px;
+  background: rgb(6 9 14 / 0.62); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+  opacity: 0; visibility: hidden; transition: opacity 0.2s, visibility 0s 0.2s;
+}
+.fx-sheet-backdrop.is-open { opacity: 1; visibility: visible; transition-delay: 0s; }
+.fx-sheet {
+  width: min(520px, 100%); max-height: 86vh; overflow: auto; background: var(--fx-surface); border: 1px solid var(--fx-line);
+  border-radius: 14px; padding: 22px 22px 18px; box-shadow: 0 30px 80px rgb(0 0 0 / 0.5);
+  transform: translateY(16px) scale(0.97); transition: transform 0.45s var(--fx-ease);
+}
+.fx-sheet-backdrop.is-open .fx-sheet { transform: none; }
+.fx-sheet:focus { outline: none; }
+.fx-sheet h2 { margin: 0 0 4px; font-size: 1.1rem; font-weight: 650; color: var(--fx-ink); }
+.fx-sheet > p { margin: 0 0 16px; color: var(--fx-ink-2); font-size: 0.84rem; }
+.fx-sheet-grid { display: grid; gap: 2px; }
+.fx-sheet-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 9px 10px; border-radius: 8px; font-size: 0.86rem; color: var(--fx-ink); }
+.fx-sheet-row:hover { background: color-mix(in srgb, var(--fx-ink) 6%, transparent); }
+.fx-keys { display: inline-flex; gap: 4px; flex-shrink: 0; }
+.fx-keys kbd {
+  min-width: 24px; padding: 3px 7px; text-align: center; font: 600 0.72rem/1.2 var(--font-mono, ui-monospace, monospace);
+  color: var(--fx-ink); background: color-mix(in srgb, var(--fx-ink) 9%, transparent);
+  border: 1px solid var(--fx-line); border-bottom-width: 2px; border-radius: 6px;
+}
+.fx-sheet-foot { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--fx-line); font-size: 0.76rem; color: var(--fx-ink-2); }
+
+/* ------------------------------------------------------------------ 10. salin cepat */
+[data-fx-copy], #cluster-pairing-code-display, #pairing-digits { cursor: copy; }
+.fx-copied { animation: fxBump 0.45s var(--fx-ease); }
+
+/* ------------------------------------------------------ 11. perbaikan layout kecil */
+/* Label tombol kecil tidak boleh patah per huruf ("Ca ri", "Stockfis h") */
+.btn-polaris.btn-sm { white-space: nowrap; }
+.chess-difficulty-pills { grid-template-columns: repeat(2, 1fr); }
+.chess-diff-pill { white-space: nowrap; }
+
+/* ----------------------------------------------------------------- 12. ketersediaan */
+@media (max-width: 640px) {
+  .fx-totop { right: 14px; bottom: 74px; }
+  .fx-panel { top: 52px; right: 12px; }
+  #toast-container { right: 12px !important; left: 12px; align-items: stretch; }
+  .fx-toast { max-width: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fx-toast, .fx-toast .fx-toast-bar, .fx-panel, .fx-panel-item, .fx-sheet, .fx-totop, .fx-bell.is-ringing svg,
+  .modal-backdrop.active, .modal-backdrop.active > .modal-card, .modal-backdrop.active > .modal-card-enter,
+  .fx-count-bump, .fx-copied, .fx-skeleton::after { animation: none !important; transition-duration: 0.01ms !important; }
+  .fx-reveal { opacity: 1 !important; translate: none !important; }
+  .stat-card:hover { transform: none; }
+}

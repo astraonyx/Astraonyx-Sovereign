@@ -1,0 +1,179 @@
+/* Astraonyx - token desain (PRD R-25.1 sampai R-25.4).
+   Tiga tingkat: primitif (nilai mentah) -> semantik (peran) -> komponen (di components.css).
+   Urutan layer ditetapkan sekali di sini; semua file CSS lain hanya memakai nama layer yang sama. */
+
+@layer reset, tokens, base, components, shell, pillar, utilities;
+
+@layer tokens {
+  :root {
+    color-scheme: dark;
+
+    /* ---------- Primitif: palet inti (PRD R-25.1, kontras WCAG 2.2 AA terhitung) ---------- */
+    --void: #0a0714;       /* latar halaman */
+    --surface: #14102b;    /* panel, rail, kartu */
+    --raised: #1d1740;     /* menu, dialog, baris yang disorot */
+    --text: #f2efff;       /* 17,6:1 di atas void */
+    --text-2: #b9b2d9;     /* 9,2:1 di atas surface */
+    --text-3: #8f88b5;     /* 5,1:1 di atas raised: teks bantu, placeholder */
+    --gold: #e5b94f;       /* aksen utama: aksi utama, fokus, penanda aktif */
+    --purple: #8f73ff;     /* aksen interaktif */
+    --purple-hi: #a590ff;  /* ungu untuk teks kecil di atas raised */
+    --blue: #5b9bff;       /* tautan dan informasi */
+    --success: #3ddc97;
+    --warn: #ffb84d;
+    --danger: #ff6b8a;
+    --info: #5cc8ff;
+
+    /* ---------- Semantik ---------- */
+    --bg: var(--void);
+    --bg-panel: var(--surface);
+    --bg-raised: var(--raised);
+    --bg-field: color-mix(in oklab, var(--void) 55%, var(--surface));
+    --bg-hover: color-mix(in oklab, var(--purple) 10%, transparent);
+    --bg-selected: color-mix(in oklab, var(--purple) 18%, transparent);
+    --bg-gold-wash: color-mix(in oklab, var(--gold) 11%, transparent);
+    --line: color-mix(in oklab, var(--text-2) 14%, transparent);
+    --line-strong: color-mix(in oklab, var(--text-2) 30%, transparent);
+    --scrim: rgb(5 3 14 / 0.74);
+    --focus: var(--gold);
+    --link: var(--blue);
+
+    /* Warna seri grafik (core/ui/charts.js). Urutan TETAP, jangan diputar ulang. Divalidasi dengan skrip dataviz di atas --surface:
+       pita kecerahan, kroma, selisih buta warna antar-tetangga >= 17 (dE OKLab x100), kontras >= 3:1; tiga pertama juga lolos uji semua-pasangan.
+       Bukan warna status: hijau/oranye/merah status tetap --success/--warn/--danger. */
+    --chart-1: #9d7aef;
+    --chart-2: #b98c06;
+    --chart-3: #11a5c0;
+    --chart-4: #e36e13;
+    --chart-5: #3496f8;
+    --chart-6: #7da409;
+    --chart-muted: #726f7c;                    /* seri latar pada grafik bersorot */
+    /* Tangga magnitudo satu-hue untuk kalender panas: empat langkah, kontras ujung terang >= 2:1 */
+    --heat-0: var(--raised);
+    --heat-1: #61489b;
+    --heat-2: #805fca;
+    --heat-3: #a083ea;
+    --heat-4: #bfacfa;
+
+    --on-gold: var(--void);                    /* 10,8:1 di atas emas */
+    --btn-accent-bg: #5b3fd9;                  /* teks putih 6,7:1 */
+    --btn-accent-fg: #ffffff;
+    --btn-danger-bg: #c2294b;                  /* teks putih 5,7:1 */
+    --btn-danger-fg: #ffffff;
+
+    /* ---------- Tipografi (Anthropic & Apple Standard) ---------- */
+    --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro", "Instrument Sans", "Inter", system-ui, sans-serif;
+    --font-ui: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro", "Inter", "Instrument Sans", system-ui, sans-serif;
+    --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+
+    /* Skala 1,2 dari dasar 16 px; tiga ukuran kecil khusus antarmuka padat. */
+    --fs-xs: 0.75rem;      /* 12 px: lencana */
+    --fs-sm: 0.8125rem;    /* 13 px: keterangan, meta */
+    --fs-ui: 0.9375rem;    /* 15 px: kontrol dan baris */
+    --fs-md: 1rem;         /* 16 px: teks bacaan */
+    --fs-lg: 1.2rem;
+    --fs-xl: 1.44rem;
+    --fs-2xl: 1.728rem;
+    --fs-3xl: 2.074rem;
+    --fs-4xl: 2.488rem;
+    --fs-5xl: 2.986rem;
+    --fs-6xl: 3.583rem;
+
+    --lh-tight: 1.15;
+    --lh-snug: 1.3;
+    --lh-body: 1.55;
+
+    /* ---------- Spasi (kelipatan 4 px) ---------- */
+    --sp-1: 0.25rem;
+    --sp-2: 0.5rem;
+    --sp-3: 0.75rem;
+    --sp-4: 1rem;
+    --sp-5: 1.25rem;
+    --sp-6: 1.5rem;
+    --sp-8: 2rem;
+    --sp-10: 2.5rem;
+    --sp-12: 3rem;
+    --sp-16: 4rem;
+
+    /* ---------- Bentuk: radius bertingkat sesuai hirarki ---------- */
+    --r-xs: 4px;
+    --r-sm: 6px;     /* kontrol */
+    --r-md: 10px;    /* panel, menu */
+    --r-lg: 16px;    /* dialog, sheet */
+    --r-pill: 999px;
+
+    --shadow-overlay: 0 24px 64px rgb(5 3 14 / 0.6), 0 0 0 1px var(--line-strong);
+
+    /* ---------- Gerak & Hyperframes Spring Easing ---------- */
+    --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+    --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+    --spring-bounce: cubic-bezier(0.16, 1, 0.3, 1);
+    --spring-tactile: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --spring-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+    --ease-elastic: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    --dur-1: 120ms;
+    --dur-2: 200ms;
+    --dur-3: 320ms;
+    --dur-sheen: 1.8s;
+
+    /* ---------- Vibrant Enterprise Chromatic Accents & Auras ---------- */
+    --neon-gold: #fbc02d;
+    --neon-purple: #9d7aff;
+    --neon-cyan: #00e5ff;
+    --neon-emerald: #10b981;
+    --neon-rose: #ff2a6d;
+    --neon-blue: #3b82f6;
+    --neon-amber: #f59e0b;
+    --neon-violet: #8b5cf6;
+
+    --aura-gold: rgba(245, 158, 11, 0.28);
+    --aura-purple: rgba(157, 122, 255, 0.32);
+    --aura-cyan: rgba(0, 229, 255, 0.26);
+    --aura-emerald: rgba(16, 185, 129, 0.28);
+    --aura-rose: rgba(255, 42, 109, 0.28);
+    --aura-blue: rgba(59, 130, 246, 0.32);
+
+    /* ---------- Glassmorphism & Depth Tokens ---------- */
+    --glass-bg: rgba(18, 14, 38, 0.65);
+    --glass-bg-hover: rgba(26, 20, 54, 0.82);
+    --glass-bg-active: rgba(35, 27, 72, 0.9);
+    --glass-border: 1px solid rgba(255, 255, 255, 0.08);
+    --glass-border-hi: 1px solid rgba(165, 144, 255, 0.35);
+    --glass-blur: blur(16px) saturate(180%);
+    --glass-shadow: 0 16px 40px -12px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(255, 255, 255, 0.06);
+    --glass-shadow-hover: 0 24px 50px -10px rgba(0, 0, 0, 0.75), 0 0 30px -4px var(--aura-purple), 0 0 0 1px rgba(165, 144, 255, 0.45);
+
+    /* ---------- Pillar Signature Themes ---------- */
+    --theme-sanctum: #f59e0b;
+    --theme-sanctum-aura: rgba(245, 158, 11, 0.35);
+    --theme-polarium: #a855f7;
+    --theme-polarium-aura: rgba(168, 85, 247, 0.35);
+    --theme-luminary: #06b6d4;
+    --theme-luminary-aura: rgba(6, 182, 212, 0.35);
+    --theme-atomic: #10b981;
+    --theme-atomic-aura: rgba(16, 185, 129, 0.35);
+    --theme-starlium: #f43f5e;
+    --theme-starlium-aura: rgba(244, 63, 94, 0.35);
+    --theme-sirium: #3b82f6;
+    --theme-sirium-aura: rgba(59, 130, 246, 0.35);
+    --theme-polaris: #8b5cf6;
+    --theme-polaris-aura: rgba(139, 92, 246, 0.4);
+    --theme-nebula: #ec4899;
+    --theme-nebula-aura: rgba(236, 72, 153, 0.35);
+
+    /* ---------- Tata letak (titik henti: 360, 768, 1024, 1440) ---------- */
+    --rail-w: 4.5rem;
+    --subnav-w: 14.5rem;
+    --topbar-h: 3.5rem;
+    --bottomnav-h: 3.75rem;
+    --content-max: 1180px;
+    --gutter: clamp(1rem, 2.4vw, 2rem);
+    --hit: 2.75rem;  /* target sentuh minimal 44 px */
+
+    --z-rail: 30;
+    --z-topbar: 40;
+    --z-popover: 60;
+    --z-dialog: 80;
+    --z-toast: 100;
+  }
+}

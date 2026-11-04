@@ -1,0 +1,890 @@
+/* ==========================================================================
+   POLARIS & ASTRAONYX ECOSYSTEM UNIFIED NAVIGATION SYSTEM
+   Architecture: Expandable Hover Sidebar (74px -> 245px), Astraonyx Popover,
+   More Options Popover, Create Popover, Mobile Top/Bottom Nav, and Sub-Panes
+   Design Tokens: Deep Obsidian Glassmorphic, CLS = 0, Spring Physics
+   ========================================================================== */
+
+:root {
+  --polaris-sidebar-w-collapsed: 74px;
+  --polaris-sidebar-w-expanded: 245px;
+  --polaris-sidebar-bg: rgba(9, 13, 20, 0.94);
+  --polaris-sidebar-border: rgba(255, 255, 255, 0.08);
+  --polaris-popover-bg: rgba(24, 26, 32, 0.97);
+  --polaris-popover-border: rgba(255, 255, 255, 0.12);
+  --polaris-nav-radius: 12px;
+  --polaris-spring-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --polaris-badge-red: #ff3040;
+}
+
+/* 1. UNIFIED DESKTOP SIDEBAR CONTAINER */
+.polaris-sidebar-unified {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: var(--polaris-sidebar-w-collapsed);
+  height: 100vh;
+  z-index: 120;
+  background: var(--polaris-sidebar-bg);
+  backdrop-filter: blur(28px) saturate(190%);
+  -webkit-backdrop-filter: blur(28px);
+  border-right: 1px solid var(--polaris-sidebar-border);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 18px 14px 16px 14px;
+  box-sizing: border-box;
+  user-select: none;
+  -webkit-user-select: none;
+  overflow: visible;
+  transition: width 0.22s var(--polaris-spring-ease), box-shadow 0.22s ease-out;
+  box-shadow: 4px 0 24px rgba(0, 0, 0, 0.4);
+}
+
+.polaris-sidebar-unified:hover,
+.polaris-sidebar-unified.is-expanded {
+  width: var(--polaris-sidebar-w-expanded);
+  box-shadow: 12px 0 50px rgba(0, 0, 0, 0.85), 0 0 35px rgba(0, 240, 255, 0.04);
+}
+
+/* Offset app shell viewport to account for collapsed 74px sidebar */
+.polaris-app-shell {
+  padding-left: var(--polaris-sidebar-w-collapsed) !important;
+  box-sizing: border-box;
+}
+
+/* Hide legacy dual rails in favor of unified expandable sidebar */
+.polaris-rail-primary,
+.polaris-subnav-drawer {
+  display: none !important;
+}
+
+@media (max-width: 768px) {
+  .polaris-sidebar-unified {
+    display: none !important;
+  }
+  .polaris-app-shell {
+    padding-left: 0 !important;
+    padding-bottom: 56px !important; /* Mobile bottom nav offset */
+  }
+}
+
+/* 2. TOP BRAND LOGO & TITLE */
+.sidebar-top-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.sidebar-brand-btn {
+  height: 48px;
+  width: 100%;
+  border-radius: var(--polaris-nav-radius);
+  display: flex;
+  align-items: center;
+  background: transparent;
+  border: 1px solid transparent;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: none;
+  transition: all 0.2s var(--polaris-spring-ease);
+  position: relative;
+}
+
+.sidebar-brand-btn:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-brand-btn:active {
+  transform: scale(0.97);
+}
+
+.sidebar-brand-icon-box {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.sidebar-brand-icon-box img {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
+  transition: transform 0.22s var(--polaris-spring-ease);
+}
+
+.sidebar-brand-btn:hover .sidebar-brand-icon-box img {
+  transform: scale(1.08);
+}
+
+.sidebar-brand-text {
+  font-family: 'Syne', var(--font-sans), sans-serif;
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, #ffffff 40%, rgba(255, 255, 255, 0.7) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  white-space: nowrap;
+  margin-left: 14px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s var(--polaris-spring-ease);
+}
+
+.polaris-sidebar-unified:hover .sidebar-brand-text,
+.polaris-sidebar-unified.is-expanded .sidebar-brand-text {
+  opacity: 1;
+}
+
+/* Brand Pillar Sub-Pills */
+.sidebar-pillar-pill {
+  font-size: 9px;
+  font-weight: 800;
+  padding: 2px 6px;
+  border-radius: 9999px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-left: 6px;
+  display: inline-block;
+}
+
+/* 3. NAVIGATION ITEMS LIST */
+.sidebar-nav-list {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  width: 100%;
+  overflow-y: auto;
+  overflow-x: visible;
+  scrollbar-width: none;
+}
+
+.sidebar-nav-list::-webkit-scrollbar {
+  display: none;
+}
+
+.sidebar-item-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.sidebar-nav-item {
+  height: 48px;
+  width: 100%;
+  border-radius: var(--polaris-nav-radius);
+  display: flex;
+  align-items: center;
+  background: transparent;
+  border: 1px solid transparent;
+  color: #a1a1aa;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: none;
+  transition: all 0.18s var(--polaris-spring-ease);
+  position: relative;
+  outline: none;
+}
+
+.sidebar-nav-item:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.sidebar-nav-item:active {
+  transform: scale(0.97);
+}
+
+/* Static icon container: strictly fixed dimensions so icons NEVER shift */
+.sidebar-icon-box {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.sidebar-icon-img {
+  width: 23px;
+  height: 23px;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
+  transition: transform 0.18s var(--polaris-spring-ease);
+}
+
+.sidebar-nav-item:hover .sidebar-icon-img {
+  transform: scale(1.08);
+}
+
+/* User Avatar Item */
+.sidebar-avatar-img {
+  width: 24px;
+  height: 24px;
+  border-radius: 9999px;
+  object-fit: cover;
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.sidebar-nav-item.active .sidebar-avatar-img {
+  border-color: #ffffff;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+}
+
+/* Unclipped Red Badge */
+.sidebar-badge {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  background: var(--polaris-badge-red);
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 800;
+  min-width: 17px;
+  height: 17px;
+  padding: 0 4px;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--polaris-sidebar-bg);
+  box-shadow: 0 2px 8px rgba(255, 48, 64, 0.6);
+  line-height: 1;
+  z-index: 25;
+  pointer-events: none;
+  animation: badgePop 0.25s var(--polaris-spring-ease);
+}
+
+@keyframes badgePop {
+  0% { transform: scale(0.5); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Label: Fades in on hover, invisible when collapsed */
+.sidebar-label {
+  font-size: 0.88rem;
+  font-weight: 500;
+  white-space: nowrap;
+  margin-left: 14px;
+  opacity: 0;
+  pointer-events: none;
+  user-select: none;
+  transition: opacity 0.2s var(--polaris-spring-ease), color 0.18s ease;
+  color: inherit;
+}
+
+.polaris-sidebar-unified:hover .sidebar-label,
+.polaris-sidebar-unified.is-expanded .sidebar-label {
+  opacity: 1;
+}
+
+/* Active State Styles with Multi-Layer Underglow */
+.sidebar-nav-item.active {
+  background: rgba(255, 255, 255, 0.09);
+  color: #ffffff;
+  font-weight: 700;
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow: inset 0 0 12px rgba(255, 255, 255, 0.03);
+}
+
+/* Polarium Active Tone (Sunset Coral Aura) */
+.polaris-sidebar-unified[data-pillar="polarium"] .sidebar-nav-item.active {
+  background: linear-gradient(90deg, rgba(220, 39, 67, 0.16) 0%, rgba(240, 148, 51, 0.1) 100%);
+  border-color: rgba(220, 39, 67, 0.35);
+  box-shadow: 0 0 16px rgba(220, 39, 67, 0.25), inset 0 0 10px rgba(240, 148, 51, 0.1);
+}
+
+/* Luminary Active Tone (Cyan Neon Glow) */
+.polaris-sidebar-unified[data-pillar="luminary"] .sidebar-nav-item.active {
+  background: linear-gradient(90deg, rgba(6, 182, 212, 0.18) 0%, rgba(59, 130, 246, 0.1) 100%);
+  border-color: rgba(6, 182, 212, 0.4);
+  box-shadow: 0 0 18px rgba(6, 182, 212, 0.3), inset 0 0 10px rgba(6, 182, 212, 0.1);
+}
+
+/* Polaris Active Tone (Ice Cyan Glow) */
+.polaris-sidebar-unified[data-pillar="polaris"] .sidebar-nav-item.active {
+  background: linear-gradient(90deg, rgba(0, 240, 255, 0.15) 0%, rgba(139, 92, 246, 0.1) 100%);
+  border-color: rgba(0, 240, 255, 0.35);
+  box-shadow: 0 0 18px rgba(0, 240, 255, 0.25), inset 0 0 10px rgba(0, 240, 255, 0.1);
+}
+
+/* Scalability 2.4M Button Spec */
+.sidebar-scalability-btn {
+  color: #34d399 !important;
+}
+.sidebar-scalability-btn:hover {
+  background: rgba(16, 185, 129, 0.12) !important;
+  border-color: rgba(16, 185, 129, 0.25) !important;
+}
+.sidebar-scalability-pill {
+  font-size: 10px;
+  font-weight: 800;
+  padding: 1px 6px;
+  border-radius: 9999px;
+  background: rgba(16, 185, 129, 0.18);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  color: #34d399;
+  margin-left: 6px;
+}
+
+/* 4. BOTTOM CONTROLS: "MORE" & "ALSO FROM ASTRAONYX" */
+.sidebar-bottom-section {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  width: 100%;
+  position: relative;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* 5. LUXURY POPOVER MENUS */
+.polaris-nav-popover {
+  position: absolute;
+  z-index: 200;
+  background: var(--polaris-popover-bg);
+  backdrop-filter: blur(28px) saturate(190%);
+  -webkit-backdrop-filter: blur(28px);
+  border: 1px solid var(--polaris-popover-border);
+  border-radius: 18px;
+  padding: 8px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.85), 0 0 25px rgba(255, 255, 255, 0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  user-select: none;
+  animation: popoverSpring 0.2s var(--polaris-spring-ease);
+}
+
+@keyframes popoverSpring {
+  0% { opacity: 0; transform: scale(0.94) translateY(6px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* A. Popover: Create Menu (Post, Reels, Story) */
+.create-menu-popover {
+  width: 275px;
+  left: calc(100% + 12px);
+  top: 0;
+}
+
+.polaris-sidebar-unified.is-expanded .create-menu-popover,
+.polaris-sidebar-unified:hover .create-menu-popover {
+  left: 0;
+  top: calc(100% + 8px);
+}
+
+.create-menu-card {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: rgba(38, 38, 38, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.18s var(--polaris-spring-ease);
+  text-align: left;
+}
+
+.create-menu-card:hover {
+  background: rgba(56, 56, 56, 0.95);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-1px);
+}
+
+.create-menu-card:active {
+  transform: scale(0.98);
+}
+
+.create-menu-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.create-menu-title {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.create-menu-desc {
+  font-size: 0.72rem;
+  color: #a1a1aa;
+}
+
+.create-menu-icon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: #ffffff;
+  transition: transform 0.18s var(--polaris-spring-ease);
+}
+
+.create-menu-card:hover .create-menu-icon {
+  transform: scale(1.1);
+}
+
+/* B. Popover: More Options */
+.more-menu-popover {
+  width: 260px;
+  bottom: 56px;
+  left: 0;
+}
+
+.more-menu-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: transparent;
+  border: none;
+  color: #e4e4e7;
+  font-size: 0.86rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.16s ease;
+  text-align: left;
+}
+
+.more-menu-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+}
+
+.more-menu-btn:active {
+  transform: scale(0.98);
+}
+
+.more-menu-icon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  flex-shrink: 0;
+  color: #a1a1aa;
+}
+
+.more-menu-divider {
+  height: 1px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.08);
+  margin: 4px 0;
+}
+
+.more-menu-btn.danger {
+  color: #f87171;
+}
+
+.more-menu-btn.danger:hover {
+  background: rgba(239, 68, 68, 0.12);
+  color: #ef4444;
+}
+
+/* C. Popover: "Also from astraonyx" (7 Ecosystem Pillars) */
+.astraonyx-popover {
+  width: 220px;
+  bottom: 56px;
+  left: 0;
+  padding: 6px;
+}
+
+.astra-pillar-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 12px;
+  border-radius: 12px;
+  background: transparent;
+  border: 1px solid transparent;
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.16s var(--polaris-spring-ease);
+  text-align: left;
+}
+
+.astra-pillar-item:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.12);
+  transform: translateX(2px);
+}
+
+.astra-pillar-item.active {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.2);
+  font-weight: 700;
+}
+
+.astra-pillar-icon {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  flex-shrink: 0;
+  transition: transform 0.18s var(--polaris-spring-ease);
+}
+
+.astra-pillar-item:hover .astra-pillar-icon {
+  transform: scale(1.12);
+}
+
+.astra-pillar-meta {
+  display: flex;
+  flex-direction: column;
+}
+
+.astra-pillar-name {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #ffffff;
+  line-height: 1.2;
+}
+
+.astra-pillar-desc {
+  font-size: 0.68rem;
+  color: #a1a1aa;
+}
+
+/* 6. MOBILE NAVIGATION BARS */
+.polaris-mobile-top-nav {
+  display: none;
+}
+
+.polaris-mobile-bottom-nav {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .polaris-mobile-top-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 52px;
+    z-index: 110;
+    background: var(--polaris-sidebar-bg);
+    backdrop-filter: blur(24px) saturate(190%);
+    -webkit-backdrop-filter: blur(24px);
+    border-bottom: 1px solid var(--polaris-sidebar-border);
+    padding: 0 16px;
+    user-select: none;
+  }
+
+  .mobile-brand-box {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .mobile-brand-title {
+    font-family: 'Syne', var(--font-sans), sans-serif;
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: #ffffff;
+    background: linear-gradient(135deg, #ffffff 40%, rgba(255, 255, 255, 0.7) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .mobile-actions-box {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .mobile-icon-btn {
+    background: transparent;
+    border: none;
+    padding: 6px;
+    color: #ffffff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .mobile-icon-btn img {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+  }
+
+  .polaris-mobile-bottom-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 54px;
+    z-index: 110;
+    background: var(--polaris-sidebar-bg);
+    backdrop-filter: blur(24px) saturate(190%);
+    -webkit-backdrop-filter: blur(24px);
+    border-top: 1px solid var(--polaris-sidebar-border);
+    padding: 0 8px;
+    user-select: none;
+  }
+
+  .mobile-bottom-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    background: transparent;
+    border: none;
+    color: #a1a1aa;
+    cursor: pointer;
+    position: relative;
+    padding: 0;
+  }
+
+  .mobile-bottom-btn.active {
+    color: #ffffff;
+  }
+
+  .mobile-bottom-btn img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+  }
+
+  .mobile-bottom-avatar {
+    width: 24px;
+    height: 24px;
+    border-radius: 9999px;
+    object-fit: cover;
+    border: 1.5px solid rgba(255, 255, 255, 0.3);
+  }
+
+  .mobile-bottom-btn.active .mobile-bottom-avatar {
+    border-color: #ffffff;
+  }
+}
+
+/* 7. SCALABILITY 2.4M TELEMETRY MODAL */
+.polaris-telemetry-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  animation: fadeIn 0.2s ease;
+}
+
+.polaris-telemetry-modal {
+  width: 100%;
+  max-width: 680px;
+  background: rgba(18, 22, 32, 0.98);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  border-radius: 20px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9), 0 0 40px rgba(16, 185, 129, 0.15);
+  overflow: hidden;
+  animation: modalPop 0.22s var(--polaris-spring-ease);
+}
+
+@keyframes modalPop {
+  0% { transform: scale(0.92); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+/* 8. LUMINARY STUDIO INTERNAL NAVIGATION UPGRADES */
+.luminary-studio-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  background: linear-gradient(135deg, rgba(6, 182, 212, 0.12) 0%, rgba(15, 23, 42, 0.8) 100%);
+  border: 1px solid rgba(6, 182, 212, 0.3);
+  border-radius: 16px;
+  margin-bottom: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.luminary-studio-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.luminary-studio-logo-badge {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #06b6d4, #2563eb);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 20px rgba(6, 182, 212, 0.4);
+}
+
+.luminary-studio-logo-badge img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.luminary-studio-title {
+  font-family: 'Syne', var(--font-sans), sans-serif;
+  font-size: 1.25rem;
+  font-weight: 900;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.luminary-studio-pill {
+  font-size: 10px;
+  font-weight: 800;
+  padding: 2px 7px;
+  border-radius: 6px;
+  background: rgba(6, 182, 212, 0.2);
+  border: 1px solid rgba(6, 182, 212, 0.4);
+  color: #67e8f9;
+}
+
+/* Polarium Header Integration */
+.polarium-luxury-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 20px;
+  margin-bottom: 20px;
+  background: rgba(13, 17, 26, 0.85);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+/* ==========================================================================
+   ASTRAONYX & 8-PILLAR NAVIGATION POLISH & PANE STYLING
+   ========================================================================== */
+
+/* Active tab styles for Astraonyx subtabs */
+.nav-tab.astraonyx-subtab.active {
+  background: rgba(226, 232, 240, 0.12);
+  color: #f8fafc;
+  border-color: rgba(226, 232, 240, 0.35);
+  box-shadow: 0 0 16px rgba(226, 232, 240, 0.15);
+}
+
+/* Astraonyx Command Matrix Pane Styles */
+#pane-astraonyx {
+  display: none;
+  animation: polaris-fade-in 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+#pane-astraonyx.active {
+  display: block;
+}
+
+#pane-astraonyx .ov-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+#pane-astraonyx .ov-head h1 {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #f8fafc;
+  letter-spacing: -0.02em;
+  margin: 0 0 6px 0;
+}
+
+#pane-astraonyx .ov-head p {
+  color: var(--text-secondary, #94a3b8);
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+#pane-astraonyx .ov-actions {
+  display: flex;
+  gap: 10px;
+}
+
+#pane-astraonyx .ov-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+  padding: 16px;
+  background: rgba(14, 9, 27, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 14px;
+  backdrop-filter: blur(16px);
+}
+
+#pane-astraonyx .ov-strip div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+#pane-astraonyx .ov-strip .ov-k {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-tertiary, #64748b);
+  font-weight: 700;
+}
+
+#pane-astraonyx .ov-strip .ov-v {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #f8fafc;
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+}
+
+@keyframes polaris-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

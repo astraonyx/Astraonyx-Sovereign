@@ -1,0 +1,697 @@
+/* ==========================================================================
+   POLARIS DUAL-RAIL SIDEBAR & COMPACT TOPBAR STYLESHEET (OPTION 1)
+   Architecture: High-End Obsidian Dark-Tech, Glassmorphism, Zero-Clutter Viewport
+   ========================================================================== */
+
+/* Responsive Root Scaling for High-Resolution Displays (2K / 4K / Ultrawide) */
+html {
+  font-size: 16px;
+}
+
+@media (min-width: 1920px) {
+  html {
+    font-size: 16.5px;
+  }
+}
+
+@media (min-width: 2560px) {
+  html {
+    font-size: 17px;
+  }
+}
+
+@media (min-width: 3400px) {
+  html {
+    font-size: 17.5px;
+  }
+}
+
+/* 1. APP SHELL LAYOUT */
+.polaris-app-shell {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  z-index: 10;
+  box-sizing: border-box;
+}
+
+/* 2. PRIMARY RAIL (74px) */
+.polaris-rail-primary {
+  width: 74px;
+  flex-shrink: 0;
+  background: rgba(8, 12, 22, 0.88);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 18px 0 16px 0;
+  z-index: 100;
+  box-sizing: border-box;
+  box-shadow: 4px 0 30px rgba(0, 0, 0, 0.5);
+}
+
+.rail-brand-mark {
+  width: 46px;
+  height: 46px;
+  border-radius: 13px;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--accent-cyan) 20%, transparent), color-mix(in srgb, var(--accent-purple) 20%, transparent));
+  border: 1px solid color-mix(in srgb, var(--accent-cyan) 40%, transparent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+  box-shadow: 0 0 20px color-mix(in srgb, var(--accent-cyan) 25%, transparent);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.rail-brand-mark:hover {
+  transform: scale(1.06);
+  box-shadow: 0 0 28px color-mix(in srgb, var(--accent-cyan) 50%, transparent);
+  border-color: color-mix(in srgb, var(--accent-cyan) 80%, transparent);
+}
+
+.rail-brand-mark svg {
+  width: 18px;
+  height: 18px;
+  fill: #fff;
+}
+
+.rail-brand-mark img,
+.rail-brand-mark .rail-brand-glyph {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 0 10px rgba(0, 240, 255, 0.7));
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), filter 0.25s ease;
+}
+
+.rail-brand-mark:hover img,
+.rail-brand-mark:hover .rail-brand-glyph {
+  transform: scale(1.08);
+  filter: drop-shadow(0 0 16px rgba(0, 240, 255, 0.9));
+}
+
+/* Macro Pillars Stack in Rail */
+.rail-pillars-list {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  align-items: center;
+  width: 100%;
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: none;
+  padding: 2px 0 12px 0;
+}
+
+.rail-pillars-list::-webkit-scrollbar {
+  display: none;
+}
+
+.rail-pillar-btn {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  border-radius: 13px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+  padding: 0;
+}
+
+.rail-pillar-btn .pillar-icon {
+  font-size: 1.15rem;
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.rail-pillar-btn:hover {
+  background: rgba(255, 255, 255, 0.09);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px) scale(1.04);
+}
+
+.rail-pillar-btn:active {
+  transform: scale(0.95);
+}
+
+/* 8 Sub-Projects & Zodiac Macro Active Glows */
+.rail-pillar-btn[data-pillar="astraonyx"].active {
+  background: color-mix(in srgb, #e2e8f0 18%, transparent);
+  border-color: #e2e8f0;
+  box-shadow: 0 0 28px rgba(226, 232, 240, 0.45), inset 0 0 14px rgba(226, 232, 240, 0.25);
+}
+
+.rail-pillar-btn[data-pillar="aquarius"].active,
+.rail-pillar-btn[data-pillar="polaris"].active {
+  background: color-mix(in srgb, var(--accent-cyan, #00f0ff) 18%, transparent);
+  border-color: var(--accent-cyan, #00f0ff);
+  box-shadow: 0 0 28px var(--aura-polaris, rgba(0, 240, 255, 0.45)), inset 0 0 14px rgba(0, 240, 255, 0.25);
+}
+
+.rail-pillar-btn[data-pillar="gemini"].active,
+.rail-pillar-btn[data-pillar="polarium"].active {
+  background: color-mix(in srgb, var(--neon-rose, #ff2e63) 18%, transparent);
+  border-color: var(--neon-rose, #ff2e63);
+  box-shadow: 0 0 28px var(--aura-polarium, rgba(255, 46, 99, 0.45)), inset 0 0 14px rgba(255, 46, 99, 0.25);
+}
+
+.rail-pillar-btn[data-pillar="sagittarius"].active,
+.rail-pillar-btn[data-pillar="luminary"].active {
+  background: color-mix(in srgb, #00e5ff 18%, transparent);
+  border-color: #00e5ff;
+  box-shadow: 0 0 28px var(--aura-luminary, rgba(0, 229, 255, 0.45)), inset 0 0 14px rgba(0, 229, 255, 0.25);
+}
+
+.rail-pillar-btn[data-pillar="leo"].active,
+.rail-pillar-btn[data-pillar="starlium"].active {
+  background: color-mix(in srgb, var(--neon-purple, #a855f7) 18%, transparent);
+  border-color: var(--neon-purple, #a855f7);
+  box-shadow: 0 0 28px var(--aura-starlium, rgba(168, 85, 247, 0.45)), inset 0 0 14px rgba(168, 85, 247, 0.25);
+}
+
+.rail-pillar-btn[data-pillar="tools"].active {
+  background: color-mix(in srgb, var(--neon-gold, #eab308) 18%, transparent);
+  border-color: var(--neon-gold, #eab308);
+  box-shadow: 0 0 28px var(--aura-tools, rgba(234, 179, 8, 0.45)), inset 0 0 14px rgba(234, 179, 8, 0.25);
+}
+
+.rail-pillar-btn[data-pillar="atomic"].active {
+  background: color-mix(in srgb, var(--neon-emerald, #10b981) 18%, transparent);
+  border-color: var(--neon-emerald, #10b981);
+  box-shadow: 0 0 28px var(--aura-atomic, rgba(16, 185, 129, 0.45)), inset 0 0 14px rgba(16, 185, 129, 0.25);
+}
+
+.rail-pillar-btn[data-pillar="sirium"].active {
+  background: color-mix(in srgb, #f97316 18%, transparent);
+  border-color: #f97316;
+  box-shadow: 0 0 28px var(--aura-sirium, rgba(249, 115, 22, 0.45)), inset 0 0 14px rgba(249, 115, 22, 0.25);
+}
+
+.rail-pillar-btn[data-pillar="sanctum"].active,
+.rail-admin-btn.active {
+  background: linear-gradient(135deg, color-mix(in srgb, var(--accent-amber, #f59e0b) 25%, transparent), color-mix(in srgb, #d946ef 25%, transparent));
+  border-color: var(--accent-amber, #f59e0b);
+  box-shadow: 0 0 30px var(--aura-sanctum, rgba(217, 70, 239, 0.45)), inset 0 0 14px rgba(245, 158, 11, 0.3);
+}
+
+.rail-admin-btn {
+  border-color: color-mix(in srgb, var(--accent-amber) 30%, transparent);
+  background: color-mix(in srgb, var(--accent-amber) 8%, transparent);
+}
+
+.rail-admin-btn:hover {
+  border-color: color-mix(in srgb, var(--accent-amber) 60%, transparent);
+  background: color-mix(in srgb, var(--accent-amber) 15%, transparent);
+  box-shadow: 0 0 22px color-mix(in srgb, var(--accent-amber) 40%, transparent);
+}
+
+.rail-pillar-btn[data-pillar="aries"].active {
+  background: color-mix(in srgb, var(--accent-rose) 20%, transparent);
+  border-color: var(--accent-rose);
+  box-shadow: 0 0 24px color-mix(in srgb, var(--accent-rose) 45%, transparent), inset 0 0 12px color-mix(in srgb, var(--accent-rose) 20%, transparent);
+}
+
+.rail-pillar-btn[data-pillar="taurus"].active {
+  background: color-mix(in srgb, var(--accent-amber) 20%, transparent);
+  border-color: var(--accent-amber);
+  box-shadow: 0 0 24px color-mix(in srgb, var(--accent-amber) 45%, transparent), inset 0 0 12px color-mix(in srgb, var(--accent-amber) 20%, transparent);
+}
+
+.rail-pillar-btn[data-pillar="cancer"].active {
+  background: color-mix(in srgb, var(--accent-indigo) 20%, transparent);
+  border-color: var(--accent-indigo);
+  box-shadow: 0 0 24px color-mix(in srgb, var(--accent-indigo) 45%, transparent), inset 0 0 12px color-mix(in srgb, var(--accent-indigo) 20%, transparent);
+}
+
+.rail-pillar-btn[data-pillar="virgo"].active {
+  background: rgba(20, 184, 166, 0.2);
+  border-color: #14b8a6;
+  box-shadow: 0 0 24px rgba(20, 184, 166, 0.45), inset 0 0 12px rgba(20, 184, 166, 0.2);
+}
+
+.rail-pillar-btn[data-pillar="libra"].active {
+  background: rgba(236, 72, 153, 0.2);
+  border-color: #ec4899;
+  box-shadow: 0 0 24px rgba(236, 72, 153, 0.45), inset 0 0 12px rgba(236, 72, 153, 0.2);
+}
+
+.rail-pillar-btn[data-pillar="scorpio"].active {
+  background: color-mix(in srgb, var(--accent-rose) 20%, transparent);
+  border-color: var(--accent-rose);
+  box-shadow: 0 0 24px color-mix(in srgb, var(--accent-rose) 45%, transparent), inset 0 0 12px color-mix(in srgb, var(--accent-rose) 20%, transparent);
+}
+
+.rail-pillar-btn[data-pillar="pisces"].active {
+  background: color-mix(in srgb, var(--accent-cyan) 20%, transparent);
+  border-color: var(--accent-cyan);
+  box-shadow: 0 0 24px color-mix(in srgb, var(--accent-cyan) 45%, transparent), inset 0 0 12px color-mix(in srgb, var(--accent-cyan) 20%, transparent);
+}
+
+/* Active Indicator Strip on Left Edge */
+.rail-pillar-btn::before {
+  content: '';
+  position: absolute;
+  left: -11px;
+  top: 50%;
+  transform: translateY(-50%) scaleY(0);
+  width: 4px;
+  height: 24px;
+  border-radius: 0 4px 4px 0;
+  background: var(--accent-cyan, #00f0ff);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 0 12px var(--accent-cyan, #00f0ff);
+}
+
+.rail-pillar-btn.active::before {
+  transform: translateY(-50%) scaleY(1);
+}
+
+.rail-pillar-btn[data-pillar="astraonyx"].active::before {
+  background: #e2e8f0;
+  box-shadow: 0 0 12px rgba(226, 232, 240, 0.85);
+}
+
+.rail-pillar-btn[data-pillar="polarium"].active::before {
+  background: var(--neon-rose, #ff2e63);
+  box-shadow: 0 0 14px var(--neon-rose, #ff2e63);
+}
+.rail-pillar-btn[data-pillar="luminary"].active::before {
+  background: #00e5ff;
+  box-shadow: 0 0 14px #00e5ff;
+}
+.rail-pillar-btn[data-pillar="starlium"].active::before {
+  background: var(--neon-purple, #a855f7);
+  box-shadow: 0 0 14px var(--neon-purple, #a855f7);
+}
+.rail-pillar-btn[data-pillar="tools"].active::before {
+  background: var(--neon-gold, #eab308);
+  box-shadow: 0 0 14px var(--neon-gold, #eab308);
+}
+.rail-pillar-btn[data-pillar="atomic"].active::before {
+  background: var(--neon-emerald, #10b981);
+  box-shadow: 0 0 14px var(--neon-emerald, #10b981);
+}
+.rail-pillar-btn[data-pillar="sirium"].active::before {
+  background: #f97316;
+  box-shadow: 0 0 14px #f97316;
+}
+.rail-pillar-btn[data-pillar="sanctum"].active::before {
+  background: var(--accent-amber, #f59e0b);
+  box-shadow: 0 0 14px var(--accent-amber, #f59e0b);
+}
+
+/* Tooltips on Hover */
+.rail-pillar-btn .rail-tooltip {
+  position: absolute;
+  left: calc(100% + 14px);
+  top: 50%;
+  transform: translateY(-50%) translateX(-6px);
+  background: var(--bg-surface);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #fff;
+  font-size: 0.74rem;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: 8px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: all 0.16s ease;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+  z-index: 200;
+}
+
+.rail-pillar-btn:hover .rail-tooltip {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
+
+/* Bottom Rail Actions */
+.rail-bottom-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  width: 100%;
+}
+
+.rail-toggle-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--text-muted, #94a3b8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 0.88rem;
+  transition: all 0.2s ease;
+}
+
+.rail-toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* 3. SUB-NAV DRAWER (255px Widescreen Comfortable) */
+.polaris-subnav-drawer {
+  width: 255px;
+  flex-shrink: 0;
+  background: rgba(10, 15, 28, 0.78);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 22px 14px;
+  z-index: 90;
+  box-sizing: border-box;
+  transition: width 0.28s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.22s ease, padding 0.28s ease;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.12) transparent;
+}
+
+/* Drawer Header */
+.subnav-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding: 0 6px;
+}
+
+.subnav-pillar-title {
+  font-family: var(--font-sans);
+  font-size: 1.08rem;
+  font-weight: 850;
+  color: #fff;
+  letter-spacing: -0.3px;
+  white-space: nowrap;
+}
+
+.subnav-pillar-badge {
+  font-size: 0.68rem;
+  padding: 3px 8px;
+  border-radius: 9999px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+/* Subnav Links List */
+.subnav-links-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+}
+
+.subnav-links-list .nav-tab {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--text-muted, #94a3b8);
+  font-size: 0.86rem;
+  font-weight: 650;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+  box-sizing: border-box;
+  text-decoration: none;
+  white-space: nowrap;
+  position: relative;
+}
+
+.subnav-links-list .nav-tab[style*="display: none"] {
+  display: none !important;
+}
+
+.subnav-links-list .nav-tab svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  color: currentColor;
+  transition: color 0.18s ease;
+}
+
+.subnav-links-list .nav-tab span {
+  flex: 1;
+  white-space: nowrap;
+  overflow: visible;
+  text-overflow: clip;
+}
+
+.subnav-links-list .nav-tab:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-primary);
+  border-color: rgba(255, 255, 255, 0.08);
+  transform: translateX(3px);
+}
+
+.subnav-links-list .nav-tab.active {
+  background: linear-gradient(90deg, color-mix(in srgb, var(--accent-cyan) 18%, transparent) 0%, color-mix(in srgb, var(--accent-cyan) 3%, transparent) 100%) !important;
+  border-color: color-mix(in srgb, var(--accent-cyan) 42%, transparent) !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 20px color-mix(in srgb, var(--accent-cyan) 15%, transparent);
+  font-weight: 750;
+}
+
+.subnav-links-list .nav-tab.active::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 22%;
+  bottom: 22%;
+  width: 3.5px;
+  border-radius: 0 3px 3px 0;
+  background: var(--accent-cyan, var(--accent-cyan));
+  box-shadow: 0 0 10px var(--accent-cyan, var(--accent-cyan));
+}
+
+.subnav-links-list .nav-tab.active svg {
+  color: var(--accent-cyan, var(--accent-cyan));
+}
+
+/* Collapsed Drawer State */
+.polaris-app-shell.sidebar-collapsed .polaris-subnav-drawer {
+  width: 0;
+  padding-left: 0;
+  padding-right: 0;
+  opacity: 0;
+  overflow: hidden;
+  border-right-color: transparent;
+  pointer-events: none;
+}
+
+/* 4. MAIN STAGE WRAPPER */
+.polaris-stage-wrapper {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  box-sizing: border-box;
+  position: relative;
+}
+
+/* 5. SLIM TOP BAR (52px) */
+.polaris-top-header {
+  height: 52px;
+  flex-shrink: 0;
+  background: rgba(8, 12, 22, 0.76);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 0 18px;
+  position: sticky;
+  top: 0;
+  z-index: 80;
+  box-sizing: border-box;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  overflow: visible;
+}
+
+.header-left-cluster {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.polaris-top-header .vercel-workspace-pill {
+  white-space: nowrap;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+/* Omnisearch Trigger in Slim Topbar */
+.polaris-top-search {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  color: var(--text-muted, #94a3b8);
+  font-size: 0.76rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex: 0 1 280px;
+  min-width: 140px;
+  max-width: 340px;
+  white-space: nowrap;
+}
+
+.polaris-top-search:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: color-mix(in srgb, var(--accent-cyan) 40%, transparent);
+  color: #fff;
+  box-shadow: 0 0 15px color-mix(in srgb, var(--accent-cyan) 15%, transparent);
+}
+
+.vercel-right-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+/* Responsive Top Bar Condensing */
+@media (max-width: 1400px) {
+  .quick-theme-select {
+    max-width: 150px;
+  }
+}
+
+@media (max-width: 1260px) {
+  .quick-theme-wrapper {
+    display: none !important;
+  }
+  #header-active-theme-name {
+    max-width: 80px !important;
+  }
+}
+
+@media (max-width: 1100px) {
+  .btn-welcome-trigger span.welcome-label {
+    display: none !important;
+  }
+  .polaris-top-search {
+    flex: 0 1 180px;
+    min-width: 110px;
+  }
+}
+
+/* Clean Main Canvas Content — Full Responsive Canvas */
+.polaris-stage-wrapper .app-container {
+  flex: 1;
+  padding: 28px 36px 60px 36px;
+  max-width: 100%;
+  width: 100%;
+  margin: 0;
+  box-sizing: border-box;
+  min-height: auto;
+}
+
+/* Widescreen Scaling (>1440px) */
+@media (min-width: 1440px) {
+  .polaris-stage-wrapper .app-container {
+    padding: 28px 36px 70px 36px;
+  }
+}
+
+/* Ultra-Wide & 2K / 4K Monitor Scaling (>1920px) */
+@media (min-width: 1920px) {
+  .polaris-stage-wrapper .app-container {
+    padding: 32px 48px 80px 48px;
+  }
+}
+
+@media (min-width: 2560px) {
+  .polaris-stage-wrapper .app-container {
+    padding: 36px 60px 90px 60px;
+  }
+}
+
+/* 6. MOBILE & RESPONSIVE BEHAVIOR (<992px) */
+@media (max-width: 992px) {
+  .polaris-subnav-drawer {
+    position: fixed;
+    left: 68px;
+    top: 0;
+    bottom: 0;
+    z-index: 150;
+    background: rgba(10, 15, 28, 0.95);
+    box-shadow: 10px 0 35px rgba(0, 0, 0, 0.7);
+  }
+
+  .polaris-top-search {
+    min-width: 180px;
+  }
+}
+
+@media (max-width: 640px) {
+  .polaris-rail-primary {
+    width: 56px;
+    padding: 12px 0;
+  }
+
+  .rail-pillar-btn {
+    width: 40px;
+    height: 40px;
+  }
+
+  .polaris-subnav-drawer {
+    left: 56px;
+    width: 200px;
+  }
+
+  .polaris-top-header {
+    padding: 0 12px;
+  }
+
+  .polaris-top-search {
+    display: none;
+  }
+
+  .polaris-stage-wrapper .app-container {
+    padding: 16px 14px 40px 14px;
+  }
+}

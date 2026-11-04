@@ -1,0 +1,2500 @@
+/* dashboard/css/wayground-studio.css — Wayground (Quizizz) & Luminary Studyspace Design System */
+
+:root {
+  --wg-bg-deep: #08090d;
+  --wg-bg-card: rgba(16, 20, 30, 0.75);
+  --wg-bg-glass: rgba(22, 28, 44, 0.55);
+  --wg-border: rgba(255, 255, 255, 0.08);
+  --wg-border-glow: color-mix(in srgb, var(--accent-purple) 30%, transparent);
+  --wg-accent-purple: var(--accent-purple);
+  --wg-accent-cyan: var(--accent-cyan);
+  --wg-accent-emerald: var(--accent-emerald);
+  --wg-accent-amber: var(--accent-amber);
+  --wg-accent-rose: var(--accent-rose);
+  
+  /* Wayground Signature Option Colors */
+  --wg-opt-red: var(--accent-rose);
+  --wg-opt-blue: #3b82f6;
+  --wg-opt-yellow: var(--accent-amber);
+  --wg-opt-green: var(--accent-emerald);
+}
+
+/* Container Master */
+.wayground-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 4px 60px;
+  box-sizing: border-box;
+}
+
+/* Master Header & Navigation */
+.wayground-header {
+  position: relative;
+  background: radial-gradient(circle at 15% 20%, color-mix(in srgb, var(--accent-purple) 15%, transparent), transparent 45%),
+              radial-gradient(circle at 85% 30%, color-mix(in srgb, var(--accent-cyan) 12%, transparent), transparent 45%),
+              rgba(14, 18, 28, 0.85);
+  border: 1px solid var(--wg-border);
+  border-radius: 20px;
+  padding: 24px 28px;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+}
+
+.wayground-header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.wayground-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.wayground-logo-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, var(--accent-purple), var(--accent-indigo));
+  border-radius: 14px;
+  font-size: 1.6rem;
+  box-shadow: 0 0 25px color-mix(in srgb, var(--accent-purple) 45%, transparent);
+}
+
+.wayground-brand-title {
+  font-family: var(--font-display, 'Outfit', sans-serif);
+  font-size: 1.55rem;
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: -0.02em;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.wayground-brand-pill {
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  padding: 3px 8px;
+  border-radius: 9999px;
+  background: color-mix(in srgb, var(--accent-purple) 20%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent-purple) 40%, transparent);
+  color: var(--accent-purple);
+  text-transform: uppercase;
+}
+
+.wayground-nav-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  scrollbar-width: none;
+}
+.wayground-nav-bar::-webkit-scrollbar {
+  display: none;
+}
+
+.wg-nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid transparent;
+  color: var(--text-secondary, #94a3b8);
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+}
+
+.wg-nav-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.wg-nav-btn.active {
+  background: color-mix(in srgb, var(--accent-purple) 18%, transparent);
+  border-color: color-mix(in srgb, var(--accent-purple) 45%, transparent);
+  color: #f3e8ff;
+  box-shadow: 0 4px 15px color-mix(in srgb, var(--accent-purple) 20%, transparent);
+}
+
+/* Quick PIN Input Bar */
+.wg-pin-join-box {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid var(--wg-border);
+  border-radius: 9999px;
+  padding: 4px 6px 4px 14px;
+  gap: 8px;
+}
+
+.wg-pin-input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #fff;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.85rem;
+  font-weight: 700;
+  width: 100px;
+  text-transform: uppercase;
+}
+
+.wg-pin-btn {
+  background: linear-gradient(135deg, var(--wg-accent-purple), var(--accent-purple));
+  border: none;
+  outline: none;
+  border-radius: 9999px;
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 800;
+  padding: 6px 14px;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+.wg-pin-btn:active {
+  transform: scale(0.96);
+}
+
+/* Subviews Master */
+.wg-subview {
+  display: none;
+  animation: wgFadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.wg-subview.active {
+  display: block;
+}
+
+@keyframes wgFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==================== 1. EXPLORE & CATALOG HUB ==================== */
+.wg-filter-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.wg-category-pills {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.wg-cat-pill {
+  padding: 6px 14px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--wg-border);
+  color: var(--text-muted, #94a3b8);
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.wg-cat-pill:hover, .wg-cat-pill.active {
+  background: color-mix(in srgb, var(--accent-cyan) 15%, transparent);
+  border-color: color-mix(in srgb, var(--accent-cyan) 40%, transparent);
+  color: var(--accent-cyan);
+}
+
+.wg-search-input-wrap {
+  position: relative;
+  min-width: 260px;
+}
+
+.wg-search-input {
+  width: 100%;
+  background: rgba(14, 18, 28, 0.7);
+  border: 1px solid var(--wg-border);
+  border-radius: 12px;
+  padding: 8px 14px 8px 36px;
+  color: #fff;
+  font-size: 0.85rem;
+  outline: none;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+
+.wg-search-input:focus {
+  border-color: var(--wg-accent-purple);
+}
+
+.wg-search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.9rem;
+  color: var(--text-muted, #64748b);
+  pointer-events: none;
+}
+
+/* Quiz Cards Grid */
+.wg-quiz-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
+}
+
+.wg-quiz-card {
+  position: relative;
+  background: var(--wg-bg-card);
+  border: 1px solid var(--wg-border);
+  border-radius: 18px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  backdrop-filter: blur(12px);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+
+.wg-quiz-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent-purple), var(--accent-cyan), var(--accent-emerald));
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.wg-quiz-card:hover {
+  transform: translateY(-4px);
+  border-color: color-mix(in srgb, var(--accent-purple) 40%, transparent);
+  box-shadow: 0 16px 32px -10px rgba(0, 0, 0, 0.5), 0 0 25px color-mix(in srgb, var(--accent-purple) 15%, transparent);
+}
+
+.wg-quiz-card:hover::before {
+  opacity: 1;
+}
+
+.wg-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.wg-card-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  border: 1px solid var(--wg-border);
+}
+
+.wg-card-badge {
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  padding: 3px 8px;
+  border-radius: 9999px;
+  text-transform: uppercase;
+}
+
+.wg-card-title {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #fff;
+  margin: 0 0 8px;
+  line-height: 1.35;
+}
+
+.wg-card-desc {
+  font-size: 0.8rem;
+  color: var(--text-secondary, #94a3b8);
+  line-height: 1.5;
+  margin: 0 0 16px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.wg-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 0.72rem;
+  color: var(--text-muted, #64748b);
+  margin-bottom: 16px;
+}
+
+.wg-card-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.wg-btn-action {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  border: none;
+}
+
+.wg-btn-play {
+  background: linear-gradient(135deg, var(--accent-emerald), var(--accent-emerald));
+  color: #fff;
+}
+.wg-btn-play:hover {
+  box-shadow: 0 4px 15px color-mix(in srgb, var(--accent-emerald) 35%, transparent);
+  transform: translateY(-1px);
+}
+
+.wg-btn-flash {
+  background: color-mix(in srgb, var(--accent-purple) 15%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent-purple) 35%, transparent);
+  color: var(--accent-purple);
+}
+.wg-btn-flash:hover {
+  background: color-mix(in srgb, var(--accent-purple) 25%, transparent);
+}
+
+.wg-btn-host {
+  background: color-mix(in srgb, var(--accent-cyan) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent-cyan) 30%, transparent);
+  color: var(--accent-cyan);
+}
+.wg-btn-host:hover {
+  background: color-mix(in srgb, var(--accent-cyan) 22%, transparent);
+}
+
+/* ==================== 2. INTERACTIVE SOLO PLAY ARENA ==================== */
+.wg-arena-wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Arena Top HUD */
+.wg-arena-hud {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--wg-bg-card);
+  border: 1px solid var(--wg-border);
+  border-radius: 16px;
+  padding: 12px 20px;
+  backdrop-filter: blur(12px);
+}
+
+.wg-hud-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.wg-hud-label {
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: var(--text-muted, #64748b);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.wg-hud-val {
+  font-family: var(--font-mono, monospace);
+  font-size: 1.15rem;
+  font-weight: 900;
+  color: #fff;
+}
+
+.wg-timer-bar-wrap {
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 9999px;
+  overflow: hidden;
+  margin-top: 4px;
+}
+
+.wg-timer-bar-fill {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, var(--accent-emerald), var(--accent-cyan));
+  transition: width 0.1s linear, background 0.3s ease;
+  border-radius: 9999px;
+}
+
+.wg-timer-bar-fill.warning {
+  background: linear-gradient(90deg, var(--accent-amber), var(--accent-rose));
+  animation: wgTimerPulse 0.5s infinite alternate;
+}
+
+@keyframes wgTimerPulse {
+  from { opacity: 0.8; }
+  to { opacity: 1; filter: brightness(1.2); }
+}
+
+/* Power-Ups Tray */
+.wg-powerups-tray {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.wg-powerup-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--wg-border);
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.wg-powerup-btn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.wg-powerup-btn.active {
+  background: color-mix(in srgb, var(--accent-amber) 20%, transparent);
+  border-color: var(--accent-amber);
+  color: #fef08a;
+  box-shadow: 0 0 15px color-mix(in srgb, var(--accent-amber) 30%, transparent);
+}
+
+.wg-powerup-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+/* Question Box */
+.wg-question-card {
+  background: radial-gradient(circle at 50% 0%, color-mix(in srgb, var(--accent-purple) 8%, transparent), transparent 70%),
+              var(--wg-bg-card);
+  border: 1px solid var(--wg-border);
+  border-radius: 20px;
+  padding: 32px 28px;
+  backdrop-filter: blur(16px);
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.4);
+}
+
+.wg-question-text {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.5;
+  margin: 0;
+  max-width: 800px;
+}
+
+/* 4 Options Grid — Wayground Signature Palette */
+.wg-options-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+@media (max-width: 640px) {
+  .wg-options-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.wg-option-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 22px;
+  border-radius: 16px;
+  border: 2px solid transparent;
+  background: rgba(22, 28, 44, 0.6);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  user-select: none;
+}
+
+.wg-opt-shape {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-weight: 900;
+  flex-shrink: 0;
+}
+
+/* 4 Distinct Color Variants */
+.wg-option-btn[data-idx="0"] {
+  border-color: color-mix(in srgb, var(--accent-rose) 35%, transparent);
+  background: linear-gradient(135deg, color-mix(in srgb, var(--accent-rose) 15%, transparent), rgba(22, 28, 44, 0.7));
+}
+.wg-option-btn[data-idx="0"] .wg-opt-shape {
+  background: var(--accent-rose);
+  color: #fff;
+  box-shadow: 0 0 15px color-mix(in srgb, var(--accent-rose) 40%, transparent);
+}
+
+.wg-option-btn[data-idx="1"] {
+  border-color: rgba(59, 130, 246, 0.35);
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(22, 28, 44, 0.7));
+}
+.wg-option-btn[data-idx="1"] .wg-opt-shape {
+  background: #3b82f6;
+  color: #fff;
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+}
+
+.wg-option-btn[data-idx="2"] {
+  border-color: color-mix(in srgb, var(--accent-amber) 35%, transparent);
+  background: linear-gradient(135deg, color-mix(in srgb, var(--accent-amber) 15%, transparent), rgba(22, 28, 44, 0.7));
+}
+.wg-option-btn[data-idx="2"] .wg-opt-shape {
+  background: var(--accent-amber);
+  color: #fff;
+  box-shadow: 0 0 15px color-mix(in srgb, var(--accent-amber) 40%, transparent);
+}
+
+.wg-option-btn[data-idx="3"] {
+  border-color: color-mix(in srgb, var(--accent-emerald) 35%, transparent);
+  background: linear-gradient(135deg, color-mix(in srgb, var(--accent-emerald) 15%, transparent), rgba(22, 28, 44, 0.7));
+}
+.wg-option-btn[data-idx="3"] .wg-opt-shape {
+  background: var(--accent-emerald);
+  color: #fff;
+  box-shadow: 0 0 15px color-mix(in srgb, var(--accent-emerald) 40%, transparent);
+}
+
+.wg-option-btn:hover:not(:disabled) {
+  transform: translateY(-2px) scale(1.01);
+  filter: brightness(1.15);
+}
+
+.wg-option-btn:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.wg-option-btn:disabled {
+  cursor: default;
+}
+
+.wg-option-btn.correct {
+  border-color: var(--accent-emerald) !important;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--accent-emerald) 35%, transparent), color-mix(in srgb, var(--accent-emerald) 15%, transparent)) !important;
+  box-shadow: 0 0 30px color-mix(in srgb, var(--accent-emerald) 50%, transparent) !important;
+}
+
+.wg-option-btn.wrong {
+  border-color: var(--accent-rose) !important;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--accent-rose) 35%, transparent), color-mix(in srgb, var(--accent-rose) 15%, transparent)) !important;
+  opacity: 0.6;
+  animation: wgShake 0.4s ease;
+}
+
+.wg-option-btn.eliminated {
+  opacity: 0.2;
+  pointer-events: none;
+  filter: grayscale(1);
+}
+
+@keyframes wgShake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-6px); }
+  40%, 80% { transform: translateX(6px); }
+}
+
+/* Feedback Drawer */
+.wg-feedback-box {
+  display: none;
+  border-radius: 16px;
+  padding: 16px 20px;
+  animation: wgFadeIn 0.3s ease forwards;
+}
+
+.wg-feedback-box.correct {
+  display: block;
+  background: color-mix(in srgb, var(--accent-emerald) 15%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent-emerald) 40%, transparent);
+}
+
+.wg-feedback-box.wrong {
+  display: block;
+  background: color-mix(in srgb, var(--accent-rose) 15%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent-rose) 40%, transparent);
+}
+
+/* ==================== 3. FLASHCARDS 3D ENGINE ==================== */
+.wg-flashcard-stage {
+  perspective: 1200px;
+  max-width: 680px;
+  height: 420px;
+  margin: 0 auto;
+}
+
+.wg-flashcard-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-style: preserve-3d;
+  cursor: pointer;
+}
+
+.wg-flashcard-inner.flipped {
+  transform: rotateY(180deg);
+}
+
+.wg-flashcard-front, .wg-flashcard-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: 24px;
+  padding: 36px 32px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid var(--wg-border);
+  box-shadow: 0 25px 50px -15px rgba(0, 0, 0, 0.6);
+}
+
+.wg-flashcard-front {
+  background: radial-gradient(circle at 50% 20%, color-mix(in srgb, var(--accent-purple) 15%, transparent), transparent 70%),
+              var(--wg-bg-card);
+}
+
+.wg-flashcard-back {
+  background: radial-gradient(circle at 50% 20%, color-mix(in srgb, var(--accent-cyan) 18%, transparent), transparent 70%),
+              var(--wg-bg-card);
+  transform: rotateY(180deg);
+}
+
+.wg-card-hint-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.wg-card-body-text {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.5;
+  max-width: 580px;
+}
+
+.wg-card-flip-prompt {
+  font-size: 0.75rem;
+  color: var(--wg-accent-purple);
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.wg-flash-ctrls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+/* ==================== 4. LIVE MULTIPLAYER & PODIUM ==================== */
+.wg-lobby-hero {
+  background: radial-gradient(circle at 50% 10%, color-mix(in srgb, var(--accent-purple) 20%, transparent), transparent 70%),
+              var(--wg-bg-card);
+  border: 1px solid var(--wg-border);
+  border-radius: 24px;
+  padding: 36px 28px;
+  text-align: center;
+  backdrop-filter: blur(16px);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.wg-pin-display {
+  display: inline-block;
+  font-family: var(--font-mono, monospace);
+  font-size: 3.2rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 12px 36px;
+  border-radius: 20px;
+  border: 2px dashed color-mix(in srgb, var(--accent-purple) 50%, transparent);
+  box-shadow: 0 0 35px color-mix(in srgb, var(--accent-purple) 25%, transparent);
+  margin: 16px 0;
+}
+
+.wg-players-roster {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 24px 0;
+}
+
+.wg-player-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--wg-border);
+  color: #fff;
+  font-size: 0.82rem;
+  font-weight: 700;
+  animation: wgPopIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes wgPopIn {
+  from { transform: scale(0.6); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* Podium Ceremony */
+.wg-podium-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 20px;
+  height: 320px;
+  margin: 40px auto 20px;
+  max-width: 600px;
+}
+
+.wg-podium-slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 140px;
+}
+
+.wg-podium-pillar {
+  width: 100%;
+  border-radius: 16px 16px 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  color: #fff;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+}
+
+.wg-podium-slot.rank-1 .wg-podium-pillar {
+  height: 180px;
+  background: linear-gradient(180deg, var(--accent-amber), #b45309);
+  border: 2px solid var(--accent-amber);
+  box-shadow: 0 0 40px color-mix(in srgb, var(--accent-amber) 40%, transparent);
+}
+
+.wg-podium-slot.rank-2 .wg-podium-pillar {
+  height: 140px;
+  background: linear-gradient(180deg, #94a3b8, #475569);
+  border: 2px solid #cbd5e1;
+}
+
+.wg-podium-slot.rank-3 .wg-podium-pillar {
+  height: 100px;
+  background: linear-gradient(180deg, var(--accent-amber), #78350f);
+  border: 2px solid var(--accent-amber);
+}
+
+/* Summary Card */
+.wg-summary-card {
+  max-width: 680px;
+  margin: 0 auto;
+  background: var(--wg-bg-card);
+  border: 1px solid var(--wg-border);
+  border-radius: 24px;
+  padding: 36px 28px;
+  text-align: center;
+  backdrop-filter: blur(16px);
+}
+
+.wg-score-badge {
+  font-family: var(--font-mono, monospace);
+  font-size: 2.8rem;
+  font-weight: 900;
+  background: linear-gradient(135deg, var(--accent-purple), var(--accent-cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 8px 0;
+}
+
+/* ==================== 5. WAYGROUND QUIZ BUILDER & QUESTION TYPE SUITE ==================== */
+.wg-builder-top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  background: var(--wg-bg-card);
+  border: 1px solid var(--wg-border);
+  border-radius: 16px;
+  padding: 14px 22px;
+  backdrop-filter: blur(16px);
+  margin-bottom: 20px;
+}
+
+.wg-builder-left-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.wg-quiz-title-input {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--wg-border);
+  border-radius: 10px;
+  padding: 8px 14px;
+  color: #fff;
+  font-size: 1.05rem;
+  font-weight: 800;
+  outline: none;
+  transition: border-color 0.2s;
+  min-width: 220px;
+}
+.wg-quiz-title-input:focus {
+  border-color: var(--accent-rose);
+}
+
+.wg-btn-publish {
+  background: linear-gradient(135deg, var(--accent-rose), #d946ef);
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  padding: 9px 22px;
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 4px 15px color-mix(in srgb, var(--accent-rose) 35%, transparent);
+  transition: all 0.2s ease;
+}
+.wg-btn-publish:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px color-mix(in srgb, var(--accent-rose) 50%, transparent);
+}
+
+/* Builder Two-Column Split */
+.wg-builder-split {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 24px;
+  align-items: start;
+}
+
+@media (max-width: 1024px) {
+  .wg-builder-split {
+    grid-template-columns: 1fr;
+  }
+}
+
+.wg-qtype-panel {
+  background: var(--wg-bg-card);
+  border: 1px solid var(--wg-border);
+  border-radius: 20px;
+  padding: 24px 26px;
+  backdrop-filter: blur(16px);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.wg-qtype-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.wg-qtype-group-title {
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: var(--text-muted, #94a3b8);
+  letter-spacing: 0.02em;
+  margin: 0;
+}
+
+.wg-qtype-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(185px, 1fr));
+  gap: 12px;
+}
+
+.wg-qtype-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--wg-border);
+  color: var(--text-primary);
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+  text-align: left;
+  user-select: none;
+}
+
+.wg-qtype-card:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: color-mix(in srgb, var(--accent-rose) 40%, transparent);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+.wg-qtype-icon {
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+  flex-shrink: 0;
+}
+
+.wg-badge-new {
+  font-size: 0.6rem;
+  font-weight: 800;
+  padding: 2px 5px;
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--accent-rose) 20%, transparent);
+  color: var(--accent-rose);
+  border: 1px solid color-mix(in srgb, var(--accent-rose) 40%, transparent);
+  margin-left: auto;
+}
+
+.wg-badge-lightning {
+  font-size: 0.75rem;
+  color: var(--accent-amber);
+  margin-left: auto;
+}
+
+/* Right Teleport Panel */
+.wg-teleport-panel {
+  background: var(--wg-bg-card);
+  border: 1px solid var(--wg-border);
+  border-radius: 20px;
+  padding: 24px;
+  backdrop-filter: blur(16px);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  position: sticky;
+  top: 20px;
+}
+
+.wg-teleport-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.wg-teleport-title {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #fff;
+  margin: 0;
+}
+
+.wg-btn-lib-add {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--wg-border);
+  border-radius: 8px;
+  padding: 6px 12px;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.wg-teleport-search-bar {
+  position: relative;
+  width: 100%;
+}
+
+.wg-teleport-search-input {
+  width: 100%;
+  background: rgba(14, 18, 28, 0.8);
+  border: 1px solid var(--wg-border);
+  border-radius: 12px;
+  padding: 9px 14px 9px 36px;
+  color: #fff;
+  font-size: 0.82rem;
+  outline: none;
+  box-sizing: border-box;
+}
+.wg-teleport-search-input:focus {
+  border-color: #d946ef;
+}
+
+.wg-teleport-empty-card {
+  text-align: center;
+  padding: 36px 16px;
+  color: var(--text-muted);
+}
+
+.wg-btn-generate-ai-pink {
+  background: color-mix(in srgb, var(--accent-rose) 15%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent-rose) 40%, transparent);
+  color: var(--accent-rose);
+  border-radius: 10px;
+  padding: 10px 18px;
+  font-size: 0.82rem;
+  font-weight: 800;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+.wg-btn-generate-ai-pink:hover {
+  background: color-mix(in srgb, var(--accent-rose) 25%, transparent);
+  color: #fff;
+}
+
+/* ==================== WAYGROUND FULLSCREEN QUESTION STUDIO & BARRIER ==================== */
+.wg-studio-barrier {
+  position: fixed !important;
+  inset: 0 !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  background: rgba(8, 4, 14, 0.95) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  z-index: 999998 !important;
+  display: none;
+  pointer-events: auto !important;
+}
+.wg-studio-barrier.active {
+  display: block !important;
+}
+
+.wg-studio-fullscreen-modal {
+  display: none;
+  position: fixed !important;
+  inset: 0 !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  z-index: 999999 !important;
+  background: #120a1a !important;
+  width: 100vw !important;
+  max-width: 100vw !important;
+  height: 100vh !important;
+  max-height: 100vh !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  flex-direction: column !important;
+  overflow: hidden !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  box-sizing: border-box !important;
+  box-shadow: 0 0 100px rgba(0, 0, 0, 0.95) !important;
+}
+.wg-studio-fullscreen-modal.active {
+  display: flex !important;
+}
+
+/* Secondary Dialog Modals (Settings, Library, AI, CSV, GForms) */
+.wg-qeditor-modal {
+  display: none;
+  position: fixed !important;
+  inset: 0 !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  background: rgba(6, 3, 12, 0.88) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  z-index: 1000000 !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 24px 20px !important;
+  box-sizing: border-box !important;
+}
+.wg-qeditor-modal.active {
+  display: flex !important;
+}
+.wg-qeditor-card {
+  width: 100%;
+  background: #1e1329;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 18px;
+  padding: 24px;
+  color: #ffffff;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85);
+  box-sizing: border-box;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+/* 1. Studio Topbar */
+.wg-studio-topbar {
+  background: #ffffff;
+  color: var(--bg-surface-elevated);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 24px;
+  border-bottom: 1px solid #e2e8f0;
+  z-index: 20;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100vw;
+  gap: 12px;
+  overflow-x: auto;
+}
+
+.wg-studio-topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.wg-studio-back-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  border: none;
+  background: transparent;
+  color: #334155;
+  font-size: 1.4rem;
+  font-weight: 800;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+.wg-studio-back-btn:hover {
+  background: #f1f5f9;
+}
+
+.wg-studio-type-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #ecfdf5;
+  color: #065f46;
+  border: 1px solid #a7f3d0;
+  font-size: 0.78rem;
+  font-weight: 800;
+  padding: 6px 14px;
+  border-radius: 8px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.wg-studio-topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.wg-studio-select-wrap {
+  position: relative;
+}
+
+.wg-studio-select {
+  appearance: none;
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 6px 26px 6px 12px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #334155;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.wg-studio-select:focus {
+  border-color: var(--accent-purple);
+}
+
+.wg-studio-btn-outline {
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 6px 14px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #334155;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s;
+}
+.wg-studio-btn-outline:hover {
+  background: #f1f5f9;
+}
+
+.wg-studio-btn-save {
+  background: linear-gradient(135deg, var(--accent-purple), #6d28d9);
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 7px 18px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 3px 12px color-mix(in srgb, var(--accent-purple) 35%, transparent);
+  transition: all 0.2s;
+}
+.wg-studio-btn-save:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 18px color-mix(in srgb, var(--accent-purple) 50%, transparent);
+}
+
+/* 2. Formatting Toolbar */
+.wg-studio-toolbar {
+  background: #ffffff;
+  border-bottom: 1px solid #e2e8f0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 24px;
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  flex-shrink: 0;
+  z-index: 15;
+}
+
+.wg-studio-toolbar-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.wg-studio-tool-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 4px;
+  transition: all 0.15s;
+}
+.wg-studio-tool-btn:hover {
+  color: var(--accent-purple);
+  background: #f3e8ff;
+}
+
+.wg-studio-toolbar-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-weight: 600;
+}
+
+.wg-studio-action-link {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transition: color 0.15s;
+}
+.wg-studio-action-link:hover {
+  color: var(--bg-surface);
+}
+.wg-studio-action-link.purple {
+  color: var(--accent-purple);
+}
+.wg-studio-action-link.purple:hover {
+  color: #5b21b6;
+}
+
+/* 3. Studio Split Workspace */
+.wg-studio-workspace {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  height: calc(100vh - 90px);
+}
+
+.wg-studio-canvas {
+  flex: 1;
+  overflow-y: auto;
+  padding: 32px 40px;
+  background: #160d21;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.wg-studio-prompt-card {
+  background: #2e153b;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  min-height: 160px;
+  padding: 24px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.wg-studio-mic-btn {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.wg-studio-mic-btn:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.wg-studio-prompt-input {
+  width: 100%;
+  max-width: 680px;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #ffffff;
+  font-size: 1.35rem;
+  font-weight: 600;
+  text-align: center;
+  resize: none;
+  line-height: 1.5;
+}
+.wg-studio-prompt-input::placeholder {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+/* 4. Multiple Choice 4-Color Answer Cards */
+.wg-studio-mc-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  width: 100%;
+}
+@media (max-width: 1100px) {
+  .wg-studio-mc-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 640px) {
+  .wg-studio-mc-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.wg-studio-answer-card {
+  min-height: 180px;
+  border-radius: 14px;
+  padding: 16px;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.wg-studio-answer-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4);
+}
+
+.wg-studio-answer-card.blue { background: #2374bb; }
+.wg-studio-answer-card.teal { background: #169c9b; }
+.wg-studio-answer-card.gold { background: #e5a024; }
+.wg-studio-answer-card.coral { background: #db445a; }
+
+.wg-studio-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.wg-studio-trash-btn {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  font-size: 0.9rem;
+  padding: 4px;
+}
+.wg-studio-trash-btn:hover {
+  color: #ffffff;
+}
+
+.wg-studio-check-circle {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 0.85rem;
+}
+.wg-studio-check-circle.active {
+  background: #ffffff;
+  border-color: #ffffff;
+  color: var(--bg-surface);
+  font-weight: 900;
+}
+
+.wg-studio-answer-textarea {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  text-align: center;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 700;
+  resize: none;
+  margin: auto 0;
+  line-height: 1.4;
+}
+.wg-studio-answer-textarea::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.wg-studio-card-footer {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.5);
+  text-align: right;
+}
+
+/* 5. Multi-Part Studio Cards */
+.wg-studio-part-card {
+  background: #2e153b;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  padding: 24px 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+}
+
+.wg-studio-part-title {
+  color: #ffffff;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.wg-studio-part-select-btn {
+  background: #ffffff;
+  color: var(--bg-surface);
+  font-weight: 800;
+  font-size: 0.8rem;
+  padding: 8px 18px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: background 0.15s;
+}
+.wg-studio-part-select-btn:hover {
+  background: #f1f5f9;
+}
+
+.wg-studio-addpart-full-btn {
+  width: 100%;
+  padding: 14px 20px;
+  border-radius: 12px;
+  border: 1px dashed rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.04);
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.wg-studio-addpart-full-btn:hover {
+  background: rgba(255, 255, 255, 0.09);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* 5b. True / False Studio Cards */
+.wg-studio-tf-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  width: 100%;
+}
+.wg-studio-tf-card {
+  min-height: 180px;
+  border-radius: 14px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+}
+.wg-studio-tf-card.true-card {
+  background: var(--accent-emerald);
+  border: 2px solid transparent;
+}
+.wg-studio-tf-card.false-card {
+  background: var(--accent-rose);
+  border: 2px solid transparent;
+}
+.wg-studio-tf-card.active {
+  box-shadow: 0 0 0 3px #ffffff, 0 12px 28px rgba(0, 0, 0, 0.5);
+  transform: translateY(-2px);
+}
+.wg-studio-tf-title {
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: #ffffff;
+  text-align: center;
+  margin: auto 0;
+  letter-spacing: 0.02em;
+}
+
+/* 5c. Fill in the Blanks Studio Cards */
+.wg-studio-blanks-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+}
+.wg-studio-blank-card {
+  background: #2e153b;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+}
+.wg-studio-blank-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.wg-studio-blank-pill {
+  background: #14b8a6;
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  letter-spacing: 0.04em;
+}
+.wg-studio-alt-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+.wg-studio-alt-chip button {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  padding: 0;
+  font-size: 0.8rem;
+}
+
+/* 5d. Open Ended & Rubric Studio Cards */
+.wg-studio-open-card {
+  background: #2e153b;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+}
+.wg-studio-mock-textarea {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px dashed rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  padding: 16px;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.9rem;
+  min-height: 90px;
+}
+.wg-studio-rubric-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+/* 5e. Match & Categorize Studio Cards */
+.wg-studio-match-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+.wg-studio-match-row {
+  display: grid;
+  grid-template-columns: 1fr 40px 1fr 40px;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  border-radius: 14px;
+  background: #2e153b;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+.wg-studio-match-arrow {
+  text-align: center;
+  font-size: 1.2rem;
+  color: var(--accent-purple);
+  font-weight: 800;
+}
+.wg-studio-cat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  width: 100%;
+}
+.wg-studio-cat-bucket {
+  background: #2e153b;
+  border: 2px dashed rgba(255, 255, 255, 0.2);
+  border-radius: 14px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 180px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+}
+
+/* 5f. Reorder Studio Stack */
+.wg-studio-reorder-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+.wg-studio-reorder-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  background: #2e153b;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+.wg-studio-step-pill {
+  background: linear-gradient(135deg, var(--accent-purple), var(--accent-indigo));
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+/* 5g. Math Response Studio Keypad */
+.wg-studio-math-wrap {
+  background: #2e153b;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.wg-studio-math-keypad {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 8px;
+}
+@media (max-width: 800px) {
+  .wg-studio-math-keypad {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+.wg-studio-math-key {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  color: #ffffff;
+  padding: 8px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.wg-studio-math-key:hover {
+  background: color-mix(in srgb, var(--accent-purple) 30%, transparent);
+  border-color: var(--accent-purple);
+  transform: translateY(-1px);
+}
+
+/* 5h. Bottom Options Toolbar */
+.wg-studio-bottom-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 10px;
+  width: 100%;
+  color: var(--text-secondary);
+  font-size: 0.78rem;
+}
+.wg-studio-toggle-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+.wg-studio-toggle-switch input {
+  accent-color: var(--accent-purple);
+  width: 16px;
+  height: 16px;
+}
+.wg-studio-layout-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 0.78rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.15s;
+}
+.wg-studio-layout-btn:hover {
+  color: #ffffff;
+}
+
+/* 6. Studio Right Sidebar */
+.wg-studio-sidebar {
+  width: 320px;
+  background: #ffffff;
+  border-left: 1px solid #e2e8f0;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow-y: auto;
+  color: var(--bg-surface-elevated);
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+
+.wg-studio-sidebar-title {
+  font-size: 0.76rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  margin: 0 0 10px;
+}
+
+.wg-studio-sidebar-select {
+  width: 100%;
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #334155;
+  outline: none;
+}
+
+.wg-studio-parts-stream {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.wg-studio-part-item {
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 12px;
+  background: rgba(248, 250, 252, 0.8);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.wg-studio-part-item-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: #334155;
+}
+
+.wg-studio-sidebar-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 14px;
+  border-top: 1px solid #e2e8f0;
+  margin-top: 20px;
+}
+
+.wg-studio-addpart-btn {
+  background: transparent;
+  border: none;
+  color: var(--accent-purple);
+  font-weight: 800;
+  font-size: 0.82rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.wg-studio-addpart-btn:hover {
+  color: #6d28d9;
+}
+
+.wg-studio-help-bubble {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--accent-purple);
+  color: #fff;
+  font-weight: 900;
+  font-size: 0.88rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--accent-purple) 30%, transparent);
+  transition: transform 0.15s;
+}
+.wg-studio-help-bubble:hover {
+  transform: scale(1.08);
+}
+
+@media (max-width: 992px) {
+  .wg-studio-workspace {
+    flex-direction: column !important;
+    height: auto !important;
+    overflow-y: auto !important;
+  }
+  .wg-studio-sidebar {
+    width: 100% !important;
+    min-width: 100% !important;
+    max-width: 100% !important;
+    border-left: none !important;
+    border-top: 1px solid #e2e8f0 !important;
+  }
+}
+
+/* Form Controls & Labels */
+.wg-form-label {
+  display: block;
+  font-size: 0.76rem;
+  font-weight: 800;
+  color: var(--text-muted, #94a3b8);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 6px;
+}
+
+.wg-form-input {
+  width: 100%;
+  background: rgba(14, 18, 28, 0.9);
+  border: 1px solid var(--wg-border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  color: #fff;
+  font-size: 0.86rem;
+  outline: none;
+  box-sizing: border-box;
+  font-family: inherit;
+  transition: all 0.2s ease;
+}
+.wg-form-input:focus {
+  border-color: var(--accent-purple);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent-purple) 20%, transparent);
+}
+
+/* Builder Draft Questions Tray */
+.wg-builder-drafts-tray {
+  background: rgba(16, 20, 30, 0.6);
+  border: 1px dashed var(--wg-border);
+  border-radius: 16px;
+  padding: 18px 20px;
+}
+
+.wg-builder-drafts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.wg-draft-empty-state {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: var(--text-muted, #94a3b8);
+  font-size: 0.82rem;
+  padding: 16px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.wg-draft-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--wg-border);
+  border-radius: 12px;
+  padding: 12px 16px;
+  transition: all 0.2s ease;
+}
+.wg-draft-item:hover {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: color-mix(in srgb, var(--accent-purple) 35%, transparent);
+}
+
+.wg-draft-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.68rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--accent-purple) 15%, transparent);
+  color: var(--accent-purple);
+  border: 1px solid color-mix(in srgb, var(--accent-purple) 30%, transparent);
+}
+
+.wg-draft-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Question Type: True / False */
+.wg-tf-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  width: 100%;
+}
+.wg-tf-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 32px 20px;
+  border-radius: 16px;
+  font-size: 1.3rem;
+  font-weight: 900;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  color: #fff;
+}
+.wg-tf-btn.true-opt {
+  background: linear-gradient(135deg, color-mix(in srgb, var(--accent-emerald) 20%, transparent), color-mix(in srgb, var(--accent-emerald) 5%, transparent));
+  border-color: color-mix(in srgb, var(--accent-emerald) 40%, transparent);
+}
+.wg-tf-btn.true-opt:hover {
+  background: color-mix(in srgb, var(--accent-emerald) 30%, transparent);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px color-mix(in srgb, var(--accent-emerald) 30%, transparent);
+}
+.wg-tf-btn.false-opt {
+  background: linear-gradient(135deg, color-mix(in srgb, var(--accent-rose) 20%, transparent), color-mix(in srgb, var(--accent-rose) 5%, transparent));
+  border-color: color-mix(in srgb, var(--accent-rose) 40%, transparent);
+}
+.wg-tf-btn.false-opt:hover {
+  background: color-mix(in srgb, var(--accent-rose) 30%, transparent);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px color-mix(in srgb, var(--accent-rose) 30%, transparent);
+}
+
+/* Question Type: Multi-Select */
+.wg-multiselect-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  width: 100%;
+}
+.wg-ms-btn {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 20px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid var(--wg-border);
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+}
+.wg-ms-btn.selected {
+  background: rgba(236, 72, 153, 0.2);
+  border-color: #ec4899;
+  box-shadow: 0 0 20px rgba(236, 72, 153, 0.25);
+}
+.wg-ms-checkbox {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  flex-shrink: 0;
+}
+.wg-ms-btn.selected .wg-ms-checkbox {
+  background: #ec4899;
+  border-color: #ec4899;
+}
+
+/* Question Type: Fill in the Blank */
+.wg-blank-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+.wg-blank-input {
+  background: rgba(255, 255, 255, 0.06);
+  border: 2px solid var(--wg-border);
+  border-radius: 14px;
+  padding: 14px 18px;
+  font-size: 1.1rem;
+  color: #fff;
+  outline: none;
+  font-family: inherit;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+.wg-blank-input:focus {
+  border-color: var(--accent-purple);
+  box-shadow: 0 0 25px color-mix(in srgb, var(--accent-purple) 30%, transparent);
+}
+
+/* Question Type: Match (Connecting Pairs) */
+.wg-match-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  width: 100%;
+}
+.wg-match-col {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.wg-match-card {
+  padding: 14px 18px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid var(--wg-border);
+  border-radius: 12px;
+  color: #fff;
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+.wg-match-card:hover {
+  background: rgba(255, 255, 255, 0.09);
+  border-color: color-mix(in srgb, var(--accent-emerald) 40%, transparent);
+}
+.wg-match-card.selected {
+  background: color-mix(in srgb, var(--accent-emerald) 20%, transparent);
+  border-color: var(--accent-emerald);
+  box-shadow: 0 0 15px color-mix(in srgb, var(--accent-emerald) 30%, transparent);
+}
+.wg-match-card.paired {
+  opacity: 0.55;
+  border-color: var(--accent-cyan);
+  background: color-mix(in srgb, var(--accent-cyan) 15%, transparent);
+  cursor: default;
+}
+
+/* Question Type: Reorder */
+.wg-reorder-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+.wg-reorder-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 18px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--wg-border);
+  border-radius: 12px;
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+.wg-reorder-btns {
+  display: flex;
+  gap: 6px;
+}
+.wg-reorder-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--wg-border);
+  color: #fff;
+  border-radius: 6px;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.wg-reorder-btn:hover {
+  background: rgba(255, 255, 255, 0.16);
+}
+
+/* Question Type: Categorize (Buckets) */
+.wg-cat-board {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+.wg-cat-buckets {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+.wg-cat-bucket {
+  background: rgba(255, 255, 255, 0.03);
+  border: 2px dashed rgba(255, 255, 255, 0.15);
+  border-radius: 14px;
+  padding: 14px;
+  min-height: 140px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.wg-cat-bucket-title {
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: var(--accent-cyan);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.wg-cat-item-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--wg-border);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #fff;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.2s;
+}
+.wg-cat-item-chip:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+/* Question Type: Hot Text */
+.wg-hottext-box {
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--wg-border);
+  border-radius: 14px;
+  font-size: 1.05rem;
+  line-height: 2;
+  color: var(--text-primary);
+}
+.wg-hottext-token {
+  display: inline-block;
+  padding: 2px 8px;
+  margin: 2px 3px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.wg-hottext-token:hover {
+  background: rgba(20, 184, 166, 0.2);
+  border-color: rgba(20, 184, 166, 0.4);
+}
+.wg-hottext-token.selected {
+  background: rgba(20, 184, 166, 0.35);
+  border-color: #14b8a6;
+  color: #5eead4;
+  font-weight: 800;
+  box-shadow: 0 0 12px rgba(20, 184, 166, 0.4);
+}
+
+/* Question Type: Draw (Canvas Board) */
+.wg-draw-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+.wg-draw-canvas {
+  background: var(--bg-surface);
+  border: 2px solid var(--wg-border);
+  border-radius: 16px;
+  cursor: crosshair;
+  touch-action: none;
+  box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.6);
+}
+.wg-draw-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  background: rgba(255, 255, 255, 0.04);
+  padding: 8px 16px;
+  border-radius: 9999px;
+  border: 1px solid var(--wg-border);
+}
+.wg-color-dot {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: transform 0.2s;
+}
+.wg-color-dot.active {
+  transform: scale(1.25);
+  border-color: #fff;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+/* Question Type: Poll Distribution */
+.wg-poll-btn {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--wg-border);
+  border-radius: 12px;
+  color: #fff;
+  font-size: 0.92rem;
+  font-weight: 700;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+}
+.wg-poll-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  background: color-mix(in srgb, var(--accent-cyan) 25%, transparent);
+  transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 1;
+}
+.wg-poll-text {
+  position: relative;
+  z-index: 2;
+}
+.wg-poll-pct {
+  position: relative;
+  z-index: 2;
+  font-family: var(--font-mono, monospace);
+  font-weight: 800;
+  color: var(--accent-cyan);
+}
+
+/* Question Type: Word Cloud Visual */
+.wg-wordcloud-box {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 30px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--wg-border);
+  border-radius: 16px;
+  min-height: 180px;
+}
+.wg-cloud-tag {
+  font-weight: 900;
+  padding: 4px 10px;
+  border-radius: 8px;
+  transition: transform 0.2s;
+}
+.wg-cloud-tag:hover {
+  transform: scale(1.15);
+}
+
+/* Question Type: Slide Presentation Layout */
+.wg-slide-card {
+  background: radial-gradient(circle at 50% 30%, color-mix(in srgb, var(--accent-purple) 12%, transparent), transparent 70%), rgba(16, 20, 30, 0.85);
+  border: 1px solid var(--wg-border);
+  border-radius: 20px;
+  padding: 36px 30px;
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto;
+}
+.wg-slide-title {
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: #fff;
+  margin: 0 0 16px;
+}
+.wg-slide-content {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin: 0 0 24px;
+}
+
+

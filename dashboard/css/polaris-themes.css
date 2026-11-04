@@ -1,0 +1,344 @@
+/* dashboard/css/polaris-themes.css
+ * Empat gaya tampilan tambahan di atas tema Polaris: minimalist, colorful, glassmorphism, neobrutalism.
+ * Dipilih lewat atribut data-skin pada <html> dan <body> (js/polaris-themes.js).
+ * Tanpa atribut = Polaris bawaan, file ini tidak berpengaruh sama sekali.
+ *
+ * Cara kerja: tiap gaya hanya menimpa TOKEN (--c-*, --bg-*, --accent-*, --radius-*, --sk-*)
+ * lalu satu set aturan komponen memakai token itu. Tambahan khas tiap gaya ada di bagian akhirnya.
+ */
+
+/* ======================================================================= 0. TRANSISI */
+::view-transition-old(root), ::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
+::view-transition-old(root) { z-index: 1; }
+::view-transition-new(root) { z-index: 2; }
+
+/* ======================================================================= 1. PEMILIH (selalu tampil, di semua gaya) */
+.tp-pop {
+  position: fixed; top: 58px; right: 16px; z-index: 100004; width: min(400px, calc(100vw - 24px));
+  max-height: min(78vh, 640px); overflow: auto; padding: 14px;
+  background: var(--bg-surface-elevated); color: var(--text-primary);
+  border: 1px solid var(--border-subtle); border-radius: 14px; box-shadow: 0 24px 60px rgb(0 0 0 / 0.4);
+  transform-origin: top right; opacity: 0; transform: translateY(-8px) scale(0.97); pointer-events: none; visibility: hidden;
+  transition: opacity 0.2s, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), visibility 0s 0.4s;
+}
+.tp-pop.is-open { opacity: 1; transform: none; pointer-events: auto; visibility: visible; transition-delay: 0s; }
+.tp-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; padding: 2px 4px 12px; }
+.tp-head h3 { margin: 0; font-size: 0.95rem; font-weight: 650; }
+.tp-head p { margin: 2px 0 0; font-size: 0.78rem; color: var(--text-secondary); }
+.tp-head kbd { font: 600 0.7rem/1 ui-monospace, monospace; padding: 4px 7px; border-radius: 6px; border: 1px solid var(--border-subtle); color: var(--text-secondary); white-space: nowrap; }
+.tp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.tp-card {
+  position: relative; display: flex; flex-direction: column; gap: 10px; padding: 8px 8px 12px; text-align: left; cursor: pointer;
+  background: transparent; color: inherit; border: 1px solid var(--border-subtle); border-radius: 12px; font: inherit;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s, background 0.2s;
+}
+.tp-card:hover { transform: translateY(-2px); border-color: var(--text-muted); }
+.tp-card:active { transform: scale(0.98); }
+.tp-card.is-on { border-color: var(--accent-cyan); box-shadow: 0 0 0 1px var(--accent-cyan); }
+.tp-card:last-child:nth-child(odd) { grid-column: 1 / -1; }
+.tp-meta { display: flex; flex-direction: column; gap: 2px; padding: 0 4px; }
+.tp-meta b { font-size: 0.86rem; font-weight: 650; }
+.tp-meta small { font-size: 0.72rem; line-height: 1.35; color: var(--text-secondary); }
+.tp-check { position: absolute; top: 14px; right: 14px; width: 18px; height: 18px; padding: 3px; border-radius: 50%; background: var(--accent-cyan); fill: none; stroke: #0b0f14; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; opacity: 0; transform: scale(0.5); transition: opacity 0.2s, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1); }
+.tp-card.is-on .tp-check { opacity: 1; transform: none; }
+
+/* Pratinjau mini: tiap kartu membawa warna gayanya sendiri lewat variabel lokal */
+.tp-prev { position: relative; display: block; height: 86px; border-radius: 8px; overflow: hidden; background: var(--pv-bg); border: var(--pv-bw, 1px) solid var(--pv-line); }
+.tp-prev i { position: absolute; display: block; }
+.tp-side { left: 0; top: 0; bottom: 0; width: 16%; background: var(--pv-panel); border-right: var(--pv-bw, 1px) solid var(--pv-line); }
+.tp-bar { left: 20%; right: 5%; top: 8px; height: 9px; border-radius: var(--pv-r); background: var(--pv-panel); border: var(--pv-bw, 1px) solid var(--pv-line); }
+.tp-c1, .tp-c2, .tp-c3 { top: 24px; height: 34px; border-radius: var(--pv-r); background: var(--pv-panel); border: var(--pv-bw, 1px) solid var(--pv-line); box-shadow: var(--pv-sh, none); }
+.tp-c1 { left: 20%; width: 21%; } .tp-c2 { left: 44%; width: 21%; } .tp-c3 { left: 68%; width: 27%; }
+.tp-btn { left: 20%; bottom: 8px; width: 28%; height: 11px; border-radius: var(--pv-r); background: var(--pv-accent); border: var(--pv-bw, 1px) solid var(--pv-line); box-shadow: var(--pv-sh, none); }
+[data-preview="classic"] { --pv-bg: #12171f; --pv-panel: #1e2733; --pv-line: #2c3746; --pv-accent: #f1dfa4; --pv-r: 3px; }
+[data-preview="minimalist"] { --pv-bg: #f7f7f5; --pv-panel: #ffffff; --pv-line: #e1dfd8; --pv-accent: #17171a; --pv-r: 3px; }
+[data-preview="colorful"] { --pv-bg: linear-gradient(135deg, #1b1540, #3a1d6e); --pv-panel: #2c2166; --pv-line: #4b3c9a; --pv-accent: linear-gradient(90deg, #ff5ea8, #ffb23f); --pv-r: 6px; }
+[data-preview="colorful"] .tp-c1 { background: #ff5ea8; border-color: transparent; } [data-preview="colorful"] .tp-c2 { background: #22d3ee; border-color: transparent; } [data-preview="colorful"] .tp-c3 { background: #a78bfa; border-color: transparent; }
+[data-preview="glassmorphism"] { --pv-bg: radial-gradient(circle at 20% 20%, #5b8cff, transparent 55%), radial-gradient(circle at 85% 80%, #c084fc, transparent 50%), #0b1020; --pv-panel: rgb(255 255 255 / 0.16); --pv-line: rgb(255 255 255 / 0.32); --pv-accent: rgb(255 255 255 / 0.55); --pv-r: 6px; }
+[data-preview="neobrutalism"] { --pv-bg: #fff3cf; --pv-panel: #ffffff; --pv-line: #000; --pv-bw: 2px; --pv-accent: #ffd23f; --pv-r: 4px; --pv-sh: 2px 2px 0 #000; }
+[data-preview="neobrutalism"] .tp-c1 { background: #ff6fb5; } [data-preview="neobrutalism"] .tp-c2 { background: #4cc9f0; } [data-preview="neobrutalism"] .tp-c3 { background: #b6f542; }
+
+.quick-theme-select { max-width: 150px; }
+
+/* ================================================= 2. TOKEN PER GAYA ============================================ */
+
+/* ---------------------------------------------------------------- MINIMALIST (terang, hairline, ala Linear/Vercel) */
+html[data-theme][data-skin="minimalist"], body[data-theme][data-skin="minimalist"] {
+  --c-ground: #f7f7f5; --c-panel: #ffffff; --c-raised: #ffffff; --c-hover: #f0f0ed;
+  --c-line: #e7e5e0; --c-line-strong: #cfccc4; --c-ink: #17171a; --c-ink-2: #55555c; --c-ink-3: #85858d;
+  --c-star: #17171a; --c-star-ink: #ffffff; --c-sky: #2f5bea;
+  --bg-space: #f7f7f5; --bg-surface: #ffffff; --bg-surface-elevated: #ffffff; --bg-glass: #ffffff; --bg-glass-hover: #f0f0ed;
+  --border-subtle: #e7e5e0; --border-active: #17171a; --border-glow: #cfccc4;
+  --text-primary: #17171a; --text-secondary: #55555c; --text-muted: #85858d;
+  --accent-cyan: #2f5bea; --accent-indigo: #4f5bd5; --accent-purple: #7c5cd6; --accent-emerald: #148a5c; --accent-amber: #b97a0c; --accent-rose: #cf3b33; --accent-champagne: #17171a;
+  --font-sans: 'Inter', 'Instrument Sans', ui-sans-serif, system-ui, sans-serif; --font-display: var(--font-sans); --font-mono: var(--font-sans);
+  --radius-sm: 4px; --radius-md: 6px; --radius-lg: 8px; --radius-xl: 10px;
+  --shadow-luxury: none; --spotlight-color: transparent;
+  --sk-card-bg: #ffffff; --sk-card-border: 1px solid #e7e5e0; --sk-card-shadow: none; --sk-card-r: 8px; --sk-blur: none;
+  --sk-btn-bg: #ffffff; --sk-btn-fg: #17171a; --sk-btn-border: 1px solid #dcd9d1; --sk-btn-shadow: none;
+  --sk-primary-bg: #17171a; --sk-primary-fg: #ffffff; --sk-primary-border: 1px solid #17171a;
+  --sk-input-bg: #ffffff; --sk-fill-subtle: #f4f4f1; --sk-fill-inset: #f0efeb; --sk-focus: #2f5bea;
+  --sk-sidebar-bg: #ffffff; --sk-header-bg: rgb(255 255 255 / 0.85); --sk-nav-active-bg: #f0efeb; --sk-nav-active-fg: #17171a;
+  --sk-icon-filter: invert(1) hue-rotate(180deg) saturate(0.9);
+  color-scheme: light;
+}
+
+/* ---------------------------------------------------------------- COLORFUL (gelap, vivid, tombol 3D ala Duolingo/Spotify) */
+html[data-theme][data-skin="colorful"], body[data-theme][data-skin="colorful"] {
+  --c-ground: #120d2b; --c-panel: #1b1540; --c-raised: #251c55; --c-hover: #31266b;
+  --c-line: #3b3080; --c-line-strong: #5444b0; --c-ink: #fff8ff; --c-ink-2: #d4c9f7; --c-ink-3: #a195d6;
+  --c-star: #ffd23f; --c-star-ink: #2a1a00; --c-sky: #22d3ee;
+  --bg-space: #120d2b; --bg-surface: #1b1540; --bg-surface-elevated: #251c55; --bg-glass: #1b1540; --bg-glass-hover: #31266b;
+  --border-subtle: rgb(160 140 255 / 0.28); --border-active: #ffd23f; --border-glow: rgb(255 94 168 / 0.5);
+  --text-primary: #fff8ff; --text-secondary: #d4c9f7; --text-muted: #a195d6;
+  --accent-cyan: #22d3ee; --accent-indigo: #818cf8; --accent-purple: #c084fc; --accent-emerald: #34d399; --accent-amber: #fbbf24; --accent-rose: #ff5ea8; --accent-champagne: #ffd23f;
+  --font-sans: 'Outfit', 'Plus Jakarta Sans', 'Instrument Sans', ui-sans-serif, system-ui, sans-serif; --font-display: var(--font-sans); --font-mono: var(--font-sans);
+  --radius-sm: 10px; --radius-md: 14px; --radius-lg: 18px; --radius-xl: 24px; --radius-full: 9999px;
+  --shadow-luxury: 0 10px 30px rgb(10 4 40 / 0.45); --spotlight-color: transparent;
+  --sk-card-bg: #1b1540; --sk-card-border: 2px solid rgb(160 140 255 / 0.28); --sk-card-shadow: 0 4px 0 #0e0a24; --sk-card-r: 18px; --sk-blur: none;
+  --sk-btn-bg: #2c2166; --sk-btn-fg: #fff8ff; --sk-btn-border: 2px solid #4b3c9a; --sk-btn-shadow: 0 4px 0 #1a1244;
+  --sk-primary-bg: linear-gradient(135deg, #ff5ea8, #ff8a3d); --sk-primary-fg: #ffffff; --sk-primary-border: 2px solid #ff9ec9;
+  --sk-input-bg: #140f33; --sk-fill-subtle: rgb(255 255 255 / 0.05); --sk-fill-inset: rgb(0 0 0 / 0.28); --sk-focus: #ffd23f;
+  --sk-sidebar-bg: #150f36; --sk-header-bg: rgb(18 13 43 / 0.82); --sk-nav-active-bg: linear-gradient(135deg, #ff5ea8, #a78bfa); --sk-nav-active-fg: #ffffff;
+  --sk-icon-filter: none;
+  color-scheme: dark;
+}
+
+/* ---------------------------------------------------------------- GLASSMORPHISM (gelap, kaca buram, ala visionOS/macOS) */
+html[data-theme][data-skin="glassmorphism"], body[data-theme][data-skin="glassmorphism"] {
+  --c-ground: #0b1020; --c-panel: rgb(255 255 255 / 0.07); --c-raised: rgb(255 255 255 / 0.1); --c-hover: rgb(255 255 255 / 0.14);
+  --c-line: rgb(255 255 255 / 0.16); --c-line-strong: rgb(255 255 255 / 0.3); --c-ink: #f5f8ff; --c-ink-2: rgb(235 241 255 / 0.76); --c-ink-3: rgb(225 233 255 / 0.54);
+  --c-star: #ffffff; --c-star-ink: #0b1020; --c-sky: #7fb2ff;
+  --bg-space: #0b1020; --bg-surface: rgb(255 255 255 / 0.07); --bg-surface-elevated: rgb(30 38 66 / 0.72); --bg-glass: rgb(255 255 255 / 0.07); --bg-glass-hover: rgb(255 255 255 / 0.14);
+  --border-subtle: rgb(255 255 255 / 0.16); --border-active: rgb(255 255 255 / 0.55); --border-glow: rgb(127 178 255 / 0.5);
+  --text-primary: #f5f8ff; --text-secondary: rgb(235 241 255 / 0.76); --text-muted: rgb(225 233 255 / 0.54);
+  --accent-cyan: #7fb2ff; --accent-indigo: #a5b4fc; --accent-purple: #d0a8ff; --accent-emerald: #6ee7b7; --accent-amber: #fcd34d; --accent-rose: #ff8fa3; --accent-champagne: #ffffff;
+  --font-sans: 'Inter', 'Instrument Sans', ui-sans-serif, system-ui, sans-serif; --font-display: var(--font-sans); --font-mono: var(--font-sans);
+  --radius-sm: 10px; --radius-md: 14px; --radius-lg: 20px; --radius-xl: 26px; --radius-full: 9999px;
+  --shadow-luxury: 0 18px 50px rgb(0 0 0 / 0.35); --spotlight-color: transparent;
+  --sk-card-bg: rgb(255 255 255 / 0.07); --sk-card-border: 1px solid rgb(255 255 255 / 0.16);
+  --sk-card-shadow: 0 18px 50px rgb(0 0 0 / 0.3), inset 0 1px 0 rgb(255 255 255 / 0.2); --sk-card-r: 20px; --sk-blur: blur(22px) saturate(170%);
+  --sk-btn-bg: rgb(255 255 255 / 0.1); --sk-btn-fg: #f5f8ff; --sk-btn-border: 1px solid rgb(255 255 255 / 0.2); --sk-btn-shadow: inset 0 1px 0 rgb(255 255 255 / 0.2);
+  --sk-primary-bg: rgb(255 255 255 / 0.9); --sk-primary-fg: #0b1020; --sk-primary-border: 1px solid rgb(255 255 255 / 0.9);
+  --sk-input-bg: rgb(255 255 255 / 0.07); --sk-fill-subtle: rgb(255 255 255 / 0.05); --sk-fill-inset: rgb(0 0 0 / 0.22); --sk-focus: #9ec5ff;
+  --sk-sidebar-bg: rgb(255 255 255 / 0.06); --sk-header-bg: rgb(255 255 255 / 0.06); --sk-nav-active-bg: rgb(255 255 255 / 0.18); --sk-nav-active-fg: #ffffff;
+  --sk-icon-filter: none;
+  color-scheme: dark;
+}
+
+/* ---------------------------------------------------------------- NEOBRUTALISM (terang, kontras, bayangan keras ala Gumroad/Figma) */
+html[data-theme][data-skin="neobrutalism"], body[data-theme][data-skin="neobrutalism"] {
+  --c-ground: #fff3cf; --c-panel: #ffffff; --c-raised: #fffdf6; --c-hover: #ffe58a;
+  --c-line: #000000; --c-line-strong: #000000; --c-ink: #000000; --c-ink-2: #1f1f1f; --c-ink-3: #4a4a4a;
+  --c-star: #ffd23f; --c-star-ink: #000000; --c-sky: #1e90ff;
+  --bg-space: #fff3cf; --bg-surface: #ffffff; --bg-surface-elevated: #fffdf6; --bg-glass: #ffffff; --bg-glass-hover: #ffe58a;
+  --border-subtle: #000000; --border-active: #000000; --border-glow: #000000;
+  --text-primary: #000000; --text-secondary: #1f1f1f; --text-muted: #4a4a4a;
+  --accent-cyan: #0a6cff; --accent-indigo: #5b4bff; --accent-purple: #8b3dff; --accent-emerald: #0a8a3c; --accent-amber: #b45f00; --accent-rose: #e0245e; --accent-champagne: #000000;
+  --font-sans: 'Space Grotesk', 'Outfit', 'Instrument Sans', ui-sans-serif, system-ui, sans-serif; --font-display: var(--font-sans); --font-mono: var(--font-sans);
+  --radius-sm: 6px; --radius-md: 10px; --radius-lg: 12px; --radius-xl: 16px; --radius-full: 9999px;
+  --shadow-luxury: 5px 5px 0 #000; --spotlight-color: transparent;
+  --sk-card-bg: #ffffff; --sk-card-border: 2.5px solid #000; --sk-card-shadow: 5px 5px 0 #000; --sk-card-r: 12px; --sk-blur: none;
+  --sk-btn-bg: #ffffff; --sk-btn-fg: #000000; --sk-btn-border: 2.5px solid #000; --sk-btn-shadow: 3px 3px 0 #000;
+  --sk-primary-bg: #ffd23f; --sk-primary-fg: #000000; --sk-primary-border: 2.5px solid #000;
+  --sk-input-bg: #ffffff; --sk-fill-subtle: #fff8e0; --sk-fill-inset: #ffeeb3; --sk-focus: #000000;
+  --sk-sidebar-bg: #ffd23f; --sk-header-bg: #ffffff; --sk-nav-active-bg: #000000; --sk-nav-active-fg: #ffffff;
+  --sk-icon-filter: invert(1) hue-rotate(180deg);
+  color-scheme: light;
+}
+
+/* ================================================= 3. KOMPONEN BERSAMA (memakai token --sk-*) ===================== */
+html[data-skin] body { background: var(--bg-space) !important; color: var(--text-primary); font-family: var(--font-sans); transition: background-color 0.3s; }
+html[data-skin] :is(.polaris-app-shell, .polaris-stage-wrapper) { background: transparent !important; }
+html[data-skin] .polaris-sidebar-unified { box-shadow: none !important; }
+html[data-skin] #starfield-canvas, html[data-skin] .ambient-nebula, html[data-skin] .crt-scanlines-container { opacity: 0 !important; pointer-events: none; }
+html[data-skin="colorful"] #starfield-canvas, html[data-skin="glassmorphism"] #starfield-canvas { opacity: 0.35 !important; }
+
+/* Kartu & panel */
+html[data-skin] :is(.card-luxury, .polaris-card, .stat-card, .ov-sky, .modal-card, .config-card, .platform-chip-card, .feature-group-card, .lumina-preset-card, .security-sentinel-card) {
+  background: var(--sk-card-bg) !important; border: var(--sk-card-border) !important; border-radius: var(--sk-card-r) !important;
+  box-shadow: var(--sk-card-shadow) !important; backdrop-filter: var(--sk-blur); -webkit-backdrop-filter: var(--sk-blur); color: var(--text-primary);
+}
+html[data-skin] .ov-strip { background: var(--sk-card-bg); border: var(--sk-card-border); border-radius: var(--sk-card-r); box-shadow: var(--sk-card-shadow); backdrop-filter: var(--sk-blur); -webkit-backdrop-filter: var(--sk-blur); }
+html[data-skin] .ov-strip > div { border-color: var(--border-subtle); }
+html[data-skin] .stat-card { border-radius: calc(var(--sk-card-r) - 4px) !important; }
+
+/* Tombol */
+html[data-skin] :is(.btn-polaris, .btn-action, .chess-diff-pill, .dl-chip-btn, .dl-filter-btn, .wa-chip-btn, .storage-filter-btn, .hermes-preset-chip, .hermes-term-preset-chip) {
+  background: var(--sk-btn-bg) !important; color: var(--sk-btn-fg) !important; border: var(--sk-btn-border) !important; box-shadow: var(--sk-btn-shadow) !important;
+  border-radius: var(--radius-md); font-family: var(--font-sans);
+}
+html[data-skin] .btn-polaris.btn-primary, html[data-skin] .btn-polaris.btn-rainbow, html[data-skin] .btn-rainbow {
+  background: var(--sk-primary-bg) !important; color: var(--sk-primary-fg) !important; border: var(--sk-primary-border) !important;
+}
+html[data-skin] .btn-polaris.btn-danger { background: var(--accent-rose) !important; color: #fff !important; border: var(--sk-btn-border) !important; }
+html[data-skin] .btn-polaris:disabled, html[data-skin] .btn-polaris[disabled] { opacity: 0.5; filter: saturate(0.6); }
+html[data-skin] .tb-icon-btn { color: var(--text-secondary) !important; background: transparent !important; border: 1px solid transparent !important; }
+html[data-skin] .tb-icon-btn:hover { background: var(--sk-fill-inset) !important; color: var(--text-primary) !important; }
+
+/* Input */
+html[data-skin] :is(.form-input, .form-select, .form-textarea, .wg-form-input, input[type="text"], input[type="search"], input[type="password"], input[type="number"], textarea, select) {
+  background: var(--sk-input-bg); color: var(--text-primary); border-color: var(--border-subtle); border-radius: var(--radius-md); font-family: var(--font-sans);
+}
+html[data-skin] :is(input, textarea)::placeholder { color: var(--text-muted); opacity: 1; }
+html[data-skin] :is(.form-input, .form-select, .form-textarea, input, textarea, select):focus { border-color: var(--sk-focus); outline: none; }
+html[data-skin] :where(button, a, input, select, textarea, [tabindex]):focus-visible { outline: 2px solid var(--sk-focus); outline-offset: 2px; }
+
+/* Header & sidebar */
+html[data-skin] .polaris-top-header { background: var(--sk-header-bg) !important; border-bottom: 1px solid var(--border-subtle) !important; backdrop-filter: var(--sk-blur); -webkit-backdrop-filter: var(--sk-blur); }
+html[data-skin] :is(.polaris-top-search, .vercel-workspace-pill, .vercel-user-pill, .status-beacon-container, .polaris-orbit-trigger) { background: var(--sk-fill-subtle) !important; border: 1px solid var(--border-subtle) !important; color: var(--text-primary); }
+html[data-skin] .polaris-top-search span, html[data-skin] .vercel-workspace-pill span { color: var(--text-secondary); }
+html[data-skin] .vercel-kbd-shortcut { background: var(--sk-fill-inset); color: var(--text-secondary); border: 1px solid var(--border-subtle); }
+html[data-skin] .polaris-sidebar-unified { background: var(--sk-sidebar-bg) !important; border-right: 1px solid var(--border-subtle) !important; backdrop-filter: var(--sk-blur); -webkit-backdrop-filter: var(--sk-blur); }
+html[data-skin] .sidebar-icon-img, html[data-skin] .sidebar-brand-icon-box img { filter: var(--sk-icon-filter); }
+html[data-skin] .sidebar-nav-item { color: var(--text-secondary); border-radius: var(--radius-md); }
+html[data-skin] .sidebar-nav-item:hover { background: var(--sk-fill-inset); color: var(--text-primary); }
+html[data-skin] .sidebar-nav-item.active { background: var(--sk-nav-active-bg) !important; color: var(--sk-nav-active-fg) !important; border-color: transparent !important; }
+html[data-skin="colorful"] .sidebar-nav-item.active .sidebar-icon-img, html[data-skin="neobrutalism"] .sidebar-nav-item.active .sidebar-icon-img { filter: brightness(0) invert(1); }
+html[data-skin] .sidebar-label, html[data-skin] .sidebar-brand-text { color: inherit; }
+
+/* Judul, tabel, badge, modal */
+html[data-skin] :is(h1, h2, h3, h4, .ov-head h1) { font-family: var(--font-display); color: var(--text-primary); }
+html[data-skin] .polaris-table th { background: var(--sk-fill-subtle); color: var(--text-secondary); border-color: var(--border-subtle); }
+html[data-skin] .polaris-table td { border-color: var(--border-subtle); color: var(--text-primary); }
+html[data-skin] .polaris-table tbody tr:hover { background: var(--sk-fill-subtle); }
+html[data-skin] .badge { border-radius: var(--radius-full); font-family: var(--font-sans); }
+html[data-skin] .modal-backdrop { background: rgb(10 12 20 / 0.55) !important; }
+html[data-skin] .gauge-progress-bar { background: var(--sk-fill-inset); border-radius: var(--radius-full); }
+html[data-skin] code, html[data-skin] pre { background: var(--sk-fill-inset); color: var(--text-primary); }
+
+/* Notifikasi, pusat notifikasi, lembar pintasan, pemilih gaya mengikuti kartu */
+html[data-skin] :is(.fx-toast, .fx-panel, .fx-sheet, .tp-pop, .fx-totop) {
+  background: var(--sk-card-bg); border: var(--sk-card-border); box-shadow: var(--sk-card-shadow); backdrop-filter: var(--sk-blur); -webkit-backdrop-filter: var(--sk-blur); color: var(--text-primary);
+}
+html[data-skin="glassmorphism"] :is(.fx-toast, .fx-panel, .fx-sheet, .tp-pop) { background: rgb(24 31 58 / 0.9) !important; }
+html[data-skin] :is(.fx-toast, .fx-panel, .fx-sheet, .tp-pop, .fx-totop) { border-radius: var(--sk-card-r); }
+html[data-skin] .fx-keys kbd, html[data-skin] .tp-head kbd { background: var(--sk-fill-inset); color: var(--text-primary); border-color: var(--border-subtle); }
+
+/* Warna teks & latar yang di-hardcode di markup (agar gaya terang tidak "hilang") */
+html[data-skin="minimalist"] :is([style*="color: #fff"], [style*="color:#fff"], [style*="color: #ffffff"], [style*="color: #f8fafc"], [style*="color: #f1f5f9"], [style*="color: #e2e8f0"]),
+html[data-skin="neobrutalism"] :is([style*="color: #fff"], [style*="color:#fff"], [style*="color: #ffffff"], [style*="color: #f8fafc"], [style*="color: #f1f5f9"], [style*="color: #e2e8f0"]) { color: var(--text-primary) !important; }
+html[data-skin="minimalist"] :is([style*="color: #cbd5e1"], [style*="color: #94a3b8"], [style*="color: #64748b"], [style*="color: #A6A18C"], [style*="color: #DFD9C8"]),
+html[data-skin="neobrutalism"] :is([style*="color: #cbd5e1"], [style*="color: #94a3b8"], [style*="color: #64748b"], [style*="color: #A6A18C"], [style*="color: #DFD9C8"]) { color: var(--text-secondary) !important; }
+html[data-skin="minimalist"] :is(.btn-primary, .btn-rainbow, .btn-danger)[style*="color: #fff"], html[data-skin="neobrutalism"] :is(.btn-danger)[style*="color: #fff"] { color: #fff !important; }
+html[data-skin="minimalist"] .btn-primary[style*="color: #fff"] { color: var(--sk-primary-fg) !important; }
+html[data-skin="neobrutalism"] .btn-primary[style*="color: #fff"] { color: #000 !important; }
+html[data-skin="minimalist"] :is([style*="rgba(255,255,255,0."], [style*="rgba(255, 255, 255, 0."]),
+html[data-skin="neobrutalism"] :is([style*="rgba(255,255,255,0."], [style*="rgba(255, 255, 255, 0."]) { border-color: var(--border-subtle) !important; }
+html[data-skin="minimalist"] :is([style*="background: rgba(255,255,255,0."], [style*="background: rgba(255, 255, 255, 0."]),
+html[data-skin="neobrutalism"] :is([style*="background: rgba(255,255,255,0."], [style*="background: rgba(255, 255, 255, 0."]) { background: var(--sk-fill-subtle) !important; }
+html[data-skin="minimalist"] :is([style*="background: rgba(0,0,0,0."], [style*="background: rgba(0, 0, 0, 0."]),
+html[data-skin="neobrutalism"] :is([style*="background: rgba(0,0,0,0."], [style*="background: rgba(0, 0, 0, 0."]) { background: var(--sk-fill-inset) !important; }
+html[data-skin="colorful"] :is([style*="rgba(255,255,255,0.0"], [style*="rgba(255, 255, 255, 0.0"]) { border-color: rgb(160 140 255 / 0.28) !important; }
+
+/* ================================================= 4. KHAS TIAP GAYA ============================================ */
+
+/* ---- Minimalist: ketenangan Linear/Vercel — garis tipis, tanpa bayangan, aksen hitam ---- */
+html[data-skin="minimalist"] :is(.dl-chip-btn, .wa-chip-btn, .hermes-preset-chip, .chess-diff-pill) { border: 1px solid #dcd9d1 !important; background: #fff !important; }
+html[data-skin="minimalist"] .btn-polaris:hover { background: #f4f4f1 !important; border-color: #bdb9ae !important; }
+html[data-skin="minimalist"] .btn-polaris.btn-primary:hover { background: #2c2c31 !important; }
+html[data-skin="minimalist"] .btn-polaris:active { background: #ebeae5 !important; }
+html[data-skin="minimalist"] .ov-head h1 { font-weight: 600; letter-spacing: -0.03em; }
+html[data-skin="minimalist"] .card-luxury:hover, html[data-skin="minimalist"] .stat-card:hover { border-color: #bdb9ae !important; }
+html[data-skin="minimalist"] .badge { background: #f0efeb; color: #3a3a40; border: 1px solid #e0ddd5; }
+html[data-skin="minimalist"] .fx-progress { background: #17171a; }
+html[data-skin="minimalist"] .fx-toast { box-shadow: 0 8px 24px rgb(20 20 30 / 0.08); }
+html[data-skin="minimalist"] .gauge-progress-fill { background: #17171a !important; }
+html[data-skin="minimalist"] .tp-card.is-on { border-color: #17171a; box-shadow: 0 0 0 1px #17171a; }
+html[data-skin="minimalist"] .tp-check { background: #17171a; stroke: #fff; }
+html[data-skin="minimalist"] .modal-backdrop { background: rgb(247 247 245 / 0.7) !important; }
+
+/* ---- Colorful: tombol 3D (tekan turun) ala Duolingo, kartu berwarna per urutan, gradien hangat ---- */
+html[data-skin="colorful"] body { background: radial-gradient(900px 520px at 8% -8%, rgb(255 94 168 / 0.22), transparent 60%), radial-gradient(800px 520px at 100% 0%, rgb(34 211 238 / 0.18), transparent 55%), radial-gradient(900px 600px at 50% 110%, rgb(167 139 250 / 0.2), transparent 60%), #120d2b !important; background-attachment: fixed !important; }
+html[data-skin="colorful"] .btn-polaris, html[data-skin="colorful"] .btn-action { font-weight: 800; letter-spacing: 0.01em; transition: transform 0.12s, box-shadow 0.12s, filter 0.2s; }
+html[data-skin="colorful"] .btn-polaris:hover { filter: brightness(1.12) !important; transform: translateY(-1px) !important; box-shadow: 0 5px 0 #1a1244 !important; }
+html[data-skin="colorful"] .btn-polaris.btn-primary { box-shadow: 0 4px 0 #b3335f !important; }
+html[data-skin="colorful"] .btn-polaris.btn-primary:hover { box-shadow: 0 5px 0 #b3335f !important; }
+html[data-skin="colorful"] .btn-polaris:active { transform: translateY(4px) !important; box-shadow: 0 0 0 transparent !important; }
+html[data-skin="colorful"] .btn-polaris.btn-danger { box-shadow: 0 4px 0 #a02348 !important; }
+html[data-skin="colorful"] .ov-head h1 { background: linear-gradient(90deg, #ffd23f, #ff5ea8 45%, #a78bfa); -webkit-background-clip: text; background-clip: text; color: transparent; font-weight: 800; letter-spacing: -0.02em; }
+html[data-skin="colorful"] .ov-strip > div:nth-child(1) .ov-v { color: #22d3ee; }
+html[data-skin="colorful"] .ov-strip > div:nth-child(2) .ov-v { color: #ffd23f; }
+html[data-skin="colorful"] .ov-strip > div:nth-child(3) .ov-v { color: #ff5ea8; }
+html[data-skin="colorful"] .ov-strip > div:nth-child(4) .ov-v { color: #34d399; }
+html[data-skin="colorful"] .sec-counters .stat-card:nth-child(1) { border-color: #22d3ee !important; box-shadow: 0 4px 0 #0e7490 !important; }
+html[data-skin="colorful"] .sec-counters .stat-card:nth-child(2) { border-color: #ffd23f !important; box-shadow: 0 4px 0 #a17b00 !important; }
+html[data-skin="colorful"] .sec-counters .stat-card:nth-child(3) { border-color: #ff5ea8 !important; box-shadow: 0 4px 0 #a02348 !important; }
+html[data-skin="colorful"] .sec-counters .stat-card:nth-child(4) { border-color: #a78bfa !important; box-shadow: 0 4px 0 #5b3fb0 !important; }
+html[data-skin="colorful"] .stat-card :is(#sec-total-intercepted, [id]) { color: inherit; }
+html[data-skin="colorful"] .badge { border: 2px solid currentColor; font-weight: 800; }
+html[data-skin="colorful"] .gauge-progress-fill { background: linear-gradient(90deg, #ffd23f, #ff5ea8, #a78bfa) !important; border-radius: 99px; }
+html[data-skin="colorful"] .sidebar-nav-item.active { box-shadow: 0 3px 0 #7a2c8f; }
+html[data-skin="colorful"] .fx-progress { background: linear-gradient(90deg, #ffd23f, #ff5ea8, #22d3ee); height: 3px; }
+html[data-skin="colorful"] .fx-toast { box-shadow: 0 4px 0 #0e0a24; }
+html[data-skin="colorful"] .fx-toast.success { border-color: #34d399; } html[data-skin="colorful"] .fx-toast.error { border-color: #ff5ea8; } html[data-skin="colorful"] .fx-toast.warning { border-color: #ffd23f; }
+html[data-skin="colorful"] .tp-card.is-on { border-color: #ffd23f; box-shadow: 0 0 0 1px #ffd23f, 0 4px 0 #a17b00; }
+html[data-skin="colorful"] .tp-check { background: #ffd23f; }
+
+/* ---- Glassmorphism: mesh gradient, kaca buram, kilau tepi atas, sorot mengikuti kursor ---- */
+html[data-skin="glassmorphism"] body { background: radial-gradient(900px 620px at 12% 8%, rgb(91 140 255 / 0.5), transparent 60%), radial-gradient(800px 600px at 92% 18%, rgb(192 132 252 / 0.42), transparent 58%), radial-gradient(900px 700px at 60% 105%, rgb(34 211 238 / 0.32), transparent 60%), #0b1020 !important; background-attachment: fixed !important; }
+html[data-skin="glassmorphism"] .btn-polaris:hover { background: rgb(255 255 255 / 0.18) !important; border-color: rgb(255 255 255 / 0.32) !important; }
+html[data-skin="glassmorphism"] .btn-polaris.btn-primary:hover { background: #fff !important; transform: translateY(-1px) !important; box-shadow: 0 10px 28px rgb(127 178 255 / 0.4) !important; }
+html[data-skin="glassmorphism"] :is(.card-luxury, .stat-card, .polaris-card, .ov-strip > div) { background-image: radial-gradient(260px circle at var(--mouse-x, 50%) var(--mouse-y, -20%), rgb(255 255 255 / 0.1), transparent 65%); }
+html[data-skin="glassmorphism"] .ov-head h1 { font-weight: 650; letter-spacing: -0.03em; text-shadow: 0 2px 24px rgb(127 178 255 / 0.35); }
+html[data-skin="glassmorphism"] .sidebar-nav-item.active { box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.3), 0 8px 20px rgb(0 0 0 / 0.25); backdrop-filter: blur(10px); }
+html[data-skin="glassmorphism"] .badge { background: rgb(255 255 255 / 0.12); color: var(--text-primary); border: 1px solid rgb(255 255 255 / 0.22); }
+html[data-skin="glassmorphism"] .gauge-progress-fill { background: linear-gradient(90deg, rgb(127 178 255 / 0.9), rgb(208 168 255 / 0.9)) !important; }
+html[data-skin="glassmorphism"] .fx-progress { background: linear-gradient(90deg, #7fb2ff, #d0a8ff); box-shadow: 0 0 12px rgb(127 178 255 / 0.7); }
+html[data-skin="glassmorphism"] .modal-backdrop { background: rgb(6 10 24 / 0.5) !important; backdrop-filter: blur(10px); }
+html[data-skin="glassmorphism"] ::-webkit-scrollbar-thumb { background: rgb(255 255 255 / 0.25); border-radius: 8px; }
+
+/* ---- Neobrutalism: garis hitam tebal, bayangan keras, tombol "tertekan", stiker miring ---- */
+html[data-skin="neobrutalism"] body { background-image: radial-gradient(#00000014 1.2px, transparent 1.2px) !important; background-size: 18px 18px !important; background-color: #fff3cf !important; }
+html[data-skin="neobrutalism"] .btn-polaris, html[data-skin="neobrutalism"] .btn-action { font-weight: 800; letter-spacing: -0.01em; transition: transform 0.12s, box-shadow 0.12s, background 0.15s; }
+html[data-skin="neobrutalism"] .btn-polaris:hover { transform: translate(-2px, -2px) !important; box-shadow: 5px 5px 0 #000 !important; background: #ffe58a !important; }
+html[data-skin="neobrutalism"] .btn-polaris.btn-primary:hover { background: #ffdf5e !important; }
+html[data-skin="neobrutalism"] .btn-polaris:active { transform: translate(3px, 3px) !important; box-shadow: 0 0 0 #000 !important; }
+html[data-skin="neobrutalism"] .btn-polaris.btn-danger { background: #ff6fb5 !important; color: #000 !important; }
+html[data-skin="neobrutalism"] .btn-rainbow { background: #4cc9f0 !important; color: #000 !important; border: 2.5px solid #000 !important; box-shadow: 3px 3px 0 #000 !important; }
+html[data-skin="neobrutalism"] :is(.card-luxury, .stat-card, .polaris-card, .modal-card) { transition: transform 0.15s, box-shadow 0.15s; }
+html[data-skin="neobrutalism"] .card-luxury:hover { transform: translate(-2px, -2px); box-shadow: 7px 7px 0 #000 !important; }
+html[data-skin="neobrutalism"] .stat-card { box-shadow: 4px 4px 0 #000 !important; }
+html[data-skin="neobrutalism"] .sec-counters .stat-card:nth-child(1) { background: #b6f542 !important; }
+html[data-skin="neobrutalism"] .sec-counters .stat-card:nth-child(2) { background: #4cc9f0 !important; }
+html[data-skin="neobrutalism"] .sec-counters .stat-card:nth-child(3) { background: #ff6fb5 !important; }
+html[data-skin="neobrutalism"] .sec-counters .stat-card:nth-child(4) { background: #ffd23f !important; }
+html[data-skin="neobrutalism"] .stat-card * { color: #000 !important; }
+html[data-skin="neobrutalism"] .ov-head h1 { font-weight: 900; letter-spacing: -0.04em; text-transform: none; text-shadow: 3px 3px 0 #ffd23f; }
+html[data-skin="neobrutalism"] .ov-strip > div:nth-child(1) { background: #b6f542; } html[data-skin="neobrutalism"] .ov-strip > div:nth-child(2) { background: #4cc9f0; }
+html[data-skin="neobrutalism"] .ov-strip > div:nth-child(3) { background: #ffd23f; } html[data-skin="neobrutalism"] .ov-strip > div:nth-child(4) { background: #ff6fb5; }
+html[data-skin="neobrutalism"] .ov-strip > div { border-left: 2.5px solid #000; }
+html[data-skin="neobrutalism"] .ov-strip > div:first-child { border-left: 0; }
+html[data-skin="neobrutalism"] .ov-strip { overflow: hidden; }
+html[data-skin="neobrutalism"] .ov-strip .ov-k, html[data-skin="neobrutalism"] .ov-strip .ov-v, html[data-skin="neobrutalism"] .ov-strip small { color: #000 !important; }
+html[data-skin="neobrutalism"] .badge { background: #ffd23f; color: #000; border: 2px solid #000; font-weight: 800; box-shadow: 2px 2px 0 #000; transform: rotate(-1.5deg); border-radius: 8px; }
+html[data-skin="neobrutalism"] .polaris-sidebar-unified { border-right: 3px solid #000 !important; }
+html[data-skin="neobrutalism"] .polaris-top-header { border-bottom: 3px solid #000 !important; }
+html[data-skin="neobrutalism"] .sidebar-nav-item.active { box-shadow: 3px 3px 0 #ff6fb5; }
+html[data-skin="neobrutalism"] .sidebar-nav-item { color: #000; font-weight: 700; }
+html[data-skin="neobrutalism"] .sidebar-nav-item:hover { background: #fff3cf; }
+html[data-skin="neobrutalism"] .gauge-progress-bar { border: 2px solid #000; background: #fff; height: 12px; }
+html[data-skin="neobrutalism"] .gauge-progress-fill { background: repeating-linear-gradient(45deg, #ff6fb5 0 8px, #ffd23f 8px 16px) !important; }
+html[data-skin="neobrutalism"] .fx-progress { background: #000; height: 4px; }
+html[data-skin="neobrutalism"] .fx-toast { background: #fff; }
+html[data-skin="neobrutalism"] .fx-toast .fx-toast-bar { height: 4px; background: #000 !important; }
+html[data-skin="neobrutalism"] .fx-toast.success { background: #b6f542; } html[data-skin="neobrutalism"] .fx-toast.error { background: #ff6fb5; } html[data-skin="neobrutalism"] .fx-toast.warning { background: #ffd23f; } html[data-skin="neobrutalism"] .fx-toast.info { background: #4cc9f0; }
+html[data-skin="neobrutalism"] .fx-toast :is(.fx-toast-ico, .fx-toast-msg, .fx-toast-x) { color: #000 !important; font-weight: 700; }
+html[data-skin="neobrutalism"] .fx-bell-dot { background: #ff6fb5; color: #000; border: 2px solid #000; box-shadow: none; }
+html[data-skin="neobrutalism"] .tp-card { border: 2.5px solid #000; box-shadow: 3px 3px 0 #000; background: #fff; }
+html[data-skin="neobrutalism"] .tp-card.is-on { background: #ffd23f; box-shadow: 3px 3px 0 #000; }
+html[data-skin="neobrutalism"] .tp-card:hover { transform: translate(-2px, -2px); box-shadow: 5px 5px 0 #000; }
+html[data-skin="neobrutalism"] .tp-check { background: #000; stroke: #fff; }
+html[data-skin="neobrutalism"] .modal-backdrop { background: rgb(0 0 0 / 0.55) !important; backdrop-filter: none !important; }
+html[data-skin="neobrutalism"] ::-webkit-scrollbar-thumb { background: #000; border-radius: 0; }
+html[data-skin="neobrutalism"] ::-webkit-scrollbar-track { background: #fff3cf; }
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-skin] * { transition-duration: 0.01ms !important; }
+  html[data-skin="neobrutalism"] .badge { transform: none; }
+}
+
+/* Area gelap bawaan yang tetap gelap di semua gaya: kembalikan teks terang di dalamnya */
+html[data-skin] :is(.chess-control-deck, .chess-deck-header) { --text-primary: #f5efe6; --text-secondary: #cdbfae; --text-muted: #a8988a; color: #f5efe6; }
+html[data-skin] .chess-control-deck :is(h2, h3, .chess-menu-card-title) { color: #f5efe6 !important; }
+html[data-skin] .chess-control-deck :is(.chess-menu-card-desc) { color: #cdbfae !important; }

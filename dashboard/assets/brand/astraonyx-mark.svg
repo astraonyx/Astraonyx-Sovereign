@@ -1,0 +1,193 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%" fill="none">
+  <defs>
+    <!-- Master Gradients for Chiseled "A" Frame -->
+    <!-- Left Leg: Cyan to Deep Sapphire -->
+    <linearGradient id="ax-leg-left-outer" x1="256" y1="68" x2="116" y2="368" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95" />
+      <stop offset="12%" stop-color="#00f0ff" />
+      <stop offset="55%" stop-color="#0077ff" />
+      <stop offset="100%" stop-color="#0033aa" />
+    </linearGradient>
+
+    <linearGradient id="ax-leg-left-inner" x1="256" y1="142" x2="160" y2="330" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#7c3aed" stop-opacity="0.6" />
+      <stop offset="40%" stop-color="#1e3a8a" />
+      <stop offset="100%" stop-color="#0a192f" />
+    </linearGradient>
+
+    <!-- Right Leg: Indigo to Vivid Magenta and Fiery Amber -->
+    <linearGradient id="ax-leg-right-outer" x1="256" y1="68" x2="396" y2="356" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95" />
+      <stop offset="15%" stop-color="#a855f7" />
+      <stop offset="50%" stop-color="#ec4899" />
+      <stop offset="80%" stop-color="#ff4500" />
+      <stop offset="100%" stop-color="#ff9900" />
+    </linearGradient>
+
+    <linearGradient id="ax-leg-right-inner" x1="256" y1="142" x2="350" y2="310" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#581c87" />
+      <stop offset="45%" stop-color="#831843" />
+      <stop offset="100%" stop-color="#3b0764" />
+    </linearGradient>
+
+    <!-- Orbital Ring Front Tube Gradient -->
+    <linearGradient id="ax-ring-front" x1="72" y1="310" x2="440" y2="185" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#00b4d8" />
+      <stop offset="15%" stop-color="#00f0ff" />
+      <stop offset="35%" stop-color="#3b82f6" />
+      <stop offset="55%" stop-color="#a855f7" />
+      <stop offset="72%" stop-color="#ec4899" />
+      <stop offset="88%" stop-color="#ff5500" />
+      <stop offset="100%" stop-color="#ffaa00" />
+    </linearGradient>
+
+    <!-- Orbital Ring Back Tube Gradient (Amber/Gold Corona) -->
+    <linearGradient id="ax-ring-back" x1="440" y1="185" x2="72" y2="310" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#ffaa00" />
+      <stop offset="30%" stop-color="#ff6600" />
+      <stop offset="60%" stop-color="#ff3366" />
+      <stop offset="85%" stop-color="#7c3aed" />
+      <stop offset="100%" stop-color="#0077ff" />
+    </linearGradient>
+
+    <!-- Star Core Facet Gradients -->
+    <linearGradient id="ax-star-tl" x1="256" y1="196" x2="218" y2="245" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="60%" stop-color="#00f0ff" />
+      <stop offset="100%" stop-color="#0284c7" />
+    </linearGradient>
+
+    <linearGradient id="ax-star-tr" x1="256" y1="196" x2="294" y2="245" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="50%" stop-color="#fef08a" />
+      <stop offset="100%" stop-color="#ff9900" />
+    </linearGradient>
+
+    <linearGradient id="ax-star-bl" x1="218" y1="245" x2="256" y2="294" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="60%" stop-color="#6366f1" />
+      <stop offset="100%" stop-color="#1e1b4b" />
+    </linearGradient>
+
+    <linearGradient id="ax-star-br" x1="294" y1="245" x2="256" y2="294" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#f43f5e" />
+      <stop offset="60%" stop-color="#a855f7" />
+      <stop offset="100%" stop-color="#3b0764" />
+    </linearGradient>
+
+    <!-- Ambient Aura Glows -->
+    <radialGradient id="ax-aura-cyan" cx="160" cy="240" r="180" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#00f0ff" stop-opacity="0.32" />
+      <stop offset="50%" stop-color="#0055ff" stop-opacity="0.12" />
+      <stop offset="100%" stop-color="#000000" stop-opacity="0" />
+    </radialGradient>
+
+    <radialGradient id="ax-aura-amber" cx="350" cy="250" r="180" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#ff6600" stop-opacity="0.28" />
+      <stop offset="45%" stop-color="#ec4899" stop-opacity="0.12" />
+      <stop offset="100%" stop-color="#000000" stop-opacity="0" />
+    </radialGradient>
+
+    <radialGradient id="ax-core-radiance" cx="256" cy="245" r="50" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="1" />
+      <stop offset="25%" stop-color="#a5f3fc" stop-opacity="0.9" />
+      <stop offset="65%" stop-color="#c084fc" stop-opacity="0.3" />
+      <stop offset="100%" stop-color="#38bdf8" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Filters for Glow and Neon Radiance -->
+    <filter id="ax-bloom-soft" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+
+    <filter id="ax-bloom-intense" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="16" result="b1" />
+      <feGaussianBlur stdDeviation="5" result="b2" />
+      <feMerge>
+        <feMergeNode in="b1" />
+        <feMergeNode in="b2" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Ambient Backdrop Luminescence -->
+  <circle cx="160" cy="240" r="180" fill="url(#ax-aura-cyan)" />
+  <circle cx="350" cy="250" r="180" fill="url(#ax-aura-amber)" />
+
+  <!-- ==================== LAYER 1: BACK ARC OF ORBITAL RING ==================== -->
+  <!-- Tilted orbital ellipse: Center (256, 260), Angle -24° -->
+  <g transform="rotate(-24 256 260)">
+    <!-- Back Outer Glow -->
+    <path d="M 440 260 A 184 50 0 0 0 72 260" stroke="url(#ax-ring-back)" stroke-width="16" stroke-linecap="round" fill="none" opacity="0.4" filter="url(#ax-bloom-soft)" />
+    <!-- Back Core Neon Tube -->
+    <path d="M 440 260 A 184 50 0 0 0 72 260" stroke="url(#ax-ring-back)" stroke-width="13" stroke-linecap="round" fill="none" opacity="0.9" />
+    <!-- Back Specular Rim -->
+    <path d="M 436 258 A 184 50 0 0 0 76 258" stroke="#ffe4e6" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.75" />
+  </g>
+
+  <!-- ==================== LAYER 2: CHISELED MASTER "A" FRAME ==================== -->
+  <g id="master-frame-a">
+    <!-- Left Leg - Inner Darker Bevel Facet -->
+    <polygon points="256,68 256,142 188,310 152,344 134,356" fill="url(#ax-leg-left-inner)" />
+
+    <!-- Left Leg - Outer Neon Cyan Bevel Facet -->
+    <polygon points="256,68 134,356 116,368 256,68" fill="url(#ax-leg-left-outer)" filter="url(#ax-bloom-soft)" />
+    <polygon points="256,68 134,356 116,368 256,68" fill="url(#ax-leg-left-outer)" />
+
+    <!-- Left Leg Foot Cut -->
+    <polygon points="116,368 134,356 152,344 142,374" fill="#0284c7" />
+
+    <!-- Right Leg - Inner Magenta Bevel Facet -->
+    <polygon points="256,68 256,142 324,296 360,328 378,342" fill="url(#ax-leg-right-inner)" />
+
+    <!-- Right Leg - Outer Vivid Violet/Magenta/Amber Bevel Facet -->
+    <polygon points="256,68 378,342 396,356 256,68" fill="url(#ax-leg-right-outer)" filter="url(#ax-bloom-soft)" />
+    <polygon points="256,68 378,342 396,356 256,68" fill="url(#ax-leg-right-outer)" />
+
+    <!-- Right Leg Foot Cut -->
+    <polygon points="396,356 378,342 360,328 370,360" fill="#f97316" />
+
+    <!-- Sharp Apex Crown Ridge Lines -->
+    <line x1="256" y1="68" x2="134" y2="356" stroke="#e0f2fe" stroke-width="2.5" stroke-linecap="round" opacity="0.9" />
+    <line x1="256" y1="68" x2="378" y2="342" stroke="#fed7aa" stroke-width="2.5" stroke-linecap="round" opacity="0.9" />
+    <!-- Outer Rim Edge Highlights -->
+    <line x1="256" y1="68" x2="116" y2="368" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" opacity="0.8" />
+    <line x1="256" y1="68" x2="396" y2="356" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" opacity="0.8" />
+  </g>
+
+  <!-- ==================== LAYER 3: SUSPENDED SOVEREIGN 4-POINT STAR ==================== -->
+  <g id="sovereign-star" filter="url(#ax-bloom-intense)">
+    <!-- Star Ambient Halo -->
+    <circle cx="256" cy="245" r="46" fill="url(#ax-core-radiance)" />
+
+    <!-- Top-Left Facet -->
+    <path d="M 256 196 Q 248 232 218 245 Q 246 244 256 245 Z" fill="url(#ax-star-tl)" />
+    <!-- Top-Right Facet -->
+    <path d="M 256 196 Q 264 232 294 245 Q 266 244 256 245 Z" fill="url(#ax-star-tr)" />
+    <!-- Bottom-Left Facet -->
+    <path d="M 218 245 Q 246 246 256 294 Q 248 258 256 245 Z" fill="url(#ax-star-bl)" />
+    <!-- Bottom-Right Facet -->
+    <path d="M 294 245 Q 266 246 256 294 Q 264 258 256 245 Z" fill="url(#ax-star-br)" />
+
+    <!-- Center Spine Cross Hairlines -->
+    <line x1="256" y1="196" x2="256" y2="294" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" opacity="0.95" />
+    <line x1="218" y1="245" x2="294" y2="245" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" opacity="0.95" />
+
+    <!-- Brilliant Radiant Hotspot -->
+    <circle cx="256" cy="245" r="4.5" fill="#ffffff" />
+  </g>
+
+  <!-- ==================== LAYER 4: FRONT ARC OF ORBITAL RING ==================== -->
+  <!-- Sweeps across front of left leg, center, and right leg at -24° -->
+  <g transform="rotate(-24 256 260)">
+    <!-- Front Outer Glow Tube -->
+    <path d="M 72 260 A 184 50 0 0 0 440 260" stroke="url(#ax-ring-front)" stroke-width="18" stroke-linecap="round" fill="none" opacity="0.4" filter="url(#ax-bloom-soft)" />
+    <!-- Front Core Neon Tube -->
+    <path d="M 72 260 A 184 50 0 0 0 440 260" stroke="url(#ax-ring-front)" stroke-width="14" stroke-linecap="round" fill="none" opacity="0.95" />
+    <!-- Front Specular Centerline -->
+    <path d="M 76 258 A 184 50 0 0 0 436 258" stroke="#ffffff" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.85" />
+    <path d="M 120 257 A 184 50 0 0 0 390 257" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.95" />
+  </g>
+</svg>

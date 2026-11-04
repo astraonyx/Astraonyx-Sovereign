@@ -1,0 +1,1500 @@
+/* ==========================================================================
+   Polaris Sovereign Ecosystem - Public & Authentication Design System
+   Architecture: Obsidian Glassmorphism + Apple Motion Physics
+   Specification: DESIGN.md & tokens.css
+   Pillars: 8 Signature Autonomous Quadrants
+   ========================================================================== */
+
+@layer base, components, pillar, utilities;
+
+/* --------------------------------------------------------------------------
+   1. ROOT VARIABLES & PILLAR ACCENTS
+   -------------------------------------------------------------------------- */
+:root {
+  /* 8 Signature Ecosystem Pillar Accents */
+  --pillar-astraonyx: #e2e8f0;
+  --pillar-polaris:   #00f0ff;
+  --pillar-polarium:  #dc2743;
+  --pillar-starlium:  #10b981;
+  --pillar-luminary:  #8b5cf6;
+  --pillar-nebula:    #f59e0b;
+  --pillar-sirium:    #3b82f6;
+  --pillar-atomic:    #9333ea;
+  --pillar-sanctum:   #e5b94f;
+
+  /* Pillar Aura Coordinates */
+  --aura-astraonyx: rgba(226, 232, 240, 0.22);
+  --aura-polaris:   rgba(0, 240, 255, 0.25);
+  --aura-polarium:  rgba(220, 39, 67, 0.25);
+  --aura-starlium:  rgba(16, 185, 129, 0.25);
+  --aura-luminary:  rgba(139, 92, 246, 0.26);
+  --aura-nebula:    rgba(245, 158, 11, 0.25);
+  --aura-sirium:    rgba(59, 130, 246, 0.25);
+  --aura-atomic:    rgba(147, 51, 234, 0.28);
+  --aura-sanctum:   rgba(229, 185, 79, 0.26);
+
+  /* Obsidian Glassmorphic Matrix */
+  --pub-canvas: #0a0714;
+  --pub-glass-bg: rgba(18, 14, 38, 0.65);
+  --pub-glass-bg-elevated: rgba(26, 20, 54, 0.78);
+  --pub-glass-bg-subtle: rgba(14, 10, 30, 0.55);
+  --pub-glass-border: 1px solid rgba(255, 255, 255, 0.08);
+  --pub-glass-border-hi: 1px solid rgba(255, 255, 255, 0.16);
+  --pub-glass-blur: blur(24px) saturate(190%);
+  --pub-glass-shadow: 0 24px 64px -16px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.06);
+  --pub-glass-glow: 0 0 32px -8px rgba(139, 92, 246, 0.25);
+
+  /* Semantic Typography Colors */
+  --pub-text-primary: #f2efff;
+  --pub-text-secondary: #b9b2d9;
+  --pub-text-muted: #8f88b5;
+  --pub-line: rgba(255, 255, 255, 0.08);
+  --pub-line-strong: rgba(255, 255, 255, 0.15);
+
+  /* Apple Motion Physics */
+  --pub-spring: cubic-bezier(0.16, 1, 0.3, 1);
+  --pub-spring-tactile: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --pub-dur-fast: 140ms;
+  --pub-dur-normal: 240ms;
+  --pub-dur-slow: 360ms;
+
+  /* Font Primitives */
+  --font-display: 'Instrument Sans', 'Figtree', system-ui, -apple-system, sans-serif;
+  --font-sans: 'Instrument Sans', 'Figtree', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace;
+}
+
+/* --------------------------------------------------------------------------
+   2. CANVAS FOUNDATION & NEBULA UNDERGLOW
+   -------------------------------------------------------------------------- */
+html, body {
+  box-sizing: border-box;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+body.pub,
+html[data-theme="polaris_classic"] body.pub {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--pub-canvas) !important;
+  background-image: 
+    radial-gradient(ellipse 90% 55% at 50% -18%, rgba(139, 92, 246, 0.18), transparent 72%),
+    radial-gradient(ellipse 65% 45% at 88% 82%, rgba(0, 240, 255, 0.10), transparent 62%),
+    radial-gradient(ellipse 60% 45% at 12% 76%, rgba(220, 39, 67, 0.08), transparent 58%),
+    radial-gradient(circle 950px at 50% 45%, rgba(18, 14, 38, 0.45), transparent 100%) !important;
+  background-attachment: fixed !important;
+  color: var(--pub-text-primary);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  position: relative;
+}
+
+body.pub::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 32px 32px;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.65;
+}
+
+.pub a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* --------------------------------------------------------------------------
+   3. PUBLIC TOP NAVIGATION BAR
+   -------------------------------------------------------------------------- */
+.pub-top {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 18px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  z-index: 50;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.pub-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--pub-text-primary);
+  font-weight: 700;
+  font-size: 1.12rem;
+  letter-spacing: -0.015em;
+  transition: transform var(--pub-dur-fast) var(--pub-spring), opacity var(--pub-dur-fast) ease;
+}
+
+.pub-brand:hover {
+  opacity: 0.9;
+}
+
+.pub-brand:active {
+  transform: scale(0.97);
+}
+
+.pub-brand svg.polaris-mark {
+  width: 36px;
+  height: 36px;
+  filter: drop-shadow(0 0 10px rgba(0, 240, 255, 0.4));
+}
+
+.pub-nav {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(18, 14, 38, 0.55);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  padding: 5px 8px;
+  border-radius: 12px;
+  border: var(--pub-glass-border);
+}
+
+.pub-nav a {
+  padding: 8px 14px;
+  border-radius: 8px;
+  color: var(--pub-text-secondary);
+  font-size: 0.9rem;
+  font-weight: 550;
+  transition: color var(--pub-dur-fast) var(--pub-spring),
+              background var(--pub-dur-fast) var(--pub-spring),
+              transform var(--pub-dur-fast) var(--pub-spring);
+}
+
+.pub-nav a:hover {
+  color: var(--pub-text-primary);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.pub-nav a:active {
+  transform: scale(0.97);
+}
+
+.pub-nav a.keep {
+  background: rgba(0, 240, 255, 0.12);
+  color: var(--pillar-polaris);
+  border: 1px solid rgba(0, 240, 255, 0.28);
+}
+
+.pub-nav a.keep:hover {
+  background: rgba(0, 240, 255, 0.2);
+  color: #fff;
+}
+
+.btn-back-home {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 8px 16px;
+  border-radius: 10px;
+  background: var(--pub-glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: var(--pub-glass-border);
+  color: var(--pub-text-secondary);
+  font-size: 0.92rem;
+  font-weight: 600;
+  transition: all var(--pub-dur-fast) var(--pub-spring);
+}
+
+.btn-back-home svg {
+  width: 17px;
+  height: 17px;
+  transition: transform var(--pub-dur-fast) var(--pub-spring);
+}
+
+.btn-back-home:hover {
+  background: var(--pub-glass-bg-elevated);
+  border-color: var(--pub-glass-border-hi);
+  color: var(--pub-text-primary);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+.btn-back-home:hover svg {
+  transform: translateX(-3px);
+}
+
+.btn-back-home:active {
+  transform: scale(0.97);
+}
+
+/* --------------------------------------------------------------------------
+   4. AUTHENTICATION GATEWAY DECK (login.html)
+   -------------------------------------------------------------------------- */
+.auth-gateway-section {
+  position: relative;
+  flex: 1;
+  width: 100%;
+  display: grid;
+  place-items: center;
+  padding: 24px 20px 64px;
+  z-index: 1;
+}
+
+.auth-console-deck {
+  width: min(460px, 100%);
+  background: var(--pub-glass-bg);
+  backdrop-filter: var(--pub-glass-blur);
+  -webkit-backdrop-filter: var(--pub-glass-blur);
+  border: var(--pub-glass-border);
+  border-radius: 22px;
+  box-shadow: var(--pub-glass-shadow), 0 0 45px -10px rgba(139, 92, 246, 0.16);
+  position: relative;
+  overflow: hidden;
+  transition: border-color var(--pub-dur-normal) var(--pub-spring),
+              box-shadow var(--pub-dur-normal) var(--pub-spring);
+}
+
+.auth-console-deck::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.22), rgba(0, 240, 255, 0.35), transparent);
+  pointer-events: none;
+}
+
+.console-panel-form {
+  padding: 36px 36px 32px;
+  position: relative;
+  z-index: 2;
+}
+
+/* Auth Brand Header */
+.auth-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.auth-brand svg.polaris-mark {
+  width: 50px;
+  height: 50px;
+  flex-shrink: 0;
+  filter: drop-shadow(0 0 14px rgba(0, 240, 255, 0.45));
+}
+
+.auth-brand b {
+  display: block;
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--pub-text-primary);
+}
+
+.auth-brand span {
+  display: block;
+  color: var(--pub-text-muted);
+  font-size: 0.86rem;
+  font-weight: 500;
+  margin-top: 1px;
+}
+
+.form-header-title {
+  font-size: 1.65rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  margin: 0;
+  color: var(--pub-text-primary);
+}
+
+.form-header-subtitle {
+  color: var(--pub-text-secondary);
+  font-size: 0.92rem;
+  line-height: 1.5;
+  margin: 8px 0 24px;
+}
+
+/* Tab Selector Pill Track */
+.auth-tab-pill-track {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+  padding: 4px;
+  margin-bottom: 24px;
+  background: rgba(10, 7, 20, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 12px;
+  position: relative;
+}
+
+.auth-tab-btn {
+  border: 0;
+  background: transparent;
+  color: var(--pub-text-muted);
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  font-weight: 600;
+  padding: 10px 14px;
+  border-radius: 9px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all var(--pub-dur-fast) var(--pub-spring);
+  position: relative;
+  user-select: none;
+}
+
+.auth-tab-btn svg {
+  width: 15px;
+  height: 15px;
+  stroke-width: 2.2;
+}
+
+.auth-tab-btn:hover {
+  color: var(--pub-text-primary);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.auth-tab-btn.active {
+  background: rgba(35, 27, 72, 0.9);
+  color: var(--pillar-polaris);
+  box-shadow: 0 4px 16px -2px rgba(0, 0, 0, 0.6), 0 0 14px -3px rgba(0, 240, 255, 0.35), inset 0 0 0 1px rgba(0, 240, 255, 0.25);
+}
+
+.auth-tab-btn:active {
+  transform: scale(0.97);
+}
+
+/* Error Banner Notification */
+#auth-error-msg {
+  display: none;
+  padding: 14px 18px;
+  background: rgba(220, 39, 67, 0.15);
+  border: 1px solid rgba(220, 39, 67, 0.4);
+  border-radius: 12px;
+  color: #fca5a5;
+  font-size: 0.88rem;
+  margin-bottom: 22px;
+  line-height: 1.5;
+  box-shadow: 0 6px 20px -4px rgba(220, 39, 67, 0.22);
+  animation: authShake 320ms var(--pub-spring);
+}
+
+@keyframes authShake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-4px); }
+  40%, 80% { transform: translateX(4px); }
+}
+
+/* Form Controls & Inputs */
+.pub .form-group {
+  margin-bottom: 18px;
+  text-align: left;
+}
+
+.pub .form-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--pub-text-secondary);
+  margin-bottom: 8px;
+}
+
+.pub .form-label span:last-child:not(:first-child) {
+  font-weight: 500;
+  color: var(--pub-text-muted);
+  font-size: 0.78rem;
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.input-wrapper .input-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px !important;
+  height: 18px !important;
+  color: var(--pub-text-muted);
+  pointer-events: none;
+  z-index: 2;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  transition: color var(--pub-dur-fast) var(--pub-spring);
+}
+
+.input-wrapper:focus-within .input-icon {
+  color: var(--pillar-polaris);
+}
+
+.form-input,
+.form-input-luxury {
+  width: 100%;
+  height: 48px;
+  background: rgba(14, 10, 30, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 11px;
+  padding: 0 44px 0 42px !important;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  color: var(--pub-text-primary);
+  outline: none;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4);
+  transition: border-color var(--pub-dur-fast) var(--pub-spring),
+              box-shadow var(--pub-dur-fast) var(--pub-spring),
+              background var(--pub-dur-fast) var(--pub-spring);
+}
+
+.form-input-luxury::placeholder {
+  color: var(--pub-text-muted);
+  opacity: 0.7;
+}
+
+.form-input-luxury:hover {
+  border-color: rgba(255, 255, 255, 0.18);
+  background: rgba(18, 14, 38, 0.8);
+}
+
+.form-input-luxury:focus {
+  border-color: var(--pillar-polaris);
+  background: rgba(20, 15, 42, 0.9);
+  box-shadow: 0 0 0 3px rgba(0, 240, 255, 0.18), 0 0 20px rgba(0, 240, 255, 0.12);
+}
+
+.password-toggle-btn {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: 0;
+  color: var(--pub-text-muted);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  padding: 8px;
+  border-radius: 8px;
+  z-index: 3;
+  transition: color var(--pub-dur-fast) var(--pub-spring),
+              background var(--pub-dur-fast) var(--pub-spring),
+              transform var(--pub-dur-fast) var(--pub-spring);
+}
+
+.password-toggle-btn:hover {
+  color: var(--pub-text-primary);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.password-toggle-btn:active {
+  transform: translateY(-50%) scale(0.92);
+}
+
+/* Webkit Autofill Override */
+.pub input:-webkit-autofill,
+.pub input:-webkit-autofill:hover,
+.pub input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px #14102b inset !important;
+  -webkit-text-fill-color: var(--pub-text-primary) !important;
+  caret-color: var(--pub-text-primary) !important;
+  transition: background-color 5000s ease-in-out 0s !important;
+}
+
+/* Primary Action Buttons */
+.btn-submit-gateway {
+  width: 100%;
+  height: 48px;
+  margin-top: 10px;
+  padding: 0 24px;
+  border-radius: 11px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: linear-gradient(135deg, #00c6ff, #0072ff);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  font-family: var(--font-sans);
+  font-size: 0.98rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  box-shadow: 0 8px 24px -4px rgba(0, 114, 255, 0.45), 0 0 18px rgba(0, 198, 255, 0.25);
+  transition: transform var(--pub-dur-fast) var(--pub-spring),
+              filter var(--pub-dur-fast) var(--pub-spring),
+              box-shadow var(--pub-dur-fast) var(--pub-spring);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-submit-gateway::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transform: translateX(-100%);
+  transition: transform 600ms ease;
+}
+
+.btn-submit-gateway:hover {
+  filter: brightness(1.08);
+  box-shadow: 0 10px 28px -2px rgba(0, 114, 255, 0.55), 0 0 24px rgba(0, 198, 255, 0.35);
+}
+
+.btn-submit-gateway:hover::before {
+  transform: translateX(100%);
+}
+
+.btn-submit-gateway:active {
+  transform: scale(0.97) !important;
+}
+
+.btn-submit-gateway:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.btn-submit-gateway svg {
+  width: 17px;
+  height: 17px;
+}
+
+.auth-console-deck .btn-polaris.btn-secondary {
+  height: 48px !important;
+  border-radius: 11px !important;
+  font-weight: 650 !important;
+  background: rgba(255, 255, 255, 0.05);
+  border: var(--pub-glass-border);
+  color: var(--pub-text-secondary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--pub-dur-fast) var(--pub-spring);
+}
+
+.auth-console-deck .btn-polaris.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--pub-text-primary);
+  border-color: var(--pub-glass-border-hi);
+}
+
+.auth-console-deck .btn-polaris.btn-secondary:active {
+  transform: scale(0.97);
+}
+
+/* --------------------------------------------------------------------------
+   5. 2FA MASTER PIN & OTP TORNADO ENGINE
+   -------------------------------------------------------------------------- */
+.pin-hint-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(0, 240, 255, 0.08);
+  border: 1px solid rgba(0, 240, 255, 0.24);
+  color: var(--pillar-polaris);
+  font-size: 0.84rem;
+  font-weight: 600;
+  cursor: pointer;
+  user-select: none;
+  transition: all var(--pub-dur-fast) var(--pub-spring);
+}
+
+.pin-hint-pill:hover {
+  background: rgba(0, 240, 255, 0.16);
+  border-color: rgba(0, 240, 255, 0.45);
+  box-shadow: 0 0 16px rgba(0, 240, 255, 0.25);
+}
+
+.pin-hint-pill:active {
+  transform: scale(0.95);
+}
+
+.otp-boxes-wrapper {
+  position: relative;
+  margin: 22px 0;
+}
+
+.otp-boxes-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 8px;
+}
+
+.otp-box-digit {
+  width: 100%;
+  height: 54px;
+  text-align: center;
+  background: rgba(14, 10, 30, 0.8);
+  color: var(--pub-text-primary);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 11px;
+  font-family: var(--font-mono);
+  font-size: 1.35rem;
+  font-weight: 700;
+  outline: none;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4);
+  transition: all var(--pub-dur-fast) var(--pub-spring);
+}
+
+.otp-box-digit:focus {
+  border-color: var(--pillar-polaris);
+  background: rgba(22, 16, 46, 0.95);
+  box-shadow: 0 0 0 3px rgba(0, 240, 255, 0.22), 0 0 22px rgba(0, 240, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+/* Central Target Orb / Tornado Indicator */
+.otp-tornado-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 44px;
+  height: 44px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--pub-dur-fast) ease;
+}
+
+.otp-tornado-center.active {
+  opacity: 1;
+}
+
+.otp-center-spinner {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 2px solid rgba(0, 240, 255, 0.15);
+  border-top-color: var(--pillar-polaris);
+  animation: tornadoSpin 700ms linear infinite;
+}
+
+.checkmark-svg,
+.cross-svg {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.checkmark-svg {
+  stroke: var(--pillar-starlium);
+  filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.5));
+}
+
+.cross-svg {
+  stroke: var(--pillar-polarium);
+  filter: drop-shadow(0 0 8px rgba(220, 39, 67, 0.5));
+}
+
+@keyframes tornadoSpin {
+  to { transform: rotate(360deg); }
+}
+
+/* --------------------------------------------------------------------------
+   6. DUAL OTP SMS VERIFICATION
+   -------------------------------------------------------------------------- */
+.sms-channel-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: rgba(139, 92, 246, 0.15);
+  border: 1px solid rgba(139, 92, 246, 0.35);
+  color: var(--pillar-luminary);
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+
+.dual-otp-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin: 18px 0;
+}
+
+.dual-otp-card {
+  background: rgba(14, 10, 30, 0.75);
+  border: var(--pub-glass-border);
+  border-radius: 13px;
+  padding: 14px;
+  text-align: center;
+  transition: border-color var(--pub-dur-fast) var(--pub-spring),
+              box-shadow var(--pub-dur-fast) var(--pub-spring);
+}
+
+.dual-otp-card:focus-within {
+  border-color: var(--pillar-polaris);
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.15);
+}
+
+.dual-otp-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--pub-text-secondary);
+  margin-bottom: 8px;
+}
+
+.dual-otp-input {
+  width: 100%;
+  height: 46px;
+  background: transparent;
+  color: var(--pub-text-primary);
+  border: 0;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.15);
+  border-radius: 0;
+  text-align: center;
+  letter-spacing: 0.35em;
+  font-family: var(--font-mono);
+  font-size: 1.3rem;
+  font-weight: 700;
+  outline: none;
+  transition: border-color var(--pub-dur-fast) var(--pub-spring);
+}
+
+.dual-otp-input:focus {
+  border-bottom-color: var(--pillar-polaris);
+}
+
+/* --------------------------------------------------------------------------
+   7. INTERACTIVE PILLAR DECK SYSTEM (8 SIGNATURE COLOURS)
+   -------------------------------------------------------------------------- */
+.pillar-deck {
+  width: 100%;
+  margin: 32px 0;
+}
+
+.pillar-deck-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.pillar-card {
+  position: relative;
+  background: var(--pub-glass-bg);
+  backdrop-filter: var(--pub-glass-blur);
+  -webkit-backdrop-filter: var(--pub-glass-blur);
+  border: var(--pub-glass-border);
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow: hidden;
+  transition: transform var(--pub-dur-normal) var(--pub-spring),
+              border-color var(--pub-dur-normal) var(--pub-spring),
+              box-shadow var(--pub-dur-normal) var(--pub-spring);
+  cursor: pointer;
+  user-select: none;
+}
+
+.pillar-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle 180px at var(--mouse-x, 50%) var(--mouse-y, 0%), var(--pillar-aura, rgba(255, 255, 255, 0.08)), transparent 80%);
+  opacity: 0;
+  transition: opacity var(--pub-dur-normal) ease;
+  pointer-events: none;
+}
+
+.pillar-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--pillar-accent, rgba(255, 255, 255, 0.25));
+  box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.7), 0 0 24px -4px var(--pillar-aura, rgba(255, 255, 255, 0.15));
+}
+
+.pillar-card:hover::before {
+  opacity: 1;
+}
+
+.pillar-card:active {
+  transform: scale(0.97);
+}
+
+/* Explicit 8 Pillar Theming */
+.pillar-card[data-pillar="astraonyx"],
+.pillar-card.pillar-astraonyx {
+  --pillar-accent: var(--pillar-astraonyx);
+  --pillar-aura: var(--aura-astraonyx);
+}
+
+.pillar-card[data-pillar="polaris"],
+.pillar-card.pillar-polaris {
+  --pillar-accent: var(--pillar-polaris);
+  --pillar-aura: var(--aura-polaris);
+}
+
+.pillar-card[data-pillar="polarium"],
+.pillar-card.pillar-polarium {
+  --pillar-accent: var(--pillar-polarium);
+  --pillar-aura: var(--aura-polarium);
+}
+
+.pillar-card[data-pillar="starlium"],
+.pillar-card.pillar-starlium {
+  --pillar-accent: var(--pillar-starlium);
+  --pillar-aura: var(--aura-starlium);
+}
+
+.pillar-card[data-pillar="luminary"],
+.pillar-card.pillar-luminary {
+  --pillar-accent: var(--pillar-luminary);
+  --pillar-aura: var(--aura-luminary);
+}
+
+.pillar-card[data-pillar="nebula"],
+.pillar-card.pillar-nebula {
+  --pillar-accent: var(--pillar-nebula);
+  --pillar-aura: var(--aura-nebula);
+}
+
+.pillar-card[data-pillar="sirium"],
+.pillar-card.pillar-sirium {
+  --pillar-accent: var(--pillar-sirium);
+  --pillar-aura: var(--aura-sirium);
+}
+
+.pillar-card[data-pillar="sanctum"],
+.pillar-card.pillar-sanctum {
+  --pillar-accent: var(--pillar-sanctum);
+  --pillar-aura: var(--aura-sanctum);
+}
+
+.pillar-card-badge {
+  align-self: flex-start;
+  padding: 3px 9px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--pillar-accent);
+  background: color-mix(in srgb, var(--pillar-accent) 15%, transparent);
+  border: 1px solid color-mix(in srgb, var(--pillar-accent) 35%, transparent);
+}
+
+.pillar-card-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--pub-text-primary);
+  margin: 0;
+}
+
+.pillar-card-desc {
+  font-size: 0.88rem;
+  color: var(--pub-text-secondary);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Pillar Interactive Selector Strip */
+.pillar-deck-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px;
+  background: var(--pub-glass-bg);
+  backdrop-filter: var(--pub-glass-blur);
+  -webkit-backdrop-filter: var(--pub-glass-blur);
+  border: var(--pub-glass-border);
+  border-radius: 14px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.pillar-deck-nav::-webkit-scrollbar {
+  display: none;
+}
+
+.pillar-deck-btn {
+  padding: 8px 16px;
+  border-radius: 9px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--pub-text-muted);
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all var(--pub-dur-fast) var(--pub-spring);
+}
+
+.pillar-deck-btn:hover {
+  color: var(--pub-text-primary);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.pillar-deck-btn:active {
+  transform: scale(0.97);
+}
+
+.pillar-deck-btn.active {
+  background: color-mix(in srgb, var(--pillar-accent, var(--pillar-polaris)) 18%, transparent);
+  color: var(--pillar-accent, var(--pillar-polaris));
+  border-color: color-mix(in srgb, var(--pillar-accent, var(--pillar-polaris)) 40%, transparent);
+  box-shadow: 0 0 16px color-mix(in srgb, var(--pillar-accent, var(--pillar-polaris)) 25%, transparent);
+}
+
+/* --------------------------------------------------------------------------
+   8. INTERACTIVE NEXUS SVG CANVAS STYLES
+   -------------------------------------------------------------------------- */
+.pub-chart,
+.nexus-canvas-container {
+  width: 100%;
+  max-width: 460px;
+  justify-self: center;
+  position: relative;
+  filter: drop-shadow(0 16px 40px rgba(0, 0, 0, 0.7));
+}
+
+.pub-chart svg,
+.nexus-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  overflow: visible;
+}
+
+/* Constellation Connections */
+.pub-chart .ch-line,
+.nexus-line {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.16);
+  stroke-width: 1.4;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  transition: stroke var(--pub-dur-normal) ease, stroke-width var(--pub-dur-normal) ease;
+}
+
+.pub-chart:hover .ch-line,
+.nexus-canvas-container:hover .nexus-line {
+  stroke: rgba(0, 240, 255, 0.35);
+  stroke-width: 1.8;
+}
+
+/* Standard Constellation Stars */
+.pub-chart .ch-star,
+.nexus-star {
+  fill: var(--pub-text-primary);
+  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.6));
+  cursor: pointer;
+  transition: transform var(--pub-dur-fast) var(--pub-spring),
+              fill var(--pub-dur-fast) ease,
+              filter var(--pub-dur-fast) ease;
+}
+
+.pub-chart .ch-star:hover,
+.nexus-star:hover {
+  fill: var(--pillar-polaris);
+  filter: drop-shadow(0 0 12px var(--pillar-polaris));
+  transform-origin: center;
+}
+
+/* Polaris Focal Star & Orbit Ring */
+.pub-chart .ch-polaris,
+.nexus-polaris {
+  fill: var(--pillar-polaris);
+  filter: drop-shadow(0 0 16px var(--pillar-polaris));
+  animation: polarisGlow 2.8s ease-in-out infinite alternate;
+}
+
+.pub-chart .ch-ring,
+.nexus-ring {
+  fill: none;
+  stroke: var(--pillar-polaris);
+  stroke-opacity: 0.45;
+  stroke-dasharray: 4 3;
+  animation: ringRotate 24s linear infinite;
+  transform-origin: 25px 31px;
+}
+
+@keyframes polarisGlow {
+  0% { filter: drop-shadow(0 0 10px rgba(0, 240, 255, 0.5)); transform: scale(0.98); }
+  100% { filter: drop-shadow(0 0 22px rgba(0, 240, 255, 0.95)); transform: scale(1.04); }
+}
+
+@keyframes ringRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Constellation Text Labels */
+.pub-chart text,
+.nexus-label {
+  fill: var(--pub-text-secondary);
+  font-family: var(--font-sans);
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  transition: fill var(--pub-dur-fast) ease;
+  user-select: none;
+}
+
+.pub-chart text:hover,
+.nexus-label:hover {
+  fill: var(--pillar-polaris);
+}
+
+/* Brand Polaris Mark (SVG icon) */
+.polaris-mark {
+  display: block;
+}
+
+.polaris-mark .pm-line {
+  fill: none;
+  stroke: var(--pub-line-strong);
+  stroke-width: 1.4;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.polaris-mark .pm-star {
+  fill: var(--pub-text-primary);
+}
+
+.polaris-mark .pm-ring {
+  fill: none;
+  stroke: var(--pillar-polaris);
+  stroke-width: 1;
+  stroke-opacity: 0.55;
+  stroke-dasharray: 3 2;
+}
+
+.polaris-mark .pm-polaris {
+  fill: var(--pillar-polaris);
+  filter: drop-shadow(0 0 8px var(--pillar-polaris));
+}
+
+/* --------------------------------------------------------------------------
+   9. WELCOME LANDING PAGE (welcome.html)
+   -------------------------------------------------------------------------- */
+.pub-wrap {
+  width: 100%;
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 24px;
+  position: relative;
+  z-index: 2;
+}
+
+.pub-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+  gap: 56px;
+  align-items: center;
+  padding: 68px 0 76px;
+}
+
+.pub-hero h1 {
+  font-size: clamp(2.2rem, 4.8vw, 3.4rem);
+  line-height: 1.1;
+  letter-spacing: -0.035em;
+  font-weight: 750;
+  margin: 0 0 20px;
+  max-width: 18ch;
+  color: var(--pub-text-primary);
+}
+
+.pub-hero p.lead {
+  color: var(--pub-text-secondary);
+  font-size: 1.12rem;
+  line-height: 1.6;
+  max-width: 54ch;
+  margin: 0 0 32px;
+}
+
+.pub-cta {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+
+.pub-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  height: 46px;
+  padding: 0 22px;
+  border-radius: 11px;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 650;
+  text-decoration: none;
+  cursor: pointer;
+  border: var(--pub-glass-border);
+  background: var(--pub-glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  color: var(--pub-text-primary);
+  transition: all var(--pub-dur-fast) var(--pub-spring);
+}
+
+.pub-btn:hover {
+  background: var(--pub-glass-bg-elevated);
+  border-color: var(--pub-glass-border-hi);
+  box-shadow: 0 6px 20px -2px rgba(0, 0, 0, 0.4);
+}
+
+.pub-btn:active {
+  transform: scale(0.97);
+}
+
+.pub-btn.primary {
+  background: linear-gradient(135deg, #00c6ff, #0072ff);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 24px -4px rgba(0, 114, 255, 0.45);
+}
+
+.pub-btn.primary:hover {
+  filter: brightness(1.08);
+  box-shadow: 0 10px 30px -2px rgba(0, 114, 255, 0.55);
+}
+
+/* Status Indicator Beacon */
+.pub-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(18, 14, 38, 0.6);
+  border: var(--pub-glass-border);
+  color: var(--pub-text-secondary);
+  font-size: 0.88rem;
+  font-weight: 550;
+}
+
+.pub-status i {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--pub-text-muted);
+  position: relative;
+}
+
+.pub-status.on i {
+  background: var(--pillar-starlium);
+  box-shadow: 0 0 10px var(--pillar-starlium);
+}
+
+.pub-status.on i::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  border: 1px solid var(--pillar-starlium);
+  animation: beaconPulse 2s cubic-bezier(0.24, 0, 0.38, 1) infinite;
+}
+
+@keyframes beaconPulse {
+  0% { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+
+/* Section Containers */
+.pub-section {
+  padding: 56px 0;
+  border-top: 1px solid var(--pub-line);
+}
+
+.pub-section h2 {
+  font-size: 1.65rem;
+  letter-spacing: -0.025em;
+  font-weight: 700;
+  margin: 0 0 8px;
+  color: var(--pub-text-primary);
+}
+
+.pub-section > p.sub {
+  color: var(--pub-text-secondary);
+  margin: 0 0 32px;
+  max-width: 64ch;
+  font-size: 0.96rem;
+}
+
+/* Seven Parts List */
+.parts {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px 40px;
+  counter-reset: part;
+}
+
+.parts li {
+  counter-increment: part;
+  display: grid;
+  grid-template-columns: 32px 1fr;
+  gap: 4px 14px;
+  padding: 18px 20px;
+  background: var(--pub-glass-bg);
+  backdrop-filter: var(--pub-glass-blur);
+  -webkit-backdrop-filter: var(--pub-glass-blur);
+  border: var(--pub-glass-border);
+  border-radius: 14px;
+  transition: transform var(--pub-dur-fast) var(--pub-spring),
+              border-color var(--pub-dur-fast) var(--pub-spring);
+}
+
+.parts li:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.16);
+  background: var(--pub-glass-bg-elevated);
+}
+
+.parts li::before {
+  content: counter(part);
+  grid-row: 1 / span 2;
+  color: var(--pillar-polaris);
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 1.1rem;
+  padding-top: 2px;
+}
+
+.parts b {
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--pub-text-primary);
+}
+
+.parts span {
+  color: var(--pub-text-secondary);
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+/* Access Tiers Matrix */
+.tiers-wrapper {
+  overflow-x: auto;
+  border-radius: 16px;
+  border: var(--pub-glass-border);
+  background: var(--pub-glass-bg);
+  backdrop-filter: var(--pub-glass-blur);
+  -webkit-backdrop-filter: var(--pub-glass-blur);
+}
+
+.tiers {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tiers th {
+  text-align: left;
+  color: var(--pub-text-muted);
+  font-size: 0.84rem;
+  font-weight: 650;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--pub-line-strong);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.tiers td {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--pub-line);
+  vertical-align: top;
+  color: var(--pub-text-secondary);
+  font-size: 0.94rem;
+}
+
+.tiers tr:last-child td {
+  border-bottom: 0;
+}
+
+.tiers td:first-child {
+  color: var(--pillar-polaris);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.tiers td:nth-child(2) {
+  white-space: nowrap;
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  color: var(--pub-text-muted);
+}
+
+/* Final Call To Action Card */
+.pub-final {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  padding: 32px 36px;
+  border-radius: 20px;
+  background: var(--pub-glass-bg);
+  backdrop-filter: var(--pub-glass-blur);
+  -webkit-backdrop-filter: var(--pub-glass-blur);
+  border: var(--pub-glass-border);
+  box-shadow: 0 16px 48px -12px rgba(0, 0, 0, 0.6);
+}
+
+/* Footer Section */
+.pub-foot {
+  margin-top: auto;
+  border-top: 1px solid var(--pub-line);
+  background: rgba(10, 7, 20, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.pub-foot .pub-wrap {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  flex-wrap: wrap;
+  padding-top: 24px;
+  padding-bottom: 32px;
+  color: var(--pub-text-muted);
+  font-size: 0.88rem;
+}
+
+.pub-foot a {
+  color: var(--pub-text-secondary);
+  text-decoration: none;
+  margin-left: 18px;
+  transition: color var(--pub-dur-fast) ease;
+}
+
+.pub-foot a:hover {
+  color: var(--pillar-polaris);
+}
+
+/* --------------------------------------------------------------------------
+   10. RESPONSIVE BREAKPOINTS
+   -------------------------------------------------------------------------- */
+@media (max-width: 1024px) {
+  .pillar-deck-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 860px) {
+  .pub-hero {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    padding: 36px 0 48px;
+  }
+  .pub-chart {
+    max-width: 360px;
+    justify-self: start;
+  }
+  .parts {
+    grid-template-columns: 1fr;
+  }
+  .tiers th:nth-child(2),
+  .tiers td:nth-child(2) {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .pillar-deck-grid {
+    grid-template-columns: 1fr;
+  }
+  .pub-final {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 24px 20px;
+  }
+}
+
+@media (max-width: 520px) {
+  .console-panel-form {
+    padding: 26px 20px 22px;
+  }
+  .auth-gateway-section {
+    padding: 12px 14px 44px;
+  }
+  .dual-otp-container {
+    grid-template-columns: 1fr;
+  }
+  .pub-top {
+    padding: 14px 16px;
+  }
+  .pub-wrap {
+    padding: 0 16px;
+  }
+  .pub-nav a:not(.keep) {
+    display: none;
+  }
+  .otp-box-digit {
+    height: 48px;
+    font-size: 1.15rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   11. REDUCED MOTION SUPPORT (Apple HIG Compliance)
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .btn-submit-gateway:active,
+  .pub-btn:active,
+  .auth-tab-btn:active,
+  .pillar-card:active {
+    transform: none !important;
+  }
+
+  .pub-chart .ch-polaris,
+  .pub-chart .ch-ring,
+  .otp-center-spinner,
+  .pub-status.on i::after {
+    animation: none !important;
+  }
+}

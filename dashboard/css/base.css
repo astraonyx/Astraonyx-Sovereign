@@ -1,0 +1,244 @@
+/* Astraonyx — reset dan gaya dasar elemen. */
+@layer reset, tokens, base, components, shell, pillar, utilities;
+
+@layer reset {
+  *,
+  *::before,
+  *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+  body, h1, h2, h3, h4, h5, h6, p, figure, blockquote, dl, dd, ul, ol { margin: 0; }
+  ul[role='list'], ol[role='list'] { list-style: none; padding: 0; }
+  img, svg, video, canvas, audio, iframe { display: block; max-width: 100%; }
+  button, input, select, textarea { font: inherit; color: inherit; letter-spacing: inherit; }
+  button { cursor: pointer; }
+  table { border-collapse: collapse; border-spacing: 0; }
+  [hidden] { display: none !important; }
+}
+
+@layer base {
+  html {
+    background: var(--bg);
+    scroll-behavior: smooth;
+    scrollbar-color: var(--line-strong) transparent;
+    scrollbar-width: thin;
+  }
+
+  body {
+    min-height: 100vh;
+    min-height: 100dvh;
+    color: var(--text);
+    font: 400 var(--fs-md) / var(--lh-body) var(--font-ui);
+    background: var(--bg);
+    overflow-wrap: anywhere;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Langit Kosmik Hidup: Nebula dinamis bernafas dan gemerlap bintang berpadu aura warna */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: -20%;
+    z-index: -2;
+    pointer-events: none;
+    background:
+      radial-gradient(55vmax 45vmax at 85% 15%, var(--aura-purple), transparent 65%),
+      radial-gradient(50vmax 40vmax at 15% 85%, var(--aura-cyan), transparent 60%),
+      radial-gradient(40vmax 35vmax at 50% 50%, var(--aura-gold), transparent 70%),
+      radial-gradient(45vmax 40vmax at 90% 80%, var(--aura-rose), transparent 60%),
+      var(--bg);
+    filter: blur(40px);
+    opacity: 0.85;
+    animation: ax-nebula-breathe 24s ease-in-out infinite alternate;
+    will-change: transform, opacity;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-image:
+      radial-gradient(1px 1px at 12% 18%, rgb(255 255 255 / 0.85), transparent 100%),
+      radial-gradient(1.2px 1.2px at 34% 72%, rgb(255 255 255 / 0.7), transparent 100%),
+      radial-gradient(2px 2px at 58% 31%, rgb(255 255 255 / 0.9), transparent 100%),
+      radial-gradient(1px 1px at 81% 64%, rgb(255 255 255 / 0.75), transparent 100%),
+      radial-gradient(1.5px 1.5px at 93% 12%, rgb(250 204 21 / 0.8), transparent 100%),
+      radial-gradient(1px 1px at 7% 91%, rgb(165 144 255 / 0.8), transparent 100%),
+      radial-gradient(1.5px 1.5px at 22% 44%, rgb(229 185 79 / 0.85), transparent 100%),
+      radial-gradient(1px 1px at 67% 83%, rgb(14 214 255 / 0.8), transparent 100%),
+      radial-gradient(1px 1px at 48% 9%, rgb(255 255 255 / 0.6), transparent 100%);
+    background-size: 550px 550px, 420px 420px, 600px 600px, 480px 480px, 350px 350px, 510px 510px, 400px 400px, 580px 580px, 320px 320px;
+    opacity: 0.7;
+    animation: ax-twinkle 8s ease-in-out infinite alternate;
+  }
+
+  @keyframes ax-nebula-breathe {
+    0% { transform: scale(1) translate(0, 0); opacity: 0.75; }
+    50% { transform: scale(1.08) translate(-2%, 2%); opacity: 0.95; }
+    100% { transform: scale(0.96) translate(2%, -1%); opacity: 0.8; }
+  }
+
+  @keyframes ax-twinkle {
+    0% { opacity: 0.55; transform: scale(0.99); }
+    50% { opacity: 0.85; transform: scale(1.01); }
+    100% { opacity: 0.6; transform: scale(1); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    body::before, body::after { animation: none !important; }
+  }
+
+  /* Custom High-Tech Scrollbars */
+  ::-webkit-scrollbar { width: 8px; height: 8px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(143, 115, 255, 0.25);
+    border-radius: var(--r-pill);
+    border: 2px solid transparent;
+    background-clip: padding-box;
+    transition: background-color var(--dur-2);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(165, 144, 255, 0.55);
+  }
+
+  /* Text Gradient Utilities */
+  .ax-text-gradient {
+    background: linear-gradient(135deg, #ffffff 30%, var(--purple-hi) 80%, var(--gold) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+  }
+  .ax-text-gradient-cyan {
+    background: linear-gradient(135deg, #ffffff 25%, var(--neon-cyan) 85%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+  }
+  .ax-text-gradient-gold {
+    background: linear-gradient(135deg, #ffffff 20%, var(--gold) 75%, #ffb84d 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+  }
+
+  /* ---------- Tipografi ---------- */
+  h1, h2 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    line-height: var(--lh-tight);
+    letter-spacing: 0.005em;
+    text-wrap: balance;
+  }
+  h1 { font-size: var(--fs-3xl); }
+  h2 { font-size: var(--fs-2xl); }
+  h3, h4, h5, h6 {
+    font-family: var(--font-ui);
+    font-weight: 600;
+    line-height: var(--lh-snug);
+    text-wrap: balance;
+  }
+  h3 { font-size: var(--fs-lg); }
+  h4 { font-size: var(--fs-md); }
+  h5, h6 { font-size: var(--fs-ui); }
+
+  p { text-wrap: pretty; }
+  small { font-size: var(--fs-sm); }
+  strong, b { font-weight: 650; }
+  em, i { font-style: italic; }
+
+  a {
+    color: var(--link);
+    text-decoration: underline;
+    text-decoration-color: color-mix(in oklab, currentColor 40%, transparent);
+    text-underline-offset: 0.2em;
+    transition: color var(--dur-1), text-decoration-color var(--dur-1);
+  }
+  a:hover { text-decoration-color: currentColor; }
+
+  code, kbd, samp, pre { font-family: var(--font-mono); font-size: 0.9em; }
+  code:not(pre code) {
+    padding: 0.1em 0.4em;
+    border-radius: var(--r-xs);
+    background: var(--bg-field);
+    border: 1px solid var(--line);
+  }
+  kbd {
+    display: inline-block;
+    min-width: 1.5em;
+    padding: 0.1em 0.4em;
+    border: 1px solid var(--line-strong);
+    border-bottom-width: 2px;
+    border-radius: var(--r-xs);
+    background: var(--bg-field);
+    color: var(--text-2);
+    font-size: var(--fs-xs);
+    line-height: 1.4;
+    text-align: center;
+  }
+  pre {
+    overflow: auto;
+    padding: var(--sp-4);
+    border: 1px solid var(--line);
+    border-radius: var(--r-md);
+    background: var(--bg-field);
+    line-height: 1.5;
+  }
+  hr { border: 0; border-top: 1px solid var(--line); margin: var(--sp-6) 0; }
+
+  ::selection { background: color-mix(in oklab, var(--purple) 55%, transparent); color: var(--text); }
+  ::placeholder { color: var(--text-3); opacity: 1; }
+
+  /* Fokus terlihat: kontur emas 2 px (PRD R-25.7) */
+  :focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+  }
+  :focus:not(:focus-visible) { outline: none; }
+  /* Judul yang menerima fokus lewat kode saat berpindah halaman bukan kontrol: pembaca layar mengumumkannya, tanpa kotak emas. */
+  :is(h1, h2, h3)[tabindex='-1']:focus-visible { outline: none; }
+
+  /* Pintasan lewati navigasi */
+  .ax-skip {
+    position: fixed;
+    top: var(--sp-2);
+    left: var(--sp-2);
+    z-index: calc(var(--z-toast) + 1);
+    padding: var(--sp-2) var(--sp-4);
+    border-radius: var(--r-sm);
+    background: var(--gold);
+    color: var(--on-gold);
+    font-weight: 600;
+    text-decoration: none;
+    transform: translateY(-200%);
+  }
+  .ax-skip:focus { transform: none; }
+
+  /* Pemindai bergulir yang tipis dan seragam */
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-thumb {
+    background: var(--line-strong);
+    border-radius: var(--r-pill);
+    border: 3px solid transparent;
+    background-clip: padding-box;
+  }
+  ::-webkit-scrollbar-thumb:hover { background: var(--text-3); background-clip: padding-box; border: 3px solid transparent; }
+  ::-webkit-scrollbar-track { background: transparent; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  @media (forced-colors: active) {
+    :focus-visible { outline: 2px solid Highlight; }
+    body::before { display: none; }
+  }
+}
