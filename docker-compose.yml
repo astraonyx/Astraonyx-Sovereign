@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  polaris-bot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: polaris-wa-bot:latest
+    container_name: polaris-bot-instance
+    restart: unless-stopped
+    ports:
+      - "${PORT:-3000}:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - TZ=Asia/Jakarta
+    volumes:
+      # Sesi login WhatsApp (Baileys credentials / multi-device sessions)
+      - ./auth_info:/app/auth_info
+      # Database SQLite terpadu & backup JSON
+      - ./database:/app/database
+      # File log error dan watchdog
+      - ./logs:/app/logs
+      # Cache temporary download & konversi media
+      - ./tmp:/app/tmp
+      - ./downloads:/app/downloads
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
